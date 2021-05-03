@@ -1,6 +1,6 @@
 # MLX Katalog
 
-MLX Katalog is a Project to hold the default content samples to bootstrap Machine Learning Exchange. 
+MLX Katalog is a project to hold the default content samples to bootstrap Machine Learning Exchange. 
 
 ## Pipeline Samples
 
