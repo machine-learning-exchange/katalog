@@ -10,16 +10,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Echo
-description: Echo input string
+name: <Component Name>
+description: <Component Description>
 metadata:
-  annotations: {platform: 'OpenSource'}
+  annotations:
+    platform: <Component platform>
+    source: <Component github source>
 inputs:
-  - {name: echo_statement,  description: 'Required. Echo statement', default: 'Test'}
+  - {name: <Component input parameter name>,  description: <Component input parameter description>, default: <Component input parameter default value>}
+outputs:
+  - {name: <Component output parameter name>, description: <Component output parameter description>}
 implementation:
   container:
-    image: alpine:3.6
-    command: ["sh", "-c"]
+    image: <Component container image>
+    command: <Component container command>
     args: [
-      echo, "$0", {inputValue: echo_statement}
+      <Component container args>
     ]
