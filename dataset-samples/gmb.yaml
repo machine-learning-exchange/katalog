@@ -1,0 +1,59 @@
+id: groningen-meaning-bank-modified
+name: Groningen Meaning Bank - Modified
+description: A subset of the GMB dataset, consisting of documents verified to be in the public domain.
+version: 1.0.2
+created: 2020-05-14
+updated: 2020-05-14
+format:
+  - type: IOB
+    url: https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_%28tagging%29
+domain: Natural Language Processing
+
+# Information about the entity that makes the data set available
+provider:
+  name: Data Asset eXchange
+  url: https://developer.ibm.com/exchanges/data/all/groningen-meaning-bank/
+
+# identifies where the data set is stored and how it is stored (REQUIRED)
+repository:
+  type: HTTP
+  url: https://dax-cdn.cdn.appdomain.cloud/dax-groningen-meaning-bank-modified/1.0.2/groningen-meaning-bank-modified.tar.gz
+  mime_type: application/x-tar
+  sha_512: 4b0e6c445bf5be0573ae411f8e0ba307b884300ab6b5473ea0d455dd82b8cf4dc06fb77a9a606850f3b283357f22fd516e91850cea7e45de19ce5625fda2c001
+  size: 3.6M
+
+# REQUIRED; data set license information
+license:
+  commercial: false
+  name: CDLA-Sharing
+  url: https://cdla.io/sharing-1-0/
+
+# REQUIRED; describes relevant files in the data set archive
+content:
+  - pattern: groningen_meaning_bank_modified/gmb_subset_full.txt
+    description: The dataset contains only documents authored by Voice of America VOA, together with documents from the MASC dataset and the CIA World Factbook.
+    records: 1314115
+    size: 14.8M
+    type: file
+    format: IOB
+    mime_type: text/plain
+
+# OPTIONAL; Identifies where the data set was obtained from
+source:
+  name: University of Groningen
+  url: https://www.researchgate.net/publication/317902904_The_Groningen_Meaning_Bank
+
+# OPTIONAL; but recommended
+seo_tags:
+  - Natural Language Processing
+  - Text
+
+# OPTIONAL; assets that complement this data set, e.g. notebooks
+related_assets:
+  - name: Explore the data
+    description: Data preview and glossary
+    url: https://dax-cdn.cdn.appdomain.cloud/dax-groningen-meaning-bank-modified/1.0.2/data-preview/index.html
+  - name: DAX GMB project
+    description: Watson Studio Gallery project for the GMB data set
+    mime_type: text/html
+    url: https://dataplatform.cloud.ibm.com/exchange/public/entry/view/00d1f36477e7a092a43a264d410d5451

@@ -1,0 +1,65 @@
+id: thematic-clustering-of-sentences
+name: IBM Debater® Thematic Clustering of Sentences
+description: A benchmark of sentence-clustering based on the partition of Wikipedia articles into sections.
+version: 1.0.2
+created: 2019-08-03
+updated: 2019-08-03
+format:
+  - type: CSV
+    url: https://en.wikipedia.org/wiki/Comma-separated_values
+domain: Natural Language Processing
+
+# Information about the entity that makes the data set available
+provider:
+  name: Data Asset eXchange
+  url: https://developer.ibm.com/exchanges/data/all/thematic-clustering-of-sentences/
+
+# identifies where the data set is stored and how it is stored (REQUIRED)
+repository:
+  type: HTTP
+  url: https://dax-cdn.cdn.appdomain.cloud/dax-thematic-clustering-of-sentences/1.0.2/thematic-clustering-of-sentences.tar.gz
+  mime_type: application/x-tar
+  sha_512: 08a3f1a9dc06083eb51874e90d7241f67b676af2cbc28fe6a312694051f53391fc95de70fdcdce404de3578fa389558220ea38d34f70265ed88220d0b14f1aba
+  size: 2.7M
+
+# REQUIRED; data set license information
+license:
+  commercial: false
+  name: CC-BY-SA 3.0
+  url: https://creativecommons.org/licenses/by-sa/3.0/
+# REQUIRED; describes relevant files in the data set archive
+content:
+  - pattern: dataset.csv
+    description: Sentences from 692 Wikipedia articles with their cluster annotation
+    records: 46118
+    size: 10.6M
+    format: CSV
+    type: file
+    mime_type: text/csv
+
+# OPTIONAL; Identifies where the data set was obtained from
+source:
+  name: Wikipedia
+  authors:
+    - name: Liat Ein-Dor
+      url: https://resedit.watson.ibm.com/researcher/view.php?person=il-LIATE
+    - name: Yosi Mass
+      url: https://resedit.watson.ibm.com/researcher/view.php?person=il-YOSIMASS
+    - name: Alon Halfon
+    - name: Elad Venezian
+    - name: Ilya Shnayderman
+    - name: Ranit Aharonov
+    - name: Noam Slonim
+      url: https://resedit.watson.ibm.com/researcher/view.php?person=il-NOAMS
+# OPTIONAL; but recommended
+seo_tags:
+  - Semantic Relatedness
+  - Natural Language Processing
+  - Text
+
+# OPTIONAL; assets that complement this data set, e.g. notebooks
+related_assets:
+  - name: Thematic Clustering of Sentences notebook
+    description: Thematic Clustering of Sentences Data Exploration Notebook
+    mime_type: text/html
+    url: https://resedit.watson.ibm.com/researcher/view.php?person=il-NOAMS

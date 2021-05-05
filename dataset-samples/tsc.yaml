@@ -1,0 +1,59 @@
+id: tensorflow-speech-commands
+name: TensorFlow Speech Commands
+description: A collection of short clips of spoken English words.
+version: 1.0.1
+created: 2020-03-17
+updated: 2020-03-17
+format:
+  - type: WAV
+    url: https://en.wikipedia.org/wiki/WAV
+domain: Audio
+
+# Information about the entity that makes the data set available
+provider:
+  name: Data Asset eXchange
+  url: https://developer.ibm.com/exchanges/data/all/speech-commands/
+
+# identifies where the data set is stored and how it is stored (REQUIRED)
+repository:
+  type: HTTP
+  url: https://dax-cdn.cdn.appdomain.cloud/dax-tensorflow-speech-commands/1.0.1/tensorflow-speech-commands.tar.gz
+  mime_type: application/x-tar
+  sha_512: 1c4b41d9f719454f4155b4540e8aec0b1c5bfd555974f4e9e2253dd4e52b395ecc239f26a16a86ef047d1aac78a9ac1fe41f9c559a1d3478d951e4f078bb0fb8
+  size: 1.39G
+
+# REQUIRED; data set license information
+license:
+  commercial: false
+  name: CC BY 4.0
+  url: https://creativecommons.org/licenses/by/4.0/
+
+# REQUIRED; describes relevant files in the data set archive
+content:
+  - file_name: TODO
+    description: TODO
+    records:
+    size:
+    type: WAV
+    mime_type: audio/wav
+
+# OPTIONAL; Identifies where the data set was obtained from
+source:
+  name: The audio clips were originally collected by Google. Recorded by volunteers in uncontrolled locations around the world.
+  url: https://ai.googleblog.com/2017/08/launching-speech-commands-dataset.html
+
+# OPTIONAL; but recommended
+seo_tags:
+  - Audio
+  - Feature Extraction
+  - Speech
+
+# OPTIONAL; assets that complement this data set, e.g. notebooks
+related_assets:
+  - name: Explore the data
+    description: Data preview and glossary
+    url: https://dax-cdn.cdn.appdomain.cloud/dax-tensorflow-speech-commands/1.0.1/data-preview/index.html
+  - name: Example notebook
+    description: Example notebook for the TensorFlow Speech Commands data set
+    mime_type: text/html
+    url: https://dataplatform.cloud.ibm.com/analytics/notebooks/v2/652f0257-1e58-4e63-a7e7-0e079c9f88a1/view?access_token=cfdcca6828a2cc42d4d8364757ce9f26c68fe2ca87fdb2d0ccd3977b43ae6640

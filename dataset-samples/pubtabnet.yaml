@@ -1,0 +1,74 @@
+id: pubtabnet
+name: PubTabNet
+description: PubTabNet is a large dataset for image-based table recognition, containing 516k+ images of tabular data annotated with the corresponding HTML representation of the tables.
+version: 2.0.0
+created: 2020-07-20
+updated: 2020-07-20
+format:
+  - type: PNG
+    url: https://en.wikipedia.org/wiki/Portable_Network_Graphics
+  - type: JSON
+    url: https://json.org/
+domain: Computer Vision
+
+# Information about the entity that makes the data set available
+provider:
+  name: Data Asset eXchange
+  url: https://developer.ibm.com/exchanges/data/all/pubtabnet/
+
+# identifies where the data set is stored and how it is stored (REQUIRED)
+repository:
+  type: HTTP
+  url: https://dax-cdn.cdn.appdomain.cloud/dax-pubtabnet/2.0.0/pubtabnet.tar.gz
+  mime_type: application/x-tar
+  sha_512: 377e7bf408f2d1f13410447550cf1792a1e4e84585e5e8908d5807928ae468a42be49a025be9b7f407498f781e5a106a5f9ae0a0f5f452a135778813a9c0c100
+  size: 30G
+
+# REQUIRED; data set license information
+license:
+  commercial: false
+  name: CDLA-Permissive
+  url: https://cdla.io/permissive-1-0/
+
+# REQUIRED; describes relevant files in the data set archive
+content:
+  - pattern: train/*
+    description: Images in the training subset
+    type: regex
+  - pattern: val/*
+    description: Images in the validation subset
+    type: regex
+  - pattern: test/*
+    description: Images in the testing subset
+    type: regex
+  - pattern: PubTabNet_2.0.0.jsonl
+    description: Data glossary of the three folders
+    type: file
+
+# OPTIONAL; Identifies where the data set was obtained from
+source:
+  name: Images of research papers from PubMed and annotations from IBM Research Australia.
+  url: https://www.ncbi.nlm.nih.gov/pmc/tools/openftlist/
+  authors:
+    - name: Xu Zhong
+      url: https://researcher.watson.ibm.com/researcher/view.php?person=au1-peter.zhong
+    - name: Elaheh ShafieiBavani
+      url: https://researcher.watson.ibm.com/researcher/view.php?person=ibm-Elaheh.Shafieibavani
+    - name: Antonio Jimeno Yepes
+      url: https://researcher.watson.ibm.com/researcher/view.php?person=au1-antonio.jimeno
+
+# OPTIONAL; but recommended
+seo_tags:
+  - Document Layout Analysis
+  - text
+
+# OPTIONAL; assets that complement this data set, e.g. notebooks
+related_assets:
+  - name: PubTabNet Watson Studio project
+    description: Watson Studio Gallery project for the pubtabnet data set
+    mime_type: text/html
+    url: https://dataplatform.cloud.ibm.com/analytics/notebooks/v2/0aa641b0-af25-4470-b9e1-6b33d6b5b66a/view?access_token=b7d5880bb60c253457a72e3ec76f9ab40ccc42c607331acdcbbbe21be4c46bc8
+  - name: "Image-based table recognition: data, model, and evaluation"
+    description: Research paper
+    mime_type: text/html
+    url: https://arxiv.org/abs/1911.10683
