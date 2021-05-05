@@ -1,0 +1,77 @@
+id: publaynet
+name: PubLayNet
+description: PubLayNet is a large dataset of document images from PubMed Central Open Access Subset. Each document’s layout is annotated with both bounding boxes and polygonal segmentations.
+version: 1.0.0
+created: 2019-08-07
+updated: 2019-08-07
+format:
+  - type: JPG
+    url: https://en.wikipedia.org/wiki/JPEG
+  - type: JSON
+    url: https://json.org/
+domain: Computer Vision
+
+# Information about the entity that makes the data set available
+provider:
+  name: Data Asset eXchange
+  url: https://developer.ibm.com/exchanges/data/all/publaynet/
+
+# identifies where the data set is stored and how it is stored (REQUIRED)
+repository:
+  type: HTTP
+  url: https://dax-cdn.cdn.appdomain.cloud/dax-publaynet/1.0.0/publaynet.tar.gz
+  mime_type: application/x-tar
+  sha_512: 087a58aeed533f953c041dc03e5f14bc0b1bf53c44fa1f5816fde7c0376174b1b67c837d93094f96fd6313aba172c914c7bc2d14c6f84b58913c0ddd550264eb
+  size: 96G
+
+# REQUIRED; data set license information
+license:
+  commercial: false
+  name: CDLA-Permissive
+  url: https://cdla.io/permissive-1-0/
+
+# REQUIRED; describes relevant files in the data set archive
+content:
+  - pattern: train/*
+    description: Images in the training subset
+    type: regex
+  - pattern: val/*
+    description: Images in the validation subset
+    type: regex
+  - pattern: test/*
+    description: Images in the testing subset
+    type: regex
+  - pattern: test.json
+    description: Annotations for training images
+    type: file
+  - pattern: val.json
+    description: Annotations for validation images
+    type: file
+
+# OPTIONAL; Identifies where the data set was obtained from
+source:
+  name: Images of research papers from PubMed and annotations from IBM Research Australia.
+  url: https://www.ncbi.nlm.nih.gov/pmc/tools/openftlist/
+  authors:
+    - name: Xu Zhong
+      url: https://researcher.watson.ibm.com/researcher/view.php?person=au1-peter.zhong
+    - name: Jianbin Tang
+      url: https://researcher.watson.ibm.com/researcher/view.php?person=ibm-Elaheh.Shafieibavani
+    - name: Antonio Jimeno Yepes
+      url: https://researcher.watson.ibm.com/researcher/view.php?person=au1-antonio.jimeno
+
+# OPTIONAL; but recommended
+seo_tags:
+  - Document Layout Analysis
+  - Text
+
+# OPTIONAL; assets that complement this data set, e.g. notebooks
+related_assets:
+  - name: Publaynet Watson Studio project
+    description: Watson Studio Gallery project for the publaynet data set
+    mime_type: text/html
+    url: https://dataplatform.cloud.ibm.com/analytics/notebooks/v2/43cb95d9-6c3e-479c-a189-8c9ff3524ec1/view?access_token=bb8ce645cf114b5f5512ae2eb9c7badcf0927f313e8f76b8138d0701289484e6
+  - name: "Image-based table recognition: data, model, and evaluation"
+    description: Research paper
+    mime_type: text/html
+    url: https://arxiv.org/abs/1911.10683

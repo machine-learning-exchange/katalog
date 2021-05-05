@@ -1,0 +1,59 @@
+id: finance-proposition-bank
+name: Finance Proposition Bank
+description: Text from approximately 1000 English sentences obtained from IBM's public annual financial reports, annotated with a layer of 'universal' semantic role labels.
+version: 1.0.2
+created: 2019-09-12
+updated: 2019-09-12
+format:
+  - type: CoNLL-U
+    url: https://universaldependencies.org/format.html
+domain: Natural Language Processing
+
+# Information about the entity that makes the data set available
+provider:
+  name: Data Asset eXchange
+  url: https://developer.ibm.com/exchanges/data/all/finance-proposition-bank/
+
+# identifies where the data set is stored and how it is stored (REQUIRED)
+repository:
+  type: HTTP
+  url: https://dax-cdn.cdn.appdomain.cloud/dax-finance-proposition-bank/1.0.2/finance_proposition_bank.tar.gz
+  mime_type: application/x-tar
+  sha_512: 23c5d807c85602245d270f391f222b758ec53de20ac5f0907b5e3b2219b75cfbbddf5e5d509b14b5f38f107d244f3a5ed4d10a7992e88c7e65d4c7db9ebbc354
+  size: 700K
+
+# REQUIRED; data set license information
+license:
+  commercial: false                  # if true, a commercial license (assume false if not set)
+  name: CDLA-Sharing                 # License name
+  url: https://cdla.io/sharing-1-0/  # Link to public license text
+
+# REQUIRED; describes relevant files in the data set archive
+content:
+  - pattern: finance_proposition_bank.conllx
+    description: This dataset contains ~1k labeled sentences from IBM’s publicly available annual financial reports.
+    size: 3M
+    format: CoNLL-U
+    type: file
+    mime_type: text/plain
+
+# OPTIONAL; Identifies where the data set was obtained from
+source:
+  name: IBM Research
+
+# OPTIONAL; but recommended
+seo_tags:                             # hints for classification and search
+  - Natural Language Processing
+  - Text
+
+# OPTIONAL; assets that complement this data set, e.g. notebooks
+related_assets:
+  - name: Starter notebook
+    description: This notebook explores the Finance Proposition Bank dataset.
+    mime_type: text/html
+    url: https://dataplatform.cloud.ibm.com/analytics/notebooks/v2/0e615c46-5e4c-496f-9374-25dde48b46d0/view?access_token=aa16e0d5e3447e3979158b5f5c7de5436b3381424311470ded1686d90835da1e
+  - name: Explore the data set
+    description: Data preview and glossary #
+    mime_type: text/html
+    url: https://dax-cdn.cdn.appdomain.cloud/dax-finance-proposition-bank/1.0.2/data-preview/index.html
+
