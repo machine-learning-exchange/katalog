@@ -1,37 +1,28 @@
 # MLX Katalog
 
-MLX Katalog is a project to hold the default content to bootstrap Machine Learning Exchange. 
+MLX Katalog is a project to hold the default content to bootstrap Machine Learning Exchange.
 
-## Pipelines
-
-You can upload files under [pipeline-samples](pipeline-samples) to the Machine Learning Exchange 
-Components page to register a new component.
-
-Sample Pipelines: monitor_quality, monitor_fairness, wml_train
-   
-## Pipeline Components
-You can upload files under [component-samples](component-samples) to the Machine Learning Exchange 
-Components page to register a new component.
-
-Sample Components: monitor_quality, monitor_fairness, wml_train
-
-## Models
-
-You can upload files under [model-samples](model-samples) to the Machine Learning 
-Exchange model page to register a new model.
-
-Sample Models: image-completer
-
-## Datasets
-
-You can upload files under [dataset-samples](model-samples) to the Machine Learning 
-Exchange Datasets page to register a new Dataset.
-
-Sample Models: image-completer
-
-## Notebooks
-
-You can upload files under [model-samples](model-samples) to the Machine Learning 
-Exchange Notebooks page to register a new notebook.
-
-Sample Notebooks: [Watson-ML-pipeline](notebook-samples/Watson-ML-pipeline/watson-ml-pipeline.ipynb) is simple end to end pipeline notebook that trains a model on Watson Machine Learning. Then it stores and deploys the trained model as web service on Watson Machine Learning.
+1. [pipeline-samples](pipeline-samples)
+    - [Create an AI Pipeline](./pipeline-samples/README.md#Create-an-AI-Pipeline)
+	- [Upload an AI Pipeline](./pipeline-samples/README.md#Upload-an-AI-Pipeline)
+	- [Run an AI Pipeline](./pipelines/README.md#Run-an-AI-Pipeline)
+2. [component-samples](component-samples)
+    - [Create a component](./component-samples/README.md#Create-a-Component)
+    - [Register Pipeline Components](./component-samples/README.md#Register-Pipeline-Components)
+    - [Use Components in a Pipeline](./component-samples/README.md#Use-Components-in-a-Pipeline)
+3. [model-samples](model-samples)
+    - [Create Model Metadata](./model-samples/README.md#Create-Model-Metadata)
+    - [Register Model](./model-samples/README.md#Register-Model)
+    - [Use Models in Pipelines](./model-samples/README.md#Use-Models-in-Pipelines)
+    - [Model Metadata Template](./model-samples/template.yaml)
+4. [dataset-samples](dataset-samples)
+    - [Create Datasets](./dataset-samples/README.md#create-dataset-metadata)
+    - [Register Datasets](./dataset-samples/README.md#register-datasets)
+    - [Use Dataset with MLX Assets](./dataset-samples/README.md#use-dataset-with-mlx-assets)
+    - [Datasets Metadata Template](./dataset-samples/README.md#dataset-metadata-template)
+5. [notebook-samples](notebook-samples)
+    - [Create Notebooks](./notebook-samples/README.md#Create-Notebooks)
+    - [Register Notebooks](./notebook-samples/README.md#Register-Notebooks)
+    - [Use Notebooks to Drive Pipelines](./notebook-samples/README.md#Use-Notebooks-to-Drive-Pipelines)
+    - [Use Notebooks Within a Pipeline Step](./notebook-samples/README.md#Use-Notebooks-Within-a-Pipeline-Step)
+    - [Notebook Metadata Template](./notebook-samples/template.yaml)

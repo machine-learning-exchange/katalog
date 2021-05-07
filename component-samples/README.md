@@ -17,10 +17,18 @@ For an in-depth guide, take a look at their [component specification](https://ww
 1. Click on the "Components" link in left-hand navigation panel
 2. Click on "Upload a Component"
 3. Select a file to upload (Must be tar.gz or tgz format)
-    * This will be the compressed .yaml component specification
+    * This will be the compressed `component.yaml` specification
 4. Enter a name for the component; Otherwise a default will be given
 
 ## Use Components in a Pipeline
 
 Components are composed into a pipeline using the Kubeflow Pipelines SDK.
 Refer to the pipeline [documentation](../pipeline-samples/README.md) for usage.
+
+## List of Sample Datasets
+* [Generate Dataset Metadata](dax-to-dlf/component.yaml)
+* [Create Dataset Volume](dlf/component.yaml)
+* [Echo Sample](echo/component.yaml)
+* [Create Secret - Kubernetes Cluster](create-secret/component.yaml)
+* [Kubernetes Model Deploy](kube-model-deployment/component.yaml)
+* [Create Model Config](model-config/component.yaml)
