@@ -21,5 +21,5 @@ The [src](src) directory is for hosting some Notebook example source files on Gi
 ## List of Sample Notebooks
 * [AIF360 Bias detection example](aif-bias.yaml)
 * [ART detector model](art-detector.yaml)
-* [ART poisoning attack](art-poision.yaml)
+* [ART poisoning attack](art-poison.yaml)
 * [jfk-airport-analysis](JFK-airport.yaml)

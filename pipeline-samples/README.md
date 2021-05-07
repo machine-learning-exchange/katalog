@@ -19,7 +19,7 @@ The simplest way to create a pipeline is to use [Kubeflow](https://www.kubeflow.
     * This produces a YAML file compressed as a `.tar.gz`
 
 For an in-depth guide to creating pipelines with Kubeflow, take a look at their
-[documentation](https://www.kubeflow.org/docs/pipelines/sdk/build-component/).
+[documentation](https://www.kubeflow.org/docs/components/pipelines/sdk/component-development/).
 
 ## Upload an AI Pipeline
 1. Click on the "Pipelines" link in left-hand navigation panel

@@ -113,7 +113,7 @@ Models can be run based on the metadata specified in the YAML file for a particu
 ## List of Sample Models
 * [MAX Human Pose Estimator](max-human-pose-estimator.yaml)
 * [MAX Image Caption Generator](max-image-caption-generator.yaml)
-* [MAX Image Resolution Enhancer](max-image-resolution-enhancer)
+* [MAX Image Resolution Enhancer](max-image-resolution-enhancer.yaml)
 * [MAX Object Detector](max-object-detector.yaml)
 * [MAX Optical Character Recognition](max-ocr.yaml)
 * [MAX Question Answering](max-question-answering.yaml)
