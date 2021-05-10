@@ -32,3 +32,5 @@ Refer to the pipeline [documentation](../pipeline-samples/README.md) for usage.
 * [Create Secret - Kubernetes Cluster](create-secret/component.yaml)
 * [Kubernetes Model Deploy](kube-model-deployment/component.yaml)
 * [Create Model Config](model-config/component.yaml)
+* [Model Fairness Check](https://github.com/Trusted-AI/AIF360/blob/master/mlops/kubeflow/bias_detector_pytorch/component.yaml)
+* [Adversarial Robustness Evaluation](https://github.com/Trusted-AI/adversarial-robustness-toolbox/blob/main/utils/mlops/kubeflow/robustness_evaluation_fgsm_pytorch/component.yaml)
