@@ -30,7 +30,6 @@ GITHUB_REPO = env.get("GITHUB_REPO", "https://github.com/machine-learning-exchan
 
 md_file_path_expressions = [
     "/**/*.md",
-    "/*.md"
 ]
 
 script_folder = abspath(dirname(__file__))
