@@ -69,7 +69,7 @@ data_stores:
       endpoint: https://s3.us.cloud-object-storage.appdomain.cloud
 ```
 
-### Metadata template for a servable model 
+### Metadata template for a servable model
 
 ```YAML
 name: <model_name>
@@ -108,3 +108,16 @@ Models can be run based on the metadata specified in the YAML file for a particu
 1. Under the Models tab, select a model
 2. Switch to the "CREATE RUN" section
 3. Give the run a name and click Submit to train or serve the model
+
+
+## List of Sample Models
+* [MAX Human Pose Estimator](max-human-pose-estimator.yaml)
+* [MAX Image Caption Generator](max-image-caption-generator.yaml)
+* [MAX Image Resolution Enhancer](max-image-resolution-enhancer.yaml)
+* [MAX Object Detector](max-object-detector.yaml)
+* [MAX Optical Character Recognition](max-ocr.yaml)
+* [MAX Question Answering](max-question-answering.yaml)
+* [MAX Recommender System](max-recommender.yaml)
+* [MAX Text Sentiment Classifier](max-text-sentiment-classifier.yaml)
+* [MAX Toxic Comment Classifier](max-toxic-comment-classifier.yaml)
+* [MAX Weather Forecaster](max-weather-forecaster.yaml)

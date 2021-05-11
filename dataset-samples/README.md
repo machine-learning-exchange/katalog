@@ -26,7 +26,7 @@ to better understand the dataset metadata spec.
 ## Use Dataset with MLX Assets
 
 Asset integration is work in progress. You can take a look at the
-[JFK Airport Temperature Prediction Model notebook](/notebook-samples/dlf-notebooks/JFK_Data.ipynb)
+[JFK Airport Temperature Prediction Model notebook](/notebook-samples/src/dlf-notebooks/JFK_Data.ipynb)
 
 ## Dataset Metadata Template
 
@@ -124,3 +124,12 @@ related_assets:
     mime_type: text/html                   # HTML page
     url: https://dax-cdn...                # Path to data preview and glossary pages
 ```
+
+## List of Sample Datasets
+* [Finance Proposition Bank](fpb.yaml)
+* [Groningen Meaning Bank - Modified](gmb.yaml)
+* [NOAA Weather Data - JFK Airport](jfk.yaml)
+* [PubLayNet](publaynet.yaml)
+* [PubTabNet](pubtabnet.yaml)
+* [IBM Debater® Thematic Clustering of Sentences](thematic_clustering.yaml)
+* [TensorFlow Speech Commands](tsc.yaml)
