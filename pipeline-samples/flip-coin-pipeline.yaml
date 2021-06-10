@@ -1,0 +1,323 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: conditional-execution-pipeline
+  annotations:
+    tekton.dev/output_artifacts: '{"flip-coin": [{"key": "artifacts/$PIPELINERUN/flip-coin/output.tgz",
+      "name": "flip-coin-output", "path": "/tmp/output"}], "generate-random-number":
+      [{"key": "artifacts/$PIPELINERUN/generate-random-number/output.tgz", "name":
+      "generate-random-number-output", "path": "/tmp/output"}], "generate-random-number-2":
+      [{"key": "artifacts/$PIPELINERUN/generate-random-number-2/output.tgz", "name":
+      "generate-random-number-2-output", "path": "/tmp/output"}]}'
+    tekton.dev/input_artifacts: '{"print": [{"name": "generate-random-number-output",
+      "parent_task": "generate-random-number"}], "print-2": [{"name": "generate-random-number-output",
+      "parent_task": "generate-random-number"}], "print-3": [{"name": "generate-random-number-2-output",
+      "parent_task": "generate-random-number-2"}], "print-4": [{"name": "generate-random-number-2-output",
+      "parent_task": "generate-random-number-2"}]}'
+    tekton.dev/artifact_bucket: mlpipeline
+    tekton.dev/artifact_endpoint: minio-service.kubeflow:9000
+    tekton.dev/artifact_endpoint_scheme: http://
+    tekton.dev/artifact_items: '{"flip-coin": [["output", "$(results.output.path)"]],
+      "generate-random-number": [["output", "$(results.output.path)"]], "generate-random-number-2":
+      [["output", "$(results.output.path)"]], "print": [], "print-2": [], "print-3":
+      [], "print-4": []}'
+    sidecar.istio.io/inject: "false"
+    pipelines.kubeflow.org/pipeline_spec: '{"description": "Shows how to use dsl.Condition().",
+      "name": "Conditional execution pipeline"}'
+spec:
+  pipelineSpec:
+    tasks:
+    - name: flip-coin
+      taskSpec:
+        steps:
+        - name: main
+          args: ['python -c "import random; result = ''heads'' if random.randint(0,1)
+              == 0 else ''tails''; print(result)" | tee $(results.output.path)']
+          command: [sh, -c]
+          image: python:alpine3.6
+        results:
+        - {name: output, description: /tmp/output}
+      timeout: 0s
+    - name: generate-random-number
+      taskSpec:
+        steps:
+        - name: main
+          args: ['python -c "import random; print(random.randint($0, $1))" | tee $2',
+            '0', '9', $(results.output.path)]
+          command: [sh, -c]
+          image: python:alpine3.6
+        results:
+        - {name: output, description: /tmp/output}
+      when:
+      - input: $(tasks.condition-1.results.status)
+        operator: in
+        values:
+        - "true"
+      timeout: 0s
+    - name: print
+      params:
+      - {name: generate-random-number-output, value: $(tasks.generate-random-number.results.output)}
+      taskSpec:
+        steps:
+        - name: main
+          command: [echo, heads and $(inputs.params.generate-random-number-output)
+              > 5!]
+          image: alpine:3.6
+        params:
+        - {name: generate-random-number-output}
+      when:
+      - input: $(tasks.condition-2.results.status)
+        operator: in
+        values:
+        - "true"
+      timeout: 0s
+    - name: print-2
+      params:
+      - {name: generate-random-number-output, value: $(tasks.generate-random-number.results.output)}
+      taskSpec:
+        steps:
+        - name: main
+          command: [echo, heads and $(inputs.params.generate-random-number-output)
+              <= 5!]
+          image: alpine:3.6
+        params:
+        - {name: generate-random-number-output}
+      when:
+      - input: $(tasks.condition-3.results.status)
+        operator: in
+        values:
+        - "true"
+      timeout: 0s
+    - name: generate-random-number-2
+      taskSpec:
+        steps:
+        - name: main
+          args: ['python -c "import random; print(random.randint($0, $1))" | tee $2',
+            '10', '19', $(results.output.path)]
+          command: [sh, -c]
+          image: python:alpine3.6
+        results:
+        - {name: output, description: /tmp/output}
+      when:
+      - input: $(tasks.condition-4.results.status)
+        operator: in
+        values:
+        - "true"
+      timeout: 0s
+    - name: print-3
+      params:
+      - {name: generate-random-number-2-output, value: $(tasks.generate-random-number-2.results.output)}
+      taskSpec:
+        steps:
+        - name: main
+          command: [echo, tails and $(inputs.params.generate-random-number-2-output)
+              > 15!]
+          image: alpine:3.6
+        params:
+        - {name: generate-random-number-2-output}
+      when:
+      - input: $(tasks.condition-5.results.status)
+        operator: in
+        values:
+        - "true"
+      timeout: 0s
+    - name: print-4
+      params:
+      - {name: generate-random-number-2-output, value: $(tasks.generate-random-number-2.results.output)}
+      taskSpec:
+        steps:
+        - name: main
+          command: [echo, tails and $(inputs.params.generate-random-number-2-output)
+              <= 15!]
+          image: alpine:3.6
+        params:
+        - {name: generate-random-number-2-output}
+      when:
+      - input: $(tasks.condition-6.results.status)
+        operator: in
+        values:
+        - "true"
+      timeout: 0s
+    - name: condition-1
+      params:
+      - {name: operand1, value: $(tasks.flip-coin.results.output)}
+      - {name: operand2, value: heads}
+      - {name: operator, value: ==}
+      taskSpec:
+        results:
+        - {name: status, description: Conditional task status}
+        params:
+        - {name: operand1}
+        - {name: operand2}
+        - {name: operator}
+        steps:
+        - script: |-
+            python -c 'import sys
+            input1=str.rstrip(sys.argv[1])
+            input2=str.rstrip(sys.argv[2])
+            try:
+              input1=int(input1)
+              input2=int(input2)
+            except:
+              input1=str(input1)
+            status="true" if (input1 $(inputs.params.operator) input2) else "false"
+            f = open("/tekton/results/status", "w")
+            f.write(status)
+            f.close()' '$(inputs.params.operand1)' '$(inputs.params.operand2)'
+          image: python:alpine3.6
+    - name: condition-2
+      params:
+      - {name: operand1, value: $(tasks.generate-random-number.results.output)}
+      - {name: operand2, value: '5'}
+      - {name: operator, value: '>'}
+      taskSpec:
+        results:
+        - {name: status, description: Conditional task status}
+        params:
+        - {name: operand1}
+        - {name: operand2}
+        - {name: operator}
+        steps:
+        - script: |-
+            python -c 'import sys
+            input1=str.rstrip(sys.argv[1])
+            input2=str.rstrip(sys.argv[2])
+            try:
+              input1=int(input1)
+              input2=int(input2)
+            except:
+              input1=str(input1)
+            status="true" if (input1 $(inputs.params.operator) input2) else "false"
+            f = open("/tekton/results/status", "w")
+            f.write(status)
+            f.close()' '$(inputs.params.operand1)' '$(inputs.params.operand2)'
+          image: python:alpine3.6
+      when:
+      - input: $(tasks.condition-1.results.status)
+        operator: in
+        values:
+        - "true"
+    - name: condition-3
+      params:
+      - {name: operand1, value: $(tasks.generate-random-number.results.output)}
+      - {name: operand2, value: '5'}
+      - {name: operator, value: <=}
+      taskSpec:
+        results:
+        - {name: status, description: Conditional task status}
+        params:
+        - {name: operand1}
+        - {name: operand2}
+        - {name: operator}
+        steps:
+        - script: |-
+            python -c 'import sys
+            input1=str.rstrip(sys.argv[1])
+            input2=str.rstrip(sys.argv[2])
+            try:
+              input1=int(input1)
+              input2=int(input2)
+            except:
+              input1=str(input1)
+            status="true" if (input1 $(inputs.params.operator) input2) else "false"
+            f = open("/tekton/results/status", "w")
+            f.write(status)
+            f.close()' '$(inputs.params.operand1)' '$(inputs.params.operand2)'
+          image: python:alpine3.6
+      when:
+      - input: $(tasks.condition-1.results.status)
+        operator: in
+        values:
+        - "true"
+    - name: condition-4
+      params:
+      - {name: operand1, value: $(tasks.flip-coin.results.output)}
+      - {name: operand2, value: tails}
+      - {name: operator, value: ==}
+      taskSpec:
+        results:
+        - {name: status, description: Conditional task status}
+        params:
+        - {name: operand1}
+        - {name: operand2}
+        - {name: operator}
+        steps:
+        - script: |-
+            python -c 'import sys
+            input1=str.rstrip(sys.argv[1])
+            input2=str.rstrip(sys.argv[2])
+            try:
+              input1=int(input1)
+              input2=int(input2)
+            except:
+              input1=str(input1)
+            status="true" if (input1 $(inputs.params.operator) input2) else "false"
+            f = open("/tekton/results/status", "w")
+            f.write(status)
+            f.close()' '$(inputs.params.operand1)' '$(inputs.params.operand2)'
+          image: python:alpine3.6
+    - name: condition-5
+      params:
+      - {name: operand1, value: $(tasks.generate-random-number-2.results.output)}
+      - {name: operand2, value: '15'}
+      - {name: operator, value: '>'}
+      taskSpec:
+        results:
+        - {name: status, description: Conditional task status}
+        params:
+        - {name: operand1}
+        - {name: operand2}
+        - {name: operator}
+        steps:
+        - script: |-
+            python -c 'import sys
+            input1=str.rstrip(sys.argv[1])
+            input2=str.rstrip(sys.argv[2])
+            try:
+              input1=int(input1)
+              input2=int(input2)
+            except:
+              input1=str(input1)
+            status="true" if (input1 $(inputs.params.operator) input2) else "false"
+            f = open("/tekton/results/status", "w")
+            f.write(status)
+            f.close()' '$(inputs.params.operand1)' '$(inputs.params.operand2)'
+          image: python:alpine3.6
+      when:
+      - input: $(tasks.condition-4.results.status)
+        operator: in
+        values:
+        - "true"
+    - name: condition-6
+      params:
+      - {name: operand1, value: $(tasks.generate-random-number-2.results.output)}
+      - {name: operand2, value: '15'}
+      - {name: operator, value: <=}
+      taskSpec:
+        results:
+        - {name: status, description: Conditional task status}
+        params:
+        - {name: operand1}
+        - {name: operand2}
+        - {name: operator}
+        steps:
+        - script: |-
+            python -c 'import sys
+            input1=str.rstrip(sys.argv[1])
+            input2=str.rstrip(sys.argv[2])
+            try:
+              input1=int(input1)
+              input2=int(input2)
+            except:
+              input1=str(input1)
+            status="true" if (input1 $(inputs.params.operator) input2) else "false"
+            f = open("/tekton/results/status", "w")
+            f.write(status)
+            f.close()' '$(inputs.params.operand1)' '$(inputs.params.operand2)'
+          image: python:alpine3.6
+      when:
+      - input: $(tasks.condition-4.results.status)
+        operator: in
+        values:
+        - "true"
+  timeout: 0s
