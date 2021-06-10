@@ -1,0 +1,413 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: calculation-pipeline
+  annotations:
+    tekton.dev/output_artifacts: '{"add": [{"key": "artifacts/$PIPELINERUN/add/Output.tgz",
+      "name": "add-Output", "path": "/tmp/outputs/Output/data"}], "add-2": [{"key":
+      "artifacts/$PIPELINERUN/add-2/Output.tgz", "name": "add-2-Output", "path": "/tmp/outputs/Output/data"}],
+      "my-divmod": [{"key": "artifacts/$PIPELINERUN/my-divmod/mlpipeline-ui-metadata.tgz",
+      "name": "mlpipeline-ui-metadata", "path": "/tmp/outputs/mlpipeline_ui_metadata/data"},
+      {"key": "artifacts/$PIPELINERUN/my-divmod/mlpipeline-metrics.tgz", "name": "mlpipeline-metrics",
+      "path": "/tmp/outputs/mlpipeline_metrics/data"}, {"key": "artifacts/$PIPELINERUN/my-divmod/quotient.tgz",
+      "name": "my-divmod-quotient", "path": "/tmp/outputs/quotient/data"}, {"key":
+      "artifacts/$PIPELINERUN/my-divmod/remainder.tgz", "name": "my-divmod-remainder",
+      "path": "/tmp/outputs/remainder/data"}]}'
+    tekton.dev/input_artifacts: '{"add-2": [{"name": "my-divmod-quotient", "parent_task":
+      "my-divmod"}], "my-divmod": [{"name": "add-Output", "parent_task": "add"}]}'
+    tekton.dev/artifact_bucket: mlpipeline
+    tekton.dev/artifact_endpoint: minio-service.kubeflow:9000
+    tekton.dev/artifact_endpoint_scheme: http://
+    tekton.dev/artifact_items: '{"add": [["Output", "$(results.output.path)"]], "add-2":
+      [["Output", "$(results.output.path)"]], "my-divmod": [["mlpipeline-ui-metadata",
+      "/tmp/outputs/mlpipeline_ui_metadata/data"], ["mlpipeline-metrics", "/tmp/outputs/mlpipeline_metrics/data"],
+      ["quotient", "$(results.quotient.path)"], ["remainder", "$(results.remainder.path)"]]}'
+    sidecar.istio.io/inject: "false"
+    pipelines.kubeflow.org/pipeline_spec: '{"description": "A toy pipeline that performs
+      arithmetic calculations.", "inputs": [{"default": "7", "name": "a", "optional":
+      true}, {"default": "8", "name": "b", "optional": true}, {"default": "17", "name":
+      "c", "optional": true}], "name": "Calculation pipeline"}'
+spec:
+  params:
+  - name: a
+    value: '7'
+  - name: b
+    value: '8'
+  - name: c
+    value: '17'
+  pipelineSpec:
+    params:
+    - name: a
+      default: '7'
+    - name: b
+      default: '8'
+    - name: c
+      default: '17'
+    tasks:
+    - name: add
+      params:
+      - name: a
+        value: $(params.a)
+      taskSpec:
+        steps:
+        - name: main
+          args:
+          - --a
+          - $(inputs.params.a)
+          - --b
+          - '4'
+          - '----output-paths'
+          - $(results.output.path)
+          command:
+          - sh
+          - -ec
+          - |
+            program_path=$(mktemp)
+            printf "%s" "$0" > "$program_path"
+            python3 -u "$program_path" "$@"
+          - |
+            def add(a, b):
+               """Calculates sum of two arguments"""
+               return a + b
+
+            def _serialize_float(float_value: float) -> str:
+                if isinstance(float_value, str):
+                    return float_value
+                if not isinstance(float_value, (float, int)):
+                    raise TypeError('Value "{}" has type "{}" instead of float.'.format(str(float_value), str(type(float_value))))
+                return str(float_value)
+
+            import argparse
+            _parser = argparse.ArgumentParser(prog='Add', description='Calculates sum of two arguments')
+            _parser.add_argument("--a", dest="a", type=float, required=True, default=argparse.SUPPRESS)
+            _parser.add_argument("--b", dest="b", type=float, required=True, default=argparse.SUPPRESS)
+            _parser.add_argument("----output-paths", dest="_output_paths", type=str, nargs=1)
+            _parsed_args = vars(_parser.parse_args())
+            _output_files = _parsed_args.pop("_output_paths", [])
+
+            _outputs = add(**_parsed_args)
+
+            _outputs = [_outputs]
+
+            _output_serializers = [
+                _serialize_float,
+
+            ]
+
+            import os
+            for idx, output_file in enumerate(_output_files):
+                try:
+                    os.makedirs(os.path.dirname(output_file))
+                except OSError:
+                    pass
+                with open(output_file, 'w') as f:
+                    f.write(_output_serializers[idx](_outputs[idx]))
+          image: python:3.7
+        params:
+        - name: a
+        results:
+        - name: output
+          description: /tmp/outputs/Output/data
+        metadata:
+          labels:
+            pipelines.kubeflow.org/pipelinename: ''
+            pipelines.kubeflow.org/generation: ''
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            pipelines.kubeflow.org/component_spec: '{"description": "Calculates sum
+              of two arguments", "implementation": {"container": {"args": ["--a",
+              {"inputValue": "a"}, "--b", {"inputValue": "b"}, "----output-paths",
+              {"outputPath": "Output"}], "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf
+              \"%s\" \"$0\" > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n",
+              "def add(a, b):\n   \"\"\"Calculates sum of two arguments\"\"\"\n   return
+              a + b\n\ndef _serialize_float(float_value: float) -> str:\n    if isinstance(float_value,
+              str):\n        return float_value\n    if not isinstance(float_value,
+              (float, int)):\n        raise TypeError(''Value \"{}\" has type \"{}\"
+              instead of float.''.format(str(float_value), str(type(float_value))))\n    return
+              str(float_value)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Add'',
+              description=''Calculates sum of two arguments'')\n_parser.add_argument(\"--a\",
+              dest=\"a\", type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"--b\",
+              dest=\"b\", type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\",
+              dest=\"_output_paths\", type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n_output_files
+              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = add(**_parsed_args)\n\n_outputs
+              = [_outputs]\n\n_output_serializers = [\n    _serialize_float,\n\n]\n\nimport
+              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
+              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
+              "image": "python:3.7"}}, "inputs": [{"name": "a", "type": "Float"},
+              {"name": "b", "type": "Float"}], "name": "Add", "outputs": [{"name":
+              "Output", "type": "Float"}]}'
+            tekton.dev/template: ''
+      timeout: 0s
+    - name: my-divmod
+      params:
+      - name: add-Output
+        value: $(tasks.add.results.output)
+      - name: b
+        value: $(params.b)
+      taskSpec:
+        steps:
+        - name: main
+          args:
+          - --dividend
+          - $(inputs.params.add-Output)
+          - --divisor
+          - $(inputs.params.b)
+          - '----output-paths'
+          - $(results.quotient.path)
+          - $(results.remainder.path)
+          - /tmp/outputs/mlpipeline_ui_metadata/data
+          - /tmp/outputs/mlpipeline_metrics/data
+          command:
+          - sh
+          - -ec
+          - |
+            program_path=$(mktemp)
+            printf "%s" "$0" > "$program_path"
+            python3 -u "$program_path" "$@"
+          - |
+            def my_divmod(dividend, divisor):
+                """Divides two numbers and calculate  the quotient and remainder"""
+                #Pip installs inside a component function.
+                #NOTE: installs should be placed right at the beginning to avoid upgrading a package
+                # after it has already been imported and cached by python
+                import sys, subprocess;
+                subprocess.run([sys.executable, '-m', 'pip', 'install', 'tensorflow==1.8.0'])
+
+                #Imports inside a component function:
+                import numpy as np
+
+                #This function demonstrates how to use nested functions inside a component function:
+                def divmod_helper(dividend, divisor):
+                    return np.divmod(dividend, divisor)
+
+                (quotient, remainder) = divmod_helper(dividend, divisor)
+
+                from tensorflow.python.lib.io import file_io
+                import json
+
+                # Exports a sample tensorboard:
+                metadata = {
+                  'outputs' : [{
+                    'type': 'tensorboard',
+                    'source': 'gs://ml-pipeline-dataset/tensorboard-train',
+                  }]
+                }
+
+                # Exports two sample metrics:
+                metrics = {
+                  'metrics': [{
+                      'name': 'quotient',
+                      'numberValue':  float(quotient),
+                    },{
+                      'name': 'remainder',
+                      'numberValue':  float(remainder),
+                    }]}
+
+                from collections import namedtuple
+                divmod_output = namedtuple('MyDivmodOutput', ['quotient', 'remainder', 'mlpipeline_ui_metadata', 'mlpipeline_metrics'])
+                return divmod_output(quotient, remainder, json.dumps(metadata), json.dumps(metrics))
+
+            def _serialize_float(float_value: float) -> str:
+                if isinstance(float_value, str):
+                    return float_value
+                if not isinstance(float_value, (float, int)):
+                    raise TypeError('Value "{}" has type "{}" instead of float.'.format(str(float_value), str(type(float_value))))
+                return str(float_value)
+
+            import argparse
+            _parser = argparse.ArgumentParser(prog='My divmod', description='Divides two numbers and calculate  the quotient and remainder')
+            _parser.add_argument("--dividend", dest="dividend", type=float, required=True, default=argparse.SUPPRESS)
+            _parser.add_argument("--divisor", dest="divisor", type=float, required=True, default=argparse.SUPPRESS)
+            _parser.add_argument("----output-paths", dest="_output_paths", type=str, nargs=4)
+            _parsed_args = vars(_parser.parse_args())
+            _output_files = _parsed_args.pop("_output_paths", [])
+
+            _outputs = my_divmod(**_parsed_args)
+
+            _output_serializers = [
+                _serialize_float,
+                _serialize_float,
+                str,
+                str,
+
+            ]
+
+            import os
+            for idx, output_file in enumerate(_output_files):
+                try:
+                    os.makedirs(os.path.dirname(output_file))
+                except OSError:
+                    pass
+                with open(output_file, 'w') as f:
+                    f.write(_output_serializers[idx](_outputs[idx]))
+          image: tensorflow/tensorflow:1.11.0-py3
+        params:
+        - name: add-Output
+        - name: b
+        results:
+        - name: quotient
+          description: /tmp/outputs/quotient/data
+        - name: remainder
+          description: /tmp/outputs/remainder/data
+        stepTemplate:
+          volumeMounts:
+          - name: mlpipeline-ui-metadata
+            mountPath: /tmp/outputs/mlpipeline_ui_metadata
+          - name: mlpipeline-metrics
+            mountPath: /tmp/outputs/mlpipeline_metrics
+        volumes:
+        - name: mlpipeline-ui-metadata
+          emptyDir: {}
+        - name: mlpipeline-metrics
+          emptyDir: {}
+        metadata:
+          labels:
+            pipelines.kubeflow.org/pipelinename: ''
+            pipelines.kubeflow.org/generation: ''
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            pipelines.kubeflow.org/component_spec: '{"description": "Divides two numbers
+              and calculate  the quotient and remainder", "implementation": {"container":
+              {"args": ["--dividend", {"inputValue": "dividend"}, "--divisor", {"inputValue":
+              "divisor"}, "----output-paths", {"outputPath": "quotient"}, {"outputPath":
+              "remainder"}, {"outputPath": "mlpipeline_ui_metadata"}, {"outputPath":
+              "mlpipeline_metrics"}], "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf
+              \"%s\" \"$0\" > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n",
+              "def my_divmod(dividend, divisor):\n    \"\"\"Divides two numbers and
+              calculate  the quotient and remainder\"\"\"\n    #Pip installs inside
+              a component function.\n    #NOTE: installs should be placed right at
+              the beginning to avoid upgrading a package\n    # after it has already
+              been imported and cached by python\n    import sys, subprocess;\n    subprocess.run([sys.executable,
+              ''-m'', ''pip'', ''install'', ''tensorflow==1.8.0''])\n\n    #Imports
+              inside a component function:\n    import numpy as np\n\n    #This function
+              demonstrates how to use nested functions inside a component function:\n    def
+              divmod_helper(dividend, divisor):\n        return np.divmod(dividend,
+              divisor)\n\n    (quotient, remainder) = divmod_helper(dividend, divisor)\n\n    from
+              tensorflow.python.lib.io import file_io\n    import json\n\n    # Exports
+              a sample tensorboard:\n    metadata = {\n      ''outputs'' : [{\n        ''type'':
+              ''tensorboard'',\n        ''source'': ''gs://ml-pipeline-dataset/tensorboard-train'',\n      }]\n    }\n\n    #
+              Exports two sample metrics:\n    metrics = {\n      ''metrics'': [{\n          ''name'':
+              ''quotient'',\n          ''numberValue'':  float(quotient),\n        },{\n          ''name'':
+              ''remainder'',\n          ''numberValue'':  float(remainder),\n        }]}\n\n    from
+              collections import namedtuple\n    divmod_output = namedtuple(''MyDivmodOutput'',
+              [''quotient'', ''remainder'', ''mlpipeline_ui_metadata'', ''mlpipeline_metrics''])\n    return
+              divmod_output(quotient, remainder, json.dumps(metadata), json.dumps(metrics))\n\ndef
+              _serialize_float(float_value: float) -> str:\n    if isinstance(float_value,
+              str):\n        return float_value\n    if not isinstance(float_value,
+              (float, int)):\n        raise TypeError(''Value \"{}\" has type \"{}\"
+              instead of float.''.format(str(float_value), str(type(float_value))))\n    return
+              str(float_value)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''My
+              divmod'', description=''Divides two numbers and calculate  the quotient
+              and remainder'')\n_parser.add_argument(\"--dividend\", dest=\"dividend\",
+              type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"--divisor\",
+              dest=\"divisor\", type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\",
+              dest=\"_output_paths\", type=str, nargs=4)\n_parsed_args = vars(_parser.parse_args())\n_output_files
+              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = my_divmod(**_parsed_args)\n\n_output_serializers
+              = [\n    _serialize_float,\n    _serialize_float,\n    str,\n    str,\n\n]\n\nimport
+              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
+              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
+              "image": "tensorflow/tensorflow:1.11.0-py3"}}, "inputs": [{"name": "dividend",
+              "type": "Float"}, {"name": "divisor", "type": "Float"}], "name": "My
+              divmod", "outputs": [{"name": "quotient", "type": "Float"}, {"name":
+              "remainder", "type": "Float"}, {"name": "mlpipeline_ui_metadata", "type":
+              "UI_metadata"}, {"name": "mlpipeline_metrics", "type": "Metrics"}]}'
+            tekton.dev/template: ''
+      timeout: 0s
+    - name: add-2
+      params:
+      - name: c
+        value: $(params.c)
+      - name: my-divmod-quotient
+        value: $(tasks.my-divmod.results.quotient)
+      taskSpec:
+        steps:
+        - name: main
+          args:
+          - --a
+          - $(inputs.params.my-divmod-quotient)
+          - --b
+          - $(inputs.params.c)
+          - '----output-paths'
+          - $(results.output.path)
+          command:
+          - sh
+          - -ec
+          - |
+            program_path=$(mktemp)
+            printf "%s" "$0" > "$program_path"
+            python3 -u "$program_path" "$@"
+          - |
+            def add(a, b):
+               """Calculates sum of two arguments"""
+               return a + b
+
+            def _serialize_float(float_value: float) -> str:
+                if isinstance(float_value, str):
+                    return float_value
+                if not isinstance(float_value, (float, int)):
+                    raise TypeError('Value "{}" has type "{}" instead of float.'.format(str(float_value), str(type(float_value))))
+                return str(float_value)
+
+            import argparse
+            _parser = argparse.ArgumentParser(prog='Add', description='Calculates sum of two arguments')
+            _parser.add_argument("--a", dest="a", type=float, required=True, default=argparse.SUPPRESS)
+            _parser.add_argument("--b", dest="b", type=float, required=True, default=argparse.SUPPRESS)
+            _parser.add_argument("----output-paths", dest="_output_paths", type=str, nargs=1)
+            _parsed_args = vars(_parser.parse_args())
+            _output_files = _parsed_args.pop("_output_paths", [])
+
+            _outputs = add(**_parsed_args)
+
+            _outputs = [_outputs]
+
+            _output_serializers = [
+                _serialize_float,
+
+            ]
+
+            import os
+            for idx, output_file in enumerate(_output_files):
+                try:
+                    os.makedirs(os.path.dirname(output_file))
+                except OSError:
+                    pass
+                with open(output_file, 'w') as f:
+                    f.write(_output_serializers[idx](_outputs[idx]))
+          image: python:3.7
+        params:
+        - name: c
+        - name: my-divmod-quotient
+        results:
+        - name: output
+          description: /tmp/outputs/Output/data
+        metadata:
+          labels:
+            pipelines.kubeflow.org/pipelinename: ''
+            pipelines.kubeflow.org/generation: ''
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            pipelines.kubeflow.org/component_spec: '{"description": "Calculates sum
+              of two arguments", "implementation": {"container": {"args": ["--a",
+              {"inputValue": "a"}, "--b", {"inputValue": "b"}, "----output-paths",
+              {"outputPath": "Output"}], "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf
+              \"%s\" \"$0\" > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n",
+              "def add(a, b):\n   \"\"\"Calculates sum of two arguments\"\"\"\n   return
+              a + b\n\ndef _serialize_float(float_value: float) -> str:\n    if isinstance(float_value,
+              str):\n        return float_value\n    if not isinstance(float_value,
+              (float, int)):\n        raise TypeError(''Value \"{}\" has type \"{}\"
+              instead of float.''.format(str(float_value), str(type(float_value))))\n    return
+              str(float_value)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Add'',
+              description=''Calculates sum of two arguments'')\n_parser.add_argument(\"--a\",
+              dest=\"a\", type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"--b\",
+              dest=\"b\", type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\",
+              dest=\"_output_paths\", type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n_output_files
+              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = add(**_parsed_args)\n\n_outputs
+              = [_outputs]\n\n_output_serializers = [\n    _serialize_float,\n\n]\n\nimport
+              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
+              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
+              "image": "python:3.7"}}, "inputs": [{"name": "a", "type": "Float"},
+              {"name": "b", "type": "Float"}], "name": "Add", "outputs": [{"name":
+              "Output", "type": "Float"}]}'
+            tekton.dev/template: ''
+      timeout: 0s
+  timeout: 0s
