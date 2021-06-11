@@ -21,7 +21,7 @@ def convert_to_acumos_op():
         name='convert-models-to-acumos',
         image='tomcli/acumos-model-convert:latest',
         command=['python'],
-        arguments=['-u', 'sample.py']
+        arguments=['-u', 'acumos.py']
     )
 
 
