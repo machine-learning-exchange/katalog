@@ -1,20 +1,17 @@
-# ===============LICENSE_START=======================================================
-# Acumos Apache-2.0
-# ===================================================================================
-# Copyright (C) 2017-2018 AT&T Intellectual Property & Tech Mahindra. All rights reserved.
-# ===================================================================================
-# This Acumos software file is distributed by AT&T and Tech Mahindra
-# under the Apache License, Version 2.0 (the "License");
+# Copyright 2021 IBM Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#      http://www.apache.org/licenses/LICENSE-2.0
 #
-# This file is distributed on an "AS IS" BASIS,
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# ===============LICENSE_END=========================================================
+
 """
 Provides a scikit-learn Acumos model example
 """
@@ -24,11 +21,14 @@ import os
 from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
 
+from acumos.metadata import Options
 from acumos.modeling import Model, List, create_namedtuple
 from acumos.session import AcumosSession
 from minio import Minio
 
 data_bucket = os.getenv('DATA_BUCKET', 'mlpipeline')
+onboarding = os.getenv('ONBOARDING', 'false').lower()
+push_api = os.getenv('PUSH_API', '')
 
 
 iris = load_iris()
@@ -75,18 +75,25 @@ def classify_iris(df: IrisDataFrame) -> List[int]:
 
 model = Model(classify=classify_iris)
 
-session = AcumosSession()
-session.dump(model, 'my-iris', '.')  # creates ./my-iris
+if onboarding == "true":
+    session = AcumosSession(push_api=push_api) # push onboarding URL is available on your onboarding model page of your Acumos instance
+    opts=Options(create_microservice=True)
+    session.push(model,'my-iris',options=opts)
 
-# Store Acumos files to S3
-cos = Minio(os.getenv('S3_ENDPOINT', 'minio-service:9000'),
-            access_key=os.getenv('S3_ACCESS_KEY', 'minio'),
-            secret_key=os.getenv('S3_SECRET_KEY', 'minio123'),
-            secure=False)
+    print("Onboarded Acumos files to Marketplace")
+else:
+    session = AcumosSession()
+    session.dump(model, 'my-iris', '.')  # creates ./my-iris for web onboarding
+
+    # Store Acumos files to S3
+    cos = Minio(os.getenv('S3_ENDPOINT', 'minio-service:9000'),
+                access_key=os.getenv('S3_ACCESS_KEY', 'minio'),
+                secret_key=os.getenv('S3_SECRET_KEY', 'minio123'),
+                secure=False)
 
 
-cos.fput_object(data_bucket, 'my-iris/metadata.json', 'my-iris/metadata.json')
-cos.fput_object(data_bucket, 'my-iris/model.proto', 'my-iris/model.proto')
-cos.fput_object(data_bucket, 'my-iris/model.zip', 'my-iris/model.zip')
+    cos.fput_object(data_bucket, 'my-iris/metadata.json', 'my-iris/metadata.json')
+    cos.fput_object(data_bucket, 'my-iris/model.proto', 'my-iris/model.proto')
+    cos.fput_object(data_bucket, 'my-iris/model.zip', 'my-iris/model.zip')
 
-print("Uploaded Acumos files to Object Storage")
+    print("Uploaded Acumos files to Object Storage")

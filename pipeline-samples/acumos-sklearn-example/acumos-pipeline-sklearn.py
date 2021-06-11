@@ -1,4 +1,4 @@
-# Copyright 2021 IBM
+# Copyright 2021 IBM Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from kfp import dsl
+from kubernetes.client.models import V1EnvVar
 
 
 def convert_to_acumos_op():
@@ -41,6 +42,8 @@ def acumos_pipeline(
 ):
     pull_metadata = echo_op(name="process-model-source-files")
     convert_to_acumos = convert_to_acumos_op().after(pull_metadata)
+    convert_to_acumos.add_env_variable(V1EnvVar(name='ONBOARDING', value='true'))
+    convert_to_acumos.add_env_variable(V1EnvVar(name='PUSH_API', value='http://acumos-api-endpoint'))
     onboard_model = echo_op(name="onboard-acumos-models").after(convert_to_acumos)
 
 
