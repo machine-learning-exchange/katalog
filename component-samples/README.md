@@ -6,11 +6,11 @@
 
 Components are made up of two sets of code. Client code talks to api endpoints for submitting the job. Runtime code does the actual job specified for the component.
 
-Components must also include a specification file in YAML format. The file includes information for Kubeflow to run the component, such as metadata and input/output specifications.
+Components must also include a specification file in YAML format. The file includes information for Kubeflow how to run the component, such as metadata and input/output specifications.
 
 The last step is to dockerize the component code.
 
-For an in-depth guide, take a look at their [component specification](https://www.kubeflow.org/docs/pipelines/reference/component-spec/).
+For an in-depth guide, take a look at the [Component Development Guide](https://www.kubeflow.org/docs/components/pipelines/sdk/component-development/).
 
 ## Register Pipeline Components
 
@@ -25,7 +25,7 @@ For an in-depth guide, take a look at their [component specification](https://ww
 Components are composed into a pipeline using the Kubeflow Pipelines SDK.
 Refer to the pipeline [documentation](../pipeline-samples/README.md) for usage.
 
-## List of Sample Datasets
+## List of Sample Components
 * [Generate Dataset Metadata](dax-to-dlf/component.yaml)
 * [Create Dataset Volume](dlf/component.yaml)
 * [Echo Sample](echo/component.yaml)
