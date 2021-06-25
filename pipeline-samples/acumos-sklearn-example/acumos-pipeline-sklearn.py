@@ -16,12 +16,17 @@ from kfp import dsl
 from kubernetes.client.models import V1EnvVar
 
 
-def convert_to_acumos_op():
+def convert_to_acumos_op(acumos_onboarding="false",
+                         acumos_push_api='http://acumos-api-endpoint',
+                         model_persistent_bucket='mlpipeline'):
     return dsl.ContainerOp(
         name='convert-models-to-acumos',
         image='tomcli/acumos-model-convert:latest',
         command=['python'],
-        arguments=['-u', 'acumos.py']
+        arguments=['-u', 'convert-to-acumos.py',
+                   '--onboarding', acumos_onboarding,
+                   '--push-api', acumos_push_api,
+                   '--data-bucket', model_persistent_bucket]
     )
 
 
@@ -39,14 +44,16 @@ def echo_op(name="echo", text="placeholder"):
     description='A pipeline for onboarding MLX models to Acumos Marketplace'
 )
 def acumos_pipeline(
+    acumos_onboarding='true',
+    acumos_push_api='http://acumos-api-endpoint',
+    model_persistent_bucket='mlpipeline'
 ):
     pull_metadata = echo_op(name="process-model-source-files")
-    convert_to_acumos = convert_to_acumos_op().after(pull_metadata)
-    convert_to_acumos.add_env_variable(V1EnvVar(name='ONBOARDING', value='true'))
-    convert_to_acumos.add_env_variable(V1EnvVar(name='PUSH_API', value='http://acumos-api-endpoint'))
-    onboard_model = echo_op(name="onboard-acumos-models").after(convert_to_acumos)
+    convert_to_acumos = convert_to_acumos_op(acumos_onboarding=acumos_onboarding,
+                                             acumos_push_api=acumos_push_api,
+                                             model_persistent_bucket=model_persistent_bucket).after(pull_metadata)
 
 
 if __name__ == '__main__':
     from kfp_tekton.compiler import TektonCompiler
-    TektonCompiler().compile(acumos_pipeline, __file__.replace('.py', '.yaml'))
+    TektonCompiler().compile(acumos_pipeline, __file__.replace('.py', '.tgz'))

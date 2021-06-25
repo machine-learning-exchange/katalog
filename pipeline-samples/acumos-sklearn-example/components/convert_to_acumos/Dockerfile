@@ -31,4 +31,4 @@ COPY src $APP_HOME
 WORKDIR $APP_HOME
 
 ENTRYPOINT ["python"]
-CMD ["acumos.py"]
+CMD ["convert-to-acumos.py"]
