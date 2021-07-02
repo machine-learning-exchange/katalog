@@ -50,10 +50,11 @@ seo_tags:
 
 # OPTIONAL; assets that complement this data set, e.g. notebooks
 related_assets:
-  - name: Explore the data
-    description: Data preview and glossary
-    url: https://dax-cdn.cdn.appdomain.cloud/dax-groningen-meaning-bank-modified/1.0.2/data-preview/index.html
-  - name: DAX GMB project
-    description: Watson Studio Gallery project for the GMB data set
-    mime_type: text/html
-    url: https://dataplatform.cloud.ibm.com/exchange/public/entry/view/00d1f36477e7a092a43a264d410d5451
+  - name: Language Classification Notebook
+    description: Applying MLM to source code 
+    mime_type: application/x-ipynb+json
+    url: https://github.com/machine-learning-exchange/mlx/blob/main/notebooks/dlf-notebooks/Proect_CodeNet_LangClass.ipynb
+  - name: Masked Language Model Notebook
+    description: Detect language of souce code
+    mime_type: application/x-ipynb+json
+    url: https://github.com/machine-learning-exchange/mlx/blob/main/notebooks/dlf-notebooks/Project_CodeNet_MLM.ipynb
