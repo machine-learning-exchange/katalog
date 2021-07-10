@@ -18,6 +18,8 @@ from ruamel.yaml import YAML
 import subprocess
 import os
 import configparser
+from os import environ as env
+from urllib.request import urlopen
 
 yaml = YAML(typ='safe')
 
@@ -49,12 +51,11 @@ def get_secret_creds(path):
 
 
 def loadModelFile(model_id):
-    model_api = 'mlx-api'  # Pull KubeDNS address from secret in the future
-    model_url = 'http://' + model_api + '/apis/v1alpha1/models/' + model_id + '/templates'
-    response = requests.get(model_url)
-    metrics = response.json()
-    data = yaml.load(metrics['template'])
-    return data
+    model_api = env.get('MINIO_SERVICE_ENDPOINT', 'minio-service.kubeflow:9000')  # Pull KubeDNS address from secret in the future
+    model_url = 'http://' + model_api + '/mlpipeline/models/' + model_id + '/template.yaml'
+    response = urlopen(url=model_url)
+    model_yaml = yaml.load(response.read())
+    return model_yaml
 
 
 def writeFile(path, content):
