@@ -1,0 +1,60 @@
+id: codenet
+name: CodeNet Dataset
+description: Project CodeNet is a large-scale dataset with approximately 14 million code samples, each of which is an intended solution to one of 4000 coding problems.
+version: 1.0.0
+created: 2021-05-05
+updated: 2021-05-05
+format:
+  - type: C++, Java, Python, other programming languages, csv, text
+    url: https://en.wikipedia.org/wiki/Programming_language
+domain: Solutions to Programming Problems
+
+# Information about the entity that makes the data set available
+provider:
+  name: Data Asset eXchange
+  url: https://developer.ibm.com/exchanges/data/all/project-codenet/
+
+# identifies where the data set is stored and how it is stored (REQUIRED)
+repository:
+  type: HTTP
+  url: https://dax-cdn.cdn.appdomain.cloud/dax-project-codenet/1.0.0/Project_CodeNet.tar.gz
+  mime_type: application/x-tar
+  sha_512: 
+  size: 9G
+
+# REQUIRED; data set license information
+license:
+  commercial: false
+  name: CDLA Permissive v2.0
+  url: https://cdla.dev/permissive-2-0/
+
+# REQUIRED; describes relevant files in the data set archive
+content:
+  - pattern: problem_list.csv
+    description: The dataset comprises 13,916,868 submissions, divided into 4053 problems (of which 5 are empty).
+    records: 13916868
+    size: 9G
+    type: file
+    format: csv
+    mime_type: text/plain
+
+# OPTIONAL; Identifies where the data set was obtained from
+source:
+  name: Data Asset eXchange
+  url: https://developer.ibm.com/exchanges/data/all/project-codenet/
+
+# OPTIONAL; but recommended
+seo_tags:
+  - Solutions to Programming Problems
+  - Text
+
+# OPTIONAL; assets that complement this data set, e.g. notebooks
+related_assets:
+  - name: Project CodeNet Language Classification
+    description: Simple experiment that shows how to create and exercise a Keras model to detect the language of a piece of source code
+    mime_type: application/x-ipynb+json
+    url: https://github.com/IBM/Project_CodeNet/blob/main/notebooks/codenet-lang.ipynb
+  - name: Project CodeNet Masked Language Model
+    description: Experiment investigates whether a popular attention model to construct a masked language model (MLM) can be used for source code instead of natural language sentences
+    mime_type: application/x-ipynb+json
+    url: https://github.com/IBM/Project_CodeNet/blob/main/notebooks/codenet-mlm.ipynb
