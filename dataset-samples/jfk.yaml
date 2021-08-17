@@ -81,4 +81,4 @@ related_assets:
       asset_id: notebooks/jfk-airport-analysis
 
 # OPTIONAL; url for the markdown file which describes the asset
-readme_url: https://raw.githubusercontent.com/drewbutlerbb4/katalog/readme-url/dataset-samples/jfk.md
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/jfk.md
