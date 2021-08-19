@@ -59,4 +59,4 @@ related_assets:
     url: https://dataplatform.cloud.ibm.com/exchange/public/entry/view/00d1f36477e7a092a43a264d410d5451
 
 # OPTIONAL; url for the markdown file which describes the asset
-readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/gmb.md
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/gmb/gmb.md
