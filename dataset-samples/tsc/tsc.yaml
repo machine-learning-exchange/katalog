@@ -57,3 +57,6 @@ related_assets:
     description: Example notebook for the TensorFlow Speech Commands data set
     mime_type: text/html
     url: https://dataplatform.cloud.ibm.com/analytics/notebooks/v2/652f0257-1e58-4e63-a7e7-0e079c9f88a1/view?access_token=cfdcca6828a2cc42d4d8364757ce9f26c68fe2ca87fdb2d0ccd3977b43ae6640
+
+# OPTIONAL; url for the markdown file which describes the asset
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/tsc/tsc.md
