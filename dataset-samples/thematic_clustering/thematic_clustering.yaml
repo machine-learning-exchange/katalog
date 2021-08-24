@@ -63,3 +63,6 @@ related_assets:
     description: Thematic Clustering of Sentences Data Exploration Notebook
     mime_type: text/html
     url: https://resedit.watson.ibm.com/researcher/view.php?person=il-NOAMS
+
+# OPTIONAL; url for the markdown file which describes the asset
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/thematic_clustering/thematic_clustering.md
