@@ -20,6 +20,14 @@ license: "Apache 2.0"
 domain: "Human Pose Estimation"
 website: "https://developer.ibm.com/exchanges/models/all/max-human-pose-estimator/"
 
+# applicable filter categories for MLX UI
+filter_categories:
+  domain: image-recognition
+  platform:
+    - kubernetes
+    - kfserving
+  language: python
+
 serve:
   servable: true
   tested_platforms:

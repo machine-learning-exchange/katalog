@@ -15,10 +15,16 @@ model_identifier: max-image-caption-generator
 description: "IBM Model Asset eXchange(MAX) model that generates captions from a fixed vocabulary describing the contents of images in the COCO dataset"
 framework:
     name: tensorflow
-
 license: "Apache 2.0"
 domain: "Image-To-Text Translation"
 website: "https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/"
+
+# applicable filter categories for MLX UI
+filter_categories:
+  domain: "image-to-text"
+  platform: ["kubernetes", "kfserving"]
+  language: "python"
+  framework: "tensorflow"
 
 serve:
   servable: true

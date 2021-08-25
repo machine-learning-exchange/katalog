@@ -9,6 +9,12 @@ format:
     url: https://universaldependencies.org/format.html
 domain: Natural Language Processing
 
+# applicable filter categories for MLX UI
+filter_categories:
+  domain: NLP
+  format: text
+  sector: finance
+
 # Information about the entity that makes the data set available
 provider:
   name: Data Asset eXchange
