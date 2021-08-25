@@ -59,5 +59,3 @@ data = pardata.load_dataset('noaa_jfk')
 * __[NOAA LCD Data Download Platform](https://www.ncdc.noaa.gov/cdo-web/datatools/lcd)__ website where you can choose new geographic locations for which to download local weather data from
 * __[NOAA LCD JFK Weather Station](https://www.ncdc.noaa.gov/cdo-web/datasets/LCD/stations/WBAN:94789/detail)__ website with JFK Local Climatological Data station details
 * __[NOAA LCD Data Documentation](https://www1.ncdc.noaa.gov/pub/data/cdo/documentation/LCD_documentation.pdf)__ document that provides NOAA LCD data dictionary
-
-<script defer type='text/javascript' src='/developerapi/offers/burbidge.js'></script>
