@@ -53,8 +53,8 @@ related_assets:
   - name: Project CodeNet Language Classification
     description: Simple experiment that shows how to create and exercise a Keras model to detect the language of a piece of source code
     mime_type: application/x-ipynb+json
-    url: https://github.com/IBM/Project_CodeNet/blob/main/notebooks/codenet-lang.ipynb
+    url: https://github.com/IBM/Project_CodeNet/blob/main/notebooks/Project_CodeNet_LangClass.ipynb
   - name: Project CodeNet Masked Language Model
     description: Experiment investigates whether a popular attention model to construct a masked language model (MLM) can be used for source code instead of natural language sentences
     mime_type: application/x-ipynb+json
-    url: https://github.com/IBM/Project_CodeNet/blob/main/notebooks/codenet-mlm.ipynb
+    url: https://github.com/IBM/Project_CodeNet/blob/main/notebooks/Project_CodeNet_MLM.ipynb
