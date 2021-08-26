@@ -18,4 +18,4 @@ metadata: # Optional metadata
     platform: 'OpenSource'
 implementation: # required
   github:
-    source: 'https://github.com/IBM/Trusted-ML-Pipelines/blob/master/notebooks/Project_CodeNet_LangClass.ipynb'
+    source: 'https://github.com/IBM/Project_CodeNet/blob/main/notebooks/Project_CodeNet_LangClass.ipynb'
