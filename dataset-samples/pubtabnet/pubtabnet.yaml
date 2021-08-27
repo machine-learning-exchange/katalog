@@ -72,3 +72,6 @@ related_assets:
     description: Research paper
     mime_type: text/html
     url: https://arxiv.org/abs/1911.10683
+
+# OPTIONAL; url for the markdown file which describes the asset
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/pubtabnet/pubtabnet.md
