@@ -14,7 +14,7 @@
 name: Create Dataset Volume
 description: Manage Dataset Lifecycle Framework datasets
 inputs:
-  - {name: Action,         type: String, default: 'create',   description: 'Action to execute on KFServing'}
+  - {name: Action,         type: String, default: 'create',   description: 'Action to execute on Kubernetes'}
   - {name: Dataset YAML,   type: String, default: '{}',       description: 'Raw Dataset serialized YAML for deployment'}
   - {name: Namespace,      type: String, default: 'default',  description: 'Kubernetes namespace for deployment'}
 outputs:
