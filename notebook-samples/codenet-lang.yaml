@@ -19,3 +19,6 @@ metadata: # Optional metadata
 implementation: # required
   github:
     source: 'https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/codenet/Project_CodeNet_LangClass.ipynb'
+    # TODO: do not require '==' in elyra-ai/kfp-notebook:"bootstrapper.py", def package_list_to_dict()
+    #   https://github.com/elyra-ai/kfp-notebook/blob/v0.26.0/etc/docker-scripts/bootstrapper.py#L548
+    requirements: 'matplotlib==3.4.3,numpy==1.19.5,tensorflow==2.6.0'
