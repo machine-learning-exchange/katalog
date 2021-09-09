@@ -1,0 +1,62 @@
+id: codenet_mlm
+name: Project CodeNet - MLM subset
+description: Project CodeNet is a large-scale dataset with approximately 14 million code samples, each of which is an intended solution to one of 4000 coding problems. This small subset contains 55,000 samples in the C programming language to demonstrate the use of a Masked-Language Model for tokenization tasks.
+version: 1.0.0
+created: 2021-05-05
+updated: 2021-05-05
+format:
+  - type: C
+    url: https://en.wikipedia.org/wiki/Programming_language
+domain: Solutions to Programming Problems
+
+# Information about the entity that makes the data set available
+provider:
+  name: Data Asset eXchange
+  url: https://developer.ibm.com/exchanges/data/all/project-codenet/
+
+# identifies where the data set is stored and how it is stored (REQUIRED)
+repository:
+  type: HTTP
+  url: https://dax-cdn.cdn.appdomain.cloud/dax-project-codenet/1.0.0/Project_CodeNet_MLM.tar.gz
+  mime_type: application/x-tar
+  sha_512: 
+  size: 51K
+
+# REQUIRED; data set license information
+license:
+  commercial: false
+  name: CDLA Permissive v2.0
+  url: https://cdla.dev/permissive-2-0/
+
+# REQUIRED; describes relevant files in the data set archive
+content:
+  - pattern: train, test
+    description: The dataset comprises 55,000 submissions in the C programming language.
+    records: 55000
+    size: 51K
+    type: file
+    format: C
+    mime_type: text/plain
+
+# OPTIONAL; Identifies where the data set was obtained from
+source:
+  name: Data Asset eXchange
+  url: https://developer.ibm.com/exchanges/data/all/project-codenet/
+
+# OPTIONAL; but recommended
+seo_tags:
+  - Solutions to Programming Problems
+  - Text
+
+# OPTIONAL; assets that complement this data set, e.g. notebooks
+related_assets:
+  - name: Project CodeNet Masked Language Model
+    description: Experiment investigates whether a popular attention model to construct a masked language model (MLM) can be used for source code instead of natural language sentences
+    mime_type: application/x-ipynb+json
+    url: https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/codenet/Project_CodeNet_MLM.ipynb
+    application:
+      name: MLX
+      asset_id: notebooks/project-codenet-masked-language-model
+
+# OPTIONAL; url for the markdown file which describes the asset
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/codenet_mlm/codenet_mlm.md
