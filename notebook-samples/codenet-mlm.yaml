@@ -18,4 +18,4 @@ metadata: # Optional metadata
     platform: 'OpenSource'
 implementation: # required
   github:
-    source: 'https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/dlf-notebooks/Project_CodeNet_MLM.ipynb'
+    source: 'https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/codenet/Project_CodeNet_MLM.ipynb'

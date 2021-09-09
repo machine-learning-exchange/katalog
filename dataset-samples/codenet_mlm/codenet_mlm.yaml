@@ -53,7 +53,10 @@ related_assets:
   - name: Project CodeNet Masked Language Model
     description: Experiment investigates whether a popular attention model to construct a masked language model (MLM) can be used for source code instead of natural language sentences
     mime_type: application/x-ipynb+json
-    url: https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/dlf-notebooks/Project_CodeNet_MLM.ipynb
+    url: https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/codenet/Project_CodeNet_MLM.ipynb
+    application:
+      name: MLX
+      asset_id: notebooks/project-codenet-mlm
 
 # OPTIONAL; url for the markdown file which describes the asset
 readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/codenet_mlm/codenet_mlm.md

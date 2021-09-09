@@ -53,6 +53,9 @@ related_assets:
   - name: Project CodeNet Language Classification
     description: Simple experiment that shows how to create and exercise a Keras model to detect the language of a piece of source code
     mime_type: application/x-ipynb+json
-    url: https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/dlf-notebooks/Project_CodeNet_LangClass.ipynb
+    url: https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/codenet/Project_CodeNet_LangClass.ipynb
+    application:
+      name: MLX
+      asset_id: notebooks/project-codenet-language-classification
 # OPTIONAL; url for the markdown file which describes the asset
 readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/codenet_langclass/codenet_langclass.md
