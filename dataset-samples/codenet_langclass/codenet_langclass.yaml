@@ -1,6 +1,6 @@
 id: codenet_langclass
-name: Project CodeNet - LangClass subset
-description: Project CodeNet is a large-scale dataset with approximately 14 million code samples, each of which is an intended solution to one of 4000 coding problems. This small subset of the Project CodeNet dataset is intended to showcase a language classification model and only comprises 2198 random samples across 10 languages.
+name: Project CodeNet - Language Classifier
+description: A small subset of the Project CodeNet dataset, intended to showcase a language classification model. It only comprises 2198 random samples across 10 languages.
 version: 1.0.0
 created: 2021-05-05
 updated: 2021-05-05
