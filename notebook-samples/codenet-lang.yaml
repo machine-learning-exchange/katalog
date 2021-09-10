@@ -11,14 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-name: 'Project CodeNet Language Classification' # required
-description: 'Simple experiment that shows how to create and exercise a Keras model to detect the language of a piece of source code' # Optional
-metadata: # Optional metadata
+
+name: 'Project CodeNet Language Classification'
+description: 'Simple experiment that shows how to create and exercise a Keras model to detect the language of a piece of source code'
+metadata:
   annotations:
     platform: 'OpenSource'
-implementation: # required
+implementation:
   github:
     source: 'https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/codenet/Project_CodeNet_LangClass.ipynb'
-    # TODO: do not require '==' in elyra-ai/kfp-notebook:"bootstrapper.py", def package_list_to_dict()
-    #   https://github.com/elyra-ai/kfp-notebook/blob/v0.26.0/etc/docker-scripts/bootstrapper.py#L548
-    requirements: 'matplotlib==3.4.3,numpy==1.19.5,tensorflow==2.6.0'
+    requirements: 'matplotlib==3.3.4,numpy==1.19.5,tensorflow==2.6.0'
