@@ -11,14 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-name: 'Project CodeNet Masked Language Model' # required
-description: 'Experiment investigates whether a popular attention model to construct a masked language model (MLM) can be used for source code instead of natural language sentences' # Optional
-metadata: # Optional metadata
+
+name: 'Project CodeNet Masked Language Model'
+description: 'Experiment investigates whether a popular attention model to construct a masked language model (MLM) can be used for source code instead of natural language sentences'
+metadata:
   annotations:
     platform: 'OpenSource'
-implementation: # required
+implementation:
   github:
     source: 'https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/codenet/Project_CodeNet_MLM.ipynb'
-    # TODO: do not require '==' in elyra-ai/kfp-notebook:"bootstrapper.py", def package_list_to_dict()
-    #   https://github.com/elyra-ai/kfp-notebook/blob/v0.26.0/etc/docker-scripts/bootstrapper.py#L548
-    requirements: 'pandas==1.1.5,tensorflow==2.6.0'
+    requirements: 'matplotlib==3.3.4,pandas==1.1.5,tensorflow==2.6.0'
