@@ -1,4 +1,4 @@
-id: codenet_langclass
+id: codenet-langclass
 name: Project CodeNet - Language Classifier
 description: A small subset of the Project CodeNet dataset, intended to showcase a language classification model. It only comprises 2198 random samples across 10 languages.
 version: 1.0.0

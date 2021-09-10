@@ -1,4 +1,4 @@
-id: codenet_mlm
+id: codenet-mlm
 name: Project CodeNet - Masked Language Model
 description: A small subset of the Project CodeNet dataset, containing 55,000 samples in the C programming language to demonstrate the use of a Masked Language Model for tokenization tasks.
 version: 1.0.0
