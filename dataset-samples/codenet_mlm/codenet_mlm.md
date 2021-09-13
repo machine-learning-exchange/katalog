@@ -1,5 +1,6 @@
 ## Overview
-**Note**: This small subset contains 55,000 samples in the C programming language to demonstrate the use of a Masked-Language Model for tokenization tasks.
+**Note**: This small subset contains 55,000 samples in the C programming language to demonstrate the use of a Masked 
+Language Model (MLM) for tokenization tasks.
 
 Project CodeNet is a large-scale dataset with approximately 14 million code samples, each of which is an intended solution to one of 4000 coding problems. The code samples are obtained from downloading submissions from two online judge web sites: [AIZU Online Judge](https://judge.u-aizu.ac.jp/onlinejudge/) and [AtCoder](https://atcoder.jp/). The code samples are written in over 50 programming languages (although the dominant languages are C++, C, Python, and Java) and they are annotated with a rich set of information, such as its code size, memory footprint, cpu run time, and status, which indicates acceptance or error types. The dataset is accompanied by a [repository](https://github.com/IBM/Project_CodeNet), where we provide a set of [tools](https://github.com/IBM/Project_CodeNet/tree/main/tools) to aggregate codes samples based on user criteria and to transform code samples into token sequences, simplified parse trees and other code graphs. A detailed discussion of Project CodeNet is available in this [paper](https://github.com/IBM/Project_CodeNet/blob/main/ProjectCodeNet.pdf).
 
