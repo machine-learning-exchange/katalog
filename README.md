@@ -45,3 +45,4 @@ MLX Katalog is a project to hold the default content to bootstrap Machine Learni
 * [ART detector model](notebook-samples/art-detector.yaml)
 * [ART poisoning attack](notebook-samples/art-poison.yaml)
 * [jfk-airport-analysis](notebook-samples/JFK-airport.yaml)
+
