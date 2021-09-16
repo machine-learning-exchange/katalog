@@ -1,5 +1,5 @@
 id: codenet-mlm
-name: Project CodeNet - Masked Language Model
+name: Project CodeNet - MLM
 description: A small subset of the Project CodeNet dataset, containing 55,000 samples in the C programming language to demonstrate the use of a Masked Language Model for tokenization tasks.
 version: 1.0.0
 created: 2021-05-05
@@ -56,7 +56,7 @@ related_assets:
     url: https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/codenet/Project_CodeNet_MLM.ipynb
     application:
       name: MLX
-      asset_id: notebooks/project-codenet-masked-language-model
+      asset_id: notebooks/project-codenet-mlm
 
 # OPTIONAL; url for the markdown file which describes the asset
 readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/codenet_mlm/codenet_mlm.md
