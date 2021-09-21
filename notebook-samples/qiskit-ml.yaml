@@ -1,0 +1,23 @@
+# Copyright 2021 IBM Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: 'Qiskit Quantum Kernel Machine Learning'
+description: 'Use Qiskit to calculate a kernel matrix with a quantum feature map, then use this kernel matrix in scikit-learn classification and clustering algorithms.'
+metadata:
+  annotations:
+    platform: 'OpenSource'
+implementation:
+  github:
+    source: 'https://github.com/Qiskit/qiskit-machine-learning/blob/main/docs/tutorials/03_quantum_kernel.ipynb'
+    requirements: 'fastdtw==0.3,matplotlib==3.3,numpy==1.17,qiskit[visualization]==0.29,qiskit-machine-learning==0.2,scipy==1.4,psutil==5,scikit-learn==0.20'
