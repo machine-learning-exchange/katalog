@@ -10,21 +10,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Image Caption Generator
-model_identifier: max-image-caption-generator
-description: "IBM Model Asset eXchange(MAX) model that generates captions from a fixed vocabulary describing the contents of images in the COCO dataset"
+name: MAX Named Entity Tagger
+model_identifier: max-named-entity-tagger
+description: IBM Model Asset eXchange(MAX) model that locates and tags named entities in text.
 framework:
-    name: tensorflow
-license: "Apache 2.0"
-domain: "Image-To-Text Translation"
-website: "https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/"
+  name: tensorflow
+  version: "1.15.4"
 
-# applicable filter categories for MLX UI
-filter_categories:
-  domain: "image-to-text"
-  platform: ["kubernetes", "kfserving"]
-  language: "python"
-  framework: "tensorflow"
+license: "Apache 2.0"
+domain: "Natural Language Processing"
+website: "https://developer.ibm.com/exchanges/models/all/max-named-entity-tagger/"
 
 serve:
   servable: true
@@ -32,4 +27,6 @@ serve:
     - kubernetes
     - kfserving
   serving_container_image:
-    container_image_url: "quay.io/codait/max-image-caption-generator:latest"
+    container_image_url: "quay.io/codait/max-named-entity-tagger:latest"
+
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-named-entity-tagger/max-named-entity-tagger.md

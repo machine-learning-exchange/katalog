@@ -10,16 +10,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Text Sentiment Classifier
-model_identifier: max-text-sentiment-classifier
-description: IBM Model Asset eXchange(MAX) model that detects the sentiment captured in short pieces of text
+name: MAX Question Answering
+model_identifier: max-question-answering
+description: IBM Model Asset eXchange(MAX) model that answers questions on a given corpus of text
 framework:
-  name: tensorflow
+  name: "tensorflow"
   version: "1.15.4"
 
 license: "Apache 2.0"
-domain: "Sentiment Analysis"
-website: "https://developer.ibm.com/technologies/artificial-intelligence/models/max-text-sentiment-classifier/"
+domain: "Question and Answer"
+website: "https://developer.ibm.com/exchanges/models/all/max-question-answering/"
 
 serve:
   servable: true
@@ -27,4 +27,6 @@ serve:
     - kubernetes
     - kfserving
   serving_container_image:
-    container_image_url: "quay.io/codait/max-text-sentiment-classifier:latest"
+    container_image_url: "quay.io/codait/max-question-answering:latest"
+
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-question-answering/max-question-answering.md

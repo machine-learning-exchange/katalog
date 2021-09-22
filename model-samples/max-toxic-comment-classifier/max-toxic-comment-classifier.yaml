@@ -10,16 +10,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Object Detector
-model_identifier: max-object-detector
-description: IBM Model Asset eXchange(MAX) model that localizes and identifies multiple objects in a single image
+name: MAX Toxic Comment Classifier
+model_identifier: max-toxic-comment-classifier
+description: IBM Model Asset eXchange(MAX) model that detects 6 types of toxicity in user comments
 framework:
-  name: tensorflow
-  version: "1.5.0"
+  name: pytorch
+  version: "1.0.1"
 
 license: "Apache 2.0"
-domain: "Object detection in images"
-website: "https://developer.ibm.com/exchanges/models/all/max-object-detector"
+domain: "Text Classification"
+website: "https://developer.ibm.com/exchanges/models/all/max-toxic-comment-classifier/"
 
 serve:
   servable: true
@@ -27,4 +27,6 @@ serve:
     - kubernetes
     - kfserving
   serving_container_image:
-    container_image_url: "quay.io/codait/max-object-detector:latest"
+    container_image_url: "quay.io/codait/max-toxic-comment-classifier:latest"
+
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-toxic-comment-classifier/max-toxic-comment-classifier.md

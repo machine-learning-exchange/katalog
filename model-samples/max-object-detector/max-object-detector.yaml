@@ -10,16 +10,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Optical Character Recognition
-model_identifier: max-ocr
-description: IBM Model Asset eXchange(MAX) model that identifies text in an image.
+name: MAX Object Detector
+model_identifier: max-object-detector
+description: IBM Model Asset eXchange(MAX) model that localizes and identifies multiple objects in a single image
 framework:
-  name: "N/A"
-  version: "N/A"
+  name: tensorflow
+  version: "1.5.0"
 
 license: "Apache 2.0"
-domain: "Optical Character Recognition"
-website: "https://developer.ibm.com/exchanges/models/all/max-ocr/"
+domain: "Object detection in images"
+website: "https://developer.ibm.com/exchanges/models/all/max-object-detector"
 
 serve:
   servable: true
@@ -27,4 +27,6 @@ serve:
     - kubernetes
     - kfserving
   serving_container_image:
-    container_image_url: "quay.io/codait/max-ocr:latest"
+    container_image_url: "quay.io/codait/max-object-detector:latest"
+
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-object-detector/max-object-detector.md

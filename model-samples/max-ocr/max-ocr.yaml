@@ -10,16 +10,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Named Entity Tagger
-model_identifier: max-named-entity-tagger
-description: IBM Model Asset eXchange(MAX) model that locates and tags named entities in text.
+name: MAX Optical Character Recognition
+model_identifier: max-ocr
+description: IBM Model Asset eXchange(MAX) model that identifies text in an image.
 framework:
-  name: tensorflow
-  version: "1.15.4"
+  name: "N/A"
+  version: "N/A"
 
 license: "Apache 2.0"
-domain: "Natural Language Processing"
-website: "https://developer.ibm.com/exchanges/models/all/max-named-entity-tagger/"
+domain: "Optical Character Recognition"
+website: "https://developer.ibm.com/exchanges/models/all/max-ocr/"
 
 serve:
   servable: true
@@ -27,4 +27,7 @@ serve:
     - kubernetes
     - kfserving
   serving_container_image:
-    container_image_url: "quay.io/codait/max-named-entity-tagger:latest"
+    container_image_url: "quay.io/codait/max-ocr:latest"
+
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-ocr/max-ocr.md
+

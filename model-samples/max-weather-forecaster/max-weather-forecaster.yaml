@@ -10,16 +10,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Toxic Comment Classifier
-model_identifier: max-toxic-comment-classifier
-description: IBM Model Asset eXchange(MAX) model that detects 6 types of toxicity in user comments
+name: MAX Weather Forecaster
+model_identifier: max-weather-forecaster
+description: IBM Model Asset eXchange(MAX) model that predicts hourly weather features given historical data for a specific location
 framework:
-  name: pytorch
-  version: "1.0.1"
+  name: keras
 
 license: "Apache 2.0"
-domain: "Text Classification"
-website: "https://developer.ibm.com/exchanges/models/all/max-toxic-comment-classifier/"
+domain: "Time Series Prediction"
+website: "https://developer.ibm.com/exchanges/models/all/max-weather-forecaster"
 
 serve:
   servable: true
@@ -27,4 +26,6 @@ serve:
     - kubernetes
     - kfserving
   serving_container_image:
-    container_image_url: "quay.io/codait/max-toxic-comment-classifier:latest"
+    container_image_url: "quay.io/codait/max-weather-forecaster:latest"
+
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-weather-forecaster/max-weather-forecaster.md
