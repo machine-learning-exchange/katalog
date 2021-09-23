@@ -29,14 +29,14 @@ The model is based on a simple Convolutional Neural Network (CNN) architecture w
 * The minimum recommended resources for this model are [SET NECESSARY GB] Memory and [SET NECESSARY CPUs] CPUs.
 * If you are on x86-64/AMD64, your CPU must support [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) at the minimum.
 
-# Deployment options
+# Deployment Options
 
-* [Deploy from Quay](#deploy-from-quay)
+* [Deploy from Container Registry](#deploy-from-container-registry)
 * [Deploy on Red Hat OpenShift](#deploy-on-red-hat-openshift)
 * [Deploy on Kubernetes](#deploy-on-kubernetes)
 * [Run Locally](#run-locally)
 
-## Deploy from Quay
+## Deploy from Container Registry
 
 To run the docker image, which automatically starts the model serving API, run:
 
