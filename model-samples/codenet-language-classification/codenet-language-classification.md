@@ -26,7 +26,7 @@ The model is based on a simple Convolutional Neural Network (CNN) architecture w
 ## Pre-requisites
 
 * `docker`: The [Docker](https://www.docker.com/) command-line interface. Follow the [installation instructions](https://docs.docker.com/install/) for your operating system.
-* The minimum recommended resources for this model are [SET NECESSARY GB] Memory and [SET NECESSARY CPUs] CPUs.
+* The minimum recommended resources for this model are 2 GB Memory and 2 CPUs.
 * If you are on x86-64/AMD64, your CPU must support [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) at the minimum.
 
 # Deployment Options
