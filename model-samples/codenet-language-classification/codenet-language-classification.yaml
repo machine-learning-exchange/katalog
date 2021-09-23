@@ -11,18 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# name: (Required) name of this model file
-# description: (Optional) description of this model file
-# author: (Required for trainable)
-#   name: (Required for trainable) name of this training job's author
-#   email: (Required for trainable) email of this training job's author
-# framework: (Required)
-#   name: (Required) ML/DL framework format that the model is stored as.
-#   version: (Optional) Framework version used for this model
-#   runtimes: (Required for trainable)
-#     name: (Required for trainable) programming language for the model runtime
-#     version: (Required for trainable) programming language version for the model runtime
 
 name: CodeNet Language Classification
 model_identifier: codenet-language-classification
