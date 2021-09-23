@@ -30,4 +30,3 @@ serve:
     container_image_url: "quay.io/codait/max-ocr:latest"
 
 readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-ocr/max-ocr.md
-
