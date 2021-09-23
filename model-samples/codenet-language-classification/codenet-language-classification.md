@@ -1,9 +1,8 @@
 # Overview
 
-The CodeNet Language Classification model takes in a file (any programming language format) with a computer program / code in it and outputs the detected programming language along with the probability.
+The CodeNet Language Classification model takes a text file of any programming language and classifies the detected programming language along with its probability.
 
-The model is based on a simple CNN architecture with fully connected flat layers. The model files are hosted along with this repository on GitHub. More details on the model are in the reference links below. 
-The code in this repository deploys the model as a web service in a Docker container.
+The model is based on a simple Convolutional Neural Network (CNN) architecture with fully connected flat layers.
 
 ## Model Metadata
 | Domain | Application | Industry  | Framework | Training Data | Input Data Format |
@@ -11,7 +10,6 @@ The code in this repository deploys the model as a web service in a Docker conta
 | Text Classification | Code Classification | Software | TensorFlow | [Project Codenet](https://developer.ibm.com/exchanges/data/all/project-codenet/) | Various coding language formats |
 
 ## References
-
 
 * [Project CodeNet Dataset page](https://developer.ibm.com/exchanges/data/all/project-codenet/)
 * [Project CodeNet GitHub repo](https://github.com/IBM/Project_CodeNet)
@@ -25,11 +23,11 @@ The code in this repository deploys the model as a web service in a Docker conta
 | Model Code (3rd party) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](LICENSE) |
 | Test samples | [CDLA-Permissive 2.0](https://cdla.io) | [samples README](samples/README.md) |
 
-## Pre-requisites:
+## Pre-requisites
 
-* `docker`: The [Docker](https://www.docker.com/) command-line interface. Follow the [installation instructions](https://docs.docker.com/install/) for your system.
-* The minimum recommended resources for this model is [SET NECESSARY GB] Memory and [SET NECESSARY CPUs] CPUs.
-* If you are on x86-64/AMD64, your CPU must support [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) at the minimum. [Remove this item if it's not TensorFlow-based.]
+* `docker`: The [Docker](https://www.docker.com/) command-line interface. Follow the [installation instructions](https://docs.docker.com/install/) for your operating system.
+* The minimum recommended resources for this model are [SET NECESSARY GB] Memory and [SET NECESSARY CPUs] CPUs.
+* If you are on x86-64/AMD64, your CPU must support [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) at the minimum.
 
 # Deployment options
 
@@ -43,19 +41,19 @@ The code in this repository deploys the model as a web service in a Docker conta
 To run the docker image, which automatically starts the model serving API, run:
 
 ```
-$ docker run -it -p 5000:5000 quay.io/codait/codenet-language-classifier
+$ docker run -it -p 5000:5000 codait/codenet-language-classifier
 ```
 
-This will pull a pre-built image from the Quay.io container registry (or use an existing image if already cached locally) and run it.
+This will pull a pre-built image from the container registry (or use an existing image if already cached locally) and run it.
 If you'd rather checkout and build the model locally you can follow the [run locally](#run-locally) steps below.
 
 ## Deploy on Red Hat OpenShift
 
-You can deploy the model-serving microservice on Red Hat OpenShift by following the instructions for the OpenShift web console or the OpenShift Container Platform CLI [in this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/), specifying `quay.io/codait/codenet-language-classifier` as the image name.
+You can deploy the model-serving microservice on Red Hat OpenShift by following the instructions for the OpenShift web console or the OpenShift Container Platform CLI [in this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/), specifying `codait/codenet-language-classifier` as the image name.
 
 ## Deploy on Kubernetes
 
-You can also deploy the model on Kubernetes using the latest docker image on Quay.
+You can also deploy the model on Kubernetes using the latest docker image.
 
 On your Kubernetes cluster, run the following commands:
 
