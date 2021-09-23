@@ -1,13 +1,8 @@
-# Overview
+## Overview
 
-This repository contains code to instantiate and deploy a weather forecasting model. The model takes hourly weather data
-(as a Numpy array of various weather features, in text file format) as input and returns hourly weather predictions for
-a specific target variable or variables (such as temperature or wind speed).
+This model takes hourly weather data (as a Numpy array of various weather features, in text file format) as input and returns hourly weather predictions for a specific target variable or variables (such as temperature or windspeed).
 
-Three models have been included with this repository, all trained by the [CODAIT team](http://codait.org) on
-[National Oceanic and Atmospheric Administration](https://www.ncdc.noaa.gov) local climatological data originally
-collected by JFK airport. All three models use an LSTM recurrent neural network architecture. You can specify which
-model you wish to use when making requests to the API (see [Use the Model](#3-use-the-model) below for more details).
+Three pre-trained models are provided, all trained by the [CODAIT team](codait.org) on [National Oceanic and Atmospheric Administration](https://www.ncdc.noaa.gov) local climatological data originally collected by JFK airport. All three models use an LSTM recurrent neural network architecture.
 
 A description of the weather variables used to train the models is set out below.
 
@@ -27,7 +22,7 @@ A description of the weather variables used to train the models is set out below
 | HOURLYWindDirectionCos     | Cosine component of wind direction transformation (since wind direction is cyclical). |
 | HOURLYPressureTendencyIncr  | Dummy variable indicating if pressure was increasing in the past hour. |
 | HOURLYPressureTendencyDecr  | Dummy variable indicating if pressure was decreasing in the past hour. |
-| HOURLYPressureTendencyCons  | Dummy variable indicating if pressure has stayed relatively constant in the past hour. | 
+| HOURLYPressureTendencyCons  | Dummy variable indicating if pressure has stayed relatively constant in the past hour. |
 
 For further details on the weather variables see the [US Local Climatological Data Documentation](https://www1.ncdc.noaa.gov/pub/data/cdo/documentation/LCD_documentation.pdf)
 
@@ -36,10 +31,6 @@ Each model returns a different format for its predictions:
 * *Multivariate Model*: returns predictions for all 15 weather variables, for the next hourly time step, for each input data point
 * *Multistep Model*: returns predictions of dry bulb temperature (`HOURLYDRYBULBTEMPF`), for the next 48 hourly time steps, for each input data point
 
-The model files are provided as part of this repository in the [`assets/models`](assets/models) folder. The code in this
-repository deploys the model as a web service in a Docker container. This repository was developed as part of the
-[IBM Code Model Asset Exchange](https://developer.ibm.com/code/exchanges/models/) and the public API is powered by
-[IBM Cloud](https://ibm.biz/Bdz2XM).
 ## Model Metadata
 
 | Domain        | Application           | Industry       | Framework  | Training Data           | Input Data Format |
@@ -63,115 +54,37 @@ Related Repositories
 
 | Component | License | Link  |
 | ------------- | --------  | -------- |
-| This repository | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](LICENSE) |
-| Model Weights | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](LICENSE) |
-| Test Assets | No restriction | [Asset README](assets/README.md) |
+| Model GitHub Repository | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](https://github.com/IBM/MAX-Weather-Forecaster/blob/master/LICENSE) |
+| Model Weights | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](https://github.com/IBM/MAX-Weather-Forecaster/blob/master/LICENSE) |
+| Test Assets | No restriction | [Asset README](https://github.com/IBM/MAX-Weather-Forecaster/blob/master/assets/README.md) |
 
-## Prerequisites
+## Options available for deploying this model
 
-* `docker`: The [Docker](https://www.docker.com/) command-line interface. Follow the [installation instructions](https://docs.docker.com/install/) for your system.
-* The minimum recommended resources for this model is 2GB Memory and 2 CPUs.
-* If you are on x86-64/AMD64, your CPU must support [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) at the minimum.
+This model can be deployed using the following mechanisms:
 
-# Deployment options
+* Deploy from Dockerhub:
+  ```
+  docker run -it -p 5000:5000 codait/max-weather-forecaster
+  ```
 
-* [Deploy from Quay](#deploy-from-quay)
-* [Deploy on Red Hat OpenShift](#deploy-on-red-hat-openshift)
-* [Deploy on Kubernetes](#deploy-on-kubernetes)
-* [Run Locally](#run-locally)
+* Deploy on Red Hat OpenShift:
 
-## Deploy from Quay
+  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/) and specify `codait/max-weather-forecaster` as the image name.
 
-To run the docker image, which automatically starts the model serving API, run:
+* Deploy on Kubernetes:
+  ```
+  kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Weather-Forecaster/master/max-weather-forecaster.yaml
+  ```
 
+  A more elaborate tutorial on how to deploy this MAX model to production on [IBM Cloud](https://ibm.biz/Bdz2XM) can be found [here](http://ibm.biz/max-to-ibm-cloud-tutorial).
+
+* Locally: follow the instructions in the [model README on GitHub](https://github.com/IBM/MAX-Weather-Forecaster#run-locally)
+
+## Example Usage
+
+Once deployed, you can test the model from the command line. For example to test the multi-step model when running locally:
 ```
-$ docker run -it -p 5000:5000 quay.io/codait/max-weather-forecaster
-```
-
-This will pull a pre-built image from the Quay.io container registry (or use an existing image if already cached locally) and run it.
-If you'd rather checkout and build the model locally you can follow the [run locally](#run-locally) steps below.
-
-## Deploy on Red Hat OpenShift
-
-You can deploy the model-serving microservice on Red Hat OpenShift by following the instructions for the OpenShift web console or the OpenShift Container Platform CLI [in this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/), specifying `quay.io/codait/max-weather-forecaster` as the image name.
-
-## Deploy on Kubernetes
-
-You can also deploy the model on Kubernetes using the latest docker image on Quay.
-
-On your Kubernetes cluster, run the following commands:
-
-```
-$ kubectl apply -f https://github.com/IBM/MAX-Weather-Forecaster/raw/master/max-weather-forecaster.yaml
-```
-
-The model will be available internally at port `5000`, but can also be accessed externally through the `NodePort`.
-
-## Run Locally
-
-1. [Build the Model](#1-build-the-model)
-2. [Deploy the Model](#2-deploy-the-model)
-3. [Use the Model](#3-use-the-model)
-4. [Development](#4-development)
-5. [Clean Up](#5-cleanup)
-
-### 1. Build the Model
-
-Clone this repository locally. In a terminal, run the following command:
-
-```
-$ git clone https://github.com/IBM/MAX-Weather-Forecaster.git
-```
-
-Change directory into the repository base folder: 
-
-```
-$ cd MAX-Weather-Forecaster
-```
-
-To build the docker image locally, run:
-
-```
-$ docker build -t max-weather-forecaster .
-```
-
-_Note_ that currently this docker image is CPU only (we will add support for GPU images later).
-
-## 2. Deploy the Model
-
-To run the docker image, which automatically starts the model serving API, run:
-
-```
-$ docker run -it -p 5000:5000 max-weather-forecaster
-```
-
-## 3. Use the Model
-
-The API server automatically generates an interactive Swagger documentation page. Go to `http://localhost:5000` to load it. From there you can explore the API and also create test requests.
-
-Use the `model/predict` endpoint to load a test data file and get predictions for the relevant weather target variable (or variables) from the API. You can use one of the test files from the `assets/lstm_weather_test_data` folder, after unzipping the test data archive by running the following command:
-
-```
-$ tar -zxvf assets/lstm_weather_test_data.tar.gz -C assets
-```
-
-![Swagger Screenshot](/docs/swagger-screenshot.png "Swagger Screenshot")
-
-You can also test it on the command line, for example to test the univariate model:
-```bash
-$ curl -F "file=@assets/lstm_weather_test_data/univariate_model_test_data.txt" -XPOST http://localhost:5000/model/predict
-```
-
-You can select one of the three available models used to make predictions by setting the `model` request parameter to one of: `univariate` (default), `multivariate`, or `multistep`. _Note_ that each model takes in different weather datasets. After loading a particular model, you must predict only on the accompanying test dataset (e.g. `univariate` must predict on `univariate_model_test_data.txt`).
-
-For example, to test the multivariate model:
-```bash
-$ curl -F "file=@assets/lstm_weather_test_data/multivariate_model_test_data.txt" -XPOST http://localhost:5000/model/predict?model=multivariate
-```
-
-To test the multi-step model:
-```bash
-$ curl -F "file=@assets/lstm_weather_test_data/multistep_model_test_data.txt" -XPOST http://localhost:5000/model/predict?model=multistep
+curl -F "file=@assets/lstm_weather_test_data/multistep_model_test_data.txt" -XPOST http://localhost:5000/model/predict?model=multistep
 ```
 
 You should see a JSON response like that below for the `multistep` test data, where `predictions` contains the predicted dry bulb temperature (in F) for each of the next 48 hours, for each input data point.
@@ -234,15 +147,6 @@ You should see a JSON response like that below for the `multistep` test data, wh
 }
 ```
 
-## 4. Development
-
-To run the Flask API app in debug mode, edit `config.py` to set `DEBUG = True` under the application settings. You will
-then need to rebuild the Docker image (see [step 1](#1-build-the-model)).
-
-## 5. Cleanup
-
-To stop the Docker container, type `CTRL` + `C` in your terminal.
-
 ## Resources and Contributions
-   
+
 If you are interested in contributing to the Model Asset Exchange project or have any queries, please follow the instructions [here](https://github.com/CODAIT/max-central-repo).

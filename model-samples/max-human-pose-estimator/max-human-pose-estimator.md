@@ -1,132 +1,63 @@
-# Overview
+## Overview
 
-The Human Pose Estimator model detects humans and their poses in a given image. The model first detects the humans in
-the input image and then identifies the body parts, including nose, neck, eyes, shoulders, elbows, wrists, hips, knees,
-and ankles. Next, each pair of associated body parts is connected by a "pose line"; for example, as the following image
-shows, a line may connect the left eye to the nose, while another may connect the nose to the neck.
-
-![Pose Line Example](docs/pose-lines.png)
-
-Each pose line is represented by a list [x1, y1, x2, y2], where the first pair of coordinates (x1, y1) is the start
-point of the line for one body part, while the second pair of coordinates (x2, y2) is the end point of the line for the
-other associated body part. The pose lines are assembled into full body poses for each of the humans detected in the
-image.
-
-The model is based on the open source [TF implementation of OpenPose model](https://github.com/ildoonet/tf-pose-estimation).
-The code in this repository deploys the model as a web service in a Docker container. This repository was developed
-as part of the [IBM Developer Model Asset Exchange](https://developer.ibm.com/exchanges/models/).
+This model detects humans and their poses in a given image. The model first detects the humans in the input image and then identifies the body parts, including nose, neck, eyes, shoulders, elbows, wrists, hips, knees, and ankles. Next, each pair of associated body parts is connected by a pose line. The pose lines are assembled into full body poses for each of the humans detected in the image. The model is based on the TF implementation of [OpenPose model](https://github.com/mananrai/Tensorflow-Openpose).
 
 ## Model Metadata
+
 | Domain | Application | Industry  | Framework | Training Data | Input Data Format |
 | ------------- | --------  | -------- | --------- | --------- | -------------- |
-| Vision | Pose Estimation | General | TensorFlow | [COCO](http://cocodataset.org/#home) | Image(RGB) |
+| Vision | Human Pose Estimation | Multi | Tensorflow | [COCO](http://cocodataset.org) | Image File |
 
 ## References
 
 * _Zhe Cao, Tomas Simon, Shih-En Wei, Yaser Sheikh,_ ["Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields"](https://arxiv.org/abs/1611.08050), CVPR 2017.
-* [TF-Pose-Estimation Github Repository](https://github.com/ildoonet/tf-pose-estimation)
 
 ## Licenses
 
 | Component | License | Link  |
 | ------------- | --------  | -------- |
-| This repository | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](LICENSE) |
-| Model Weights (MobileNet only) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](https://github.com/ildoonet/tf-pose-estimation/blob/master/LICENSE) |
-| Model Code (3rd party) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](https://github.com/ildoonet/tf-pose-estimation/blob/master/LICENSE) |
-| Test Samples | Various | [Samples README](samples/README.md) |
+| Model GitHub Repository | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](https://github.com/IBM/MAX-Human-Pose-Estimator/blob/master/LICENSE) |
+| Model Weights | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](https://github.com/mananrai/Tensorflow-Openpose/blob/master/LICENSE) |
+| Test assets | Various | [Samples README](https://github.com/IBM/MAX-Human-Pose-Estimator/blob/master/samples/README.md) |
 
-## Pre-requisites:
+## Options available for deploying this model
 
-* `docker`: The [Docker](https://www.docker.com/) command-line interface. Follow the [installation instructions](https://docs.docker.com/install/) for your system.
-* The minimum recommended resources for this model is 2GB Memory and 1 CPU.
-* If you are on x86-64/AMD64, your CPU must support [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) at the minimum.
+This model can be deployed using the following mechanisms:
 
-# Deployment options
+* Deploy from Dockerhub:
 
-* [Deploy from Quay](#deploy-from-quay)
-* [Deploy on Red Hat OpenShift](#deploy-on-red-hat-openshift)
-* [Deploy on Kubernetes](#deploy-on-kubernetes)
-* [Run Locally](#run-locally)
+  ```
+  docker run -it -p 5000:5000 codait/max-human-pose-estimator
+  ```
 
-## Deploy from Quay
+* Deploy on Red Hat OpenShift:
 
-To run the docker image, which automatically starts the model serving API, run:
+  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/) and specify `codait/max-human-pose-estimator` as the image name.
 
-```
-$ docker run -it -p 5000:5000 quay.io/codait/max-human-pose-estimator
-```
+* Deploy on Kubernetes:
 
-This will pull a pre-built image from the Quay.io container registry (or use an existing image if already cached locally) and run it.
-If you'd rather checkout and build the model locally you can follow the [run locally](#run-locally) steps below.
+  ```
+  kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Human-Pose-Estimator/master/max-human-pose-estimator.yaml
+  ```
+  A more elaborate tutorial on how to deploy this MAX model to production on [IBM Cloud](https://ibm.biz/Bdz2XM) can be found [here](http://ibm.biz/max-to-ibm-cloud-tutorial).
 
-## Deploy on Red Hat OpenShift
+* Locally: follow the instructions in the [model README on GitHub](https://github.com/IBM/MAX-Human-Pose-Estimator#run-locally)
 
-You can deploy the model-serving microservice on Red Hat OpenShift by following the instructions for the OpenShift web console or the OpenShift Container Platform CLI [in this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/), specifying `quay.io/codait/max-human-pose-estimator` as the image name.
+## Example Usage
 
-## Deploy on Kubernetes
+You can test or use this model
 
-You can also deploy the model on Kubernetes using the latest docker image on Quay.
+ - [using cURL](#test-the-model-using-curl)
+ - [in a Node-RED flow](#test-the-model-in-a-node-red-flow)
+ - [in CodePen](#test-the-model-in-codepen)
+ - [in a serverless app](#test-the-model-in-a-serverless-app)
 
-On your Kubernetes cluster, run the following commands:
+### Test the model using cURL
 
-```
-$ kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Human-Pose-Estimator/master/max-human-pose-estimator.yaml
-```
-
-The model will be available internally at port `5000`, but can also be accessed externally through the `NodePort`.
-
-## Run Locally
-
-1. [Build the Model](#1-build-the-model)
-2. [Deploy the Model](#2-deploy-the-model)
-3. [Use the Model](#3-use-the-model)
-4. [Run the Notebook](#4-run-the-notebook)
-5. [Development](#5-development)
-6. [Cleanup](#6-cleanup)
-
-
-### 1. Build the Model
-
-Clone this repository locally. In a terminal, run the following command:
+Once deployed, you can test the model from the command line. For example if running locally:
 
 ```
-$ git clone https://github.com/IBM/MAX-Human-Pose-Estimator
-```
-
-Change directory into the repository base folder:
-
-```
-$ cd MAX-Human-Pose-Estimator
-```
-
-To build the docker image locally, run:
-
-```
-$ docker build -t max-human-pose-estimator .
-```
-
-All required model assets will be downloaded during the build process. _Note_ that currently this docker image is CPU only (we will add support for GPU images later).
-
-
-### 2. Deploy the Model
-
-To run the docker image, which automatically starts the model serving API, run:
-
-```
-$ docker run -it -p 5000:5000 max-human-pose-estimator
-```
-
-### 3. Use the Model
-
-The API server automatically generates an interactive Swagger documentation page. Go to `http://localhost:5000` to load it. From there you can explore the API and also create test requests.
-Use the `model/predict` endpoint to load a test image (you can use one of the test images from the `samples` folder) and get predicted labels for the image from the API.
-
-![Swagger UI Screenshot](docs/swagger-screenshot.png)
-
-You can also test it on the command line, for example:
-
-```
-$ curl -F "file=@samples/Pilots.jpg" -XPOST http://localhost:5000/model/predict
+curl -F "image=@samples/p3.jpg" -XPOST http://localhost:5000/model/predict
 ```
 
 You should see a JSON response like that below:
@@ -140,71 +71,60 @@ You should see a JSON response like that below:
       "pose_lines": [
         {
           "line": [
-            444,
-            269,
-            392,
-            269
+            110,
+            53,
+            91,
+            53
           ]
         },
-
-        ...
-
         {
           "line": [
-            439,
-            195,
-            464,
-            197
+            110,
+            53,
+            129,
+            50
+          ]
+        },
+        .
+        .
+        .
+        {
+          "line": [
+            114,
+            35,
+            119,
+            32
           ]
         }
-      ],
-      "body_parts": [
-        {
-          "part_id": 0,
-          "part_name": "Nose",
-          "score": "0.83899",
-          "x": 428,
-          "y": 205
-        },
-
-        ...
-
-        {
-          "part_id": 17,
-          "part_name": "LEar",
-          "score": "0.81776",
-          "x": 464,
-          "y": 197
-        }
       ]
-    },
-
-    ...
-
+    }
   ]
 }
 ```
 
-### 4. Run the Notebook
+The information returned from the model can be used to construct and visualize pose lines for the humans detected in the
+image, such as shown in the example below. For more details see the [GitHub README](https://github.com/IBM/MAX-Human-Pose-Estimator/blob/master/README.md).
 
-Once the model server is running, you can see how to use it by walking through [the demo notebook](samples/demo.ipynb). _Note_ the demo requires `jupyter`, `numpy`, `matplotlib`, `opencv-python`, `json`, and `requests`.
+![Pose Line Example](https://raw.githubusercontent.com/IBM/MAX-Human-Pose-Estimator/master/docs/pose-lines.png)
 
-Run the following command from the model repo base folder, in a new terminal window (leaving the model server running in the other terminal window):
+### Test the model in a Node-RED flow
 
-```
-$ jupyter notebook
-```
+Complete the [node-red-contrib-model-asset-exchange](https://github.com/CODAIT/node-red-contrib-model-asset-exchange)
+module setup instructions and import the `human-pose-estimator` getting started flow.
 
-This will start the notebook server. You can open the simple demo notebook by clicking on `samples/demo.ipynb`.
+### Test the model in CodePen
 
-### 5. Development
+Learn how to send an image to the model and how to render the results in [CodePen](https://codepen.io/collection/DzdpJM/#).
 
-To run the Flask API app in debug mode, edit `config.py` to set `DEBUG = True` under the application settings. You will then need to rebuild the docker image (see [step 1](#1-build-the-model)).
+### Test the model in a serverless app
 
-### 6. Cleanup
+You can utilize this model in a serverless application by following the instructions in the [Leverage deep learning in IBM Cloud Functions](https://developer.ibm.com/tutorials/leverage-deep-learning-in-apache-openwhisk-ibm-cloud-functions/) tutorial.
 
-To stop the Docker container, type `CTRL` + `C` in your terminal.
+## Links
+
+* [Use your arms to make music](https://developer.ibm.com/patterns/making-music-with-the-max-human-pose-estimator-and-tensorflowjs/) This interactive example application was built using a TensorFlow.js version of this model.
+* [Build a web app that recognizes yoga poses using a model from the Model Asset Exchange](https://developer.ibm.com/patterns/build-a-web-application-that-recognizes-yoga-poses-using-a-model-from-the-model-asset-exchange/)
 
 ## Resources and Contributions
-   
+
 If you are interested in contributing to the Model Asset Exchange project or have any queries, please follow the instructions [here](https://github.com/CODAIT/max-central-repo).
