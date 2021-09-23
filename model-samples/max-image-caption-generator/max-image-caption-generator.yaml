@@ -19,7 +19,6 @@ license: "Apache 2.0"
 domain: "Image-To-Text Translation"
 website: "https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/"
 
-# applicable filter categories for MLX UI
 filter_categories:
   domain: "image-to-text"
   platform: ["kubernetes", "kfserving"]
