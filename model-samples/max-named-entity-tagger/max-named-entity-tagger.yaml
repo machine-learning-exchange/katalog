@@ -28,3 +28,5 @@ serve:
     - kfserving
   serving_container_image:
     container_image_url: "quay.io/codait/max-named-entity-tagger:latest"
+
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-named-entity-tagger/max-named-entity-tagger.md

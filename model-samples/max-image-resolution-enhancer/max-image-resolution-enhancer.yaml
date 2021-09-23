@@ -10,15 +10,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Weather Forecaster
-model_identifier: max-weather-forecaster
-description: IBM Model Asset eXchange(MAX) model that predicts hourly weather features given historical data for a specific location
+name: MAX Image Resolution Enhancer
+model_identifier: max-image-resolution-enhancer
+description: IBM Model Asset eXchange(MAX) model that upscales an image by a factor of 4, while generating photo-realistic details.
 framework:
-  name: keras
+  name: "tensorflow"
+  version: "1.15.4"
 
 license: "Apache 2.0"
-domain: "Time Series Prediction"
-website: "https://developer.ibm.com/exchanges/models/all/max-weather-forecaster"
+domain: "Super-Resolution"
+website: "https://developer.ibm.com/exchanges/models/all/max-image-resolution-enhancer/"
 
 serve:
   servable: true
@@ -26,4 +27,6 @@ serve:
     - kubernetes
     - kfserving
   serving_container_image:
-    container_image_url: "quay.io/codait/max-weather-forecaster:latest"
+    container_image_url: "quay.io/codait/max-image-resolution-enhancer:latest"
+
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-image-resolution-enhancer/max-image-resolution-enhancer.md

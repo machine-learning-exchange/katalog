@@ -10,23 +10,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Human Pose Estimator
-model_identifier: max-human-pose-estimator
-description: IBM Model Asset eXchange(MAX) model that detects humans in an image and estimate the pose for each person.
+name: MAX Optical Character Recognition
+model_identifier: max-ocr
+description: IBM Model Asset eXchange(MAX) model that identifies text in an image.
 framework:
-  name: tensorflow
-  version: "1.15.4"
-license: "Apache 2.0"
-domain: "Human Pose Estimation"
-website: "https://developer.ibm.com/exchanges/models/all/max-human-pose-estimator/"
+  name: "N/A"
+  version: "N/A"
 
-# applicable filter categories for MLX UI
-filter_categories:
-  domain: image-recognition
-  platform:
-    - kubernetes
-    - kfserving
-  language: python
+license: "Apache 2.0"
+domain: "Optical Character Recognition"
+website: "https://developer.ibm.com/exchanges/models/all/max-ocr/"
 
 serve:
   servable: true
@@ -34,4 +27,6 @@ serve:
     - kubernetes
     - kfserving
   serving_container_image:
-    container_image_url: "quay.io/codait/max-human-pose-estimator:latest"
+    container_image_url: "quay.io/codait/max-ocr:latest"
+
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-ocr/max-ocr.md

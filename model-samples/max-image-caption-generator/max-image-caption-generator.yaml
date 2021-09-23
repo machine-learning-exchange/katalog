@@ -19,7 +19,6 @@ license: "Apache 2.0"
 domain: "Image-To-Text Translation"
 website: "https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/"
 
-# applicable filter categories for MLX UI
 filter_categories:
   domain: "image-to-text"
   platform: ["kubernetes", "kfserving"]
@@ -33,3 +32,5 @@ serve:
     - kfserving
   serving_container_image:
     container_image_url: "quay.io/codait/max-image-caption-generator:latest"
+
+readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-image-caption-generator/max-image-caption-generator.md
