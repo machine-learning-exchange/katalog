@@ -1,11 +1,9 @@
 # Overview
 
-This repository contains code to instantiate and deploy a Code Language Classification Model.
-The model takes in a file (any format) with a computer program / code in it and outputs the detected programming language along with the probability. 
+The CodeNet Language Classification model takes in a file (any programming language format) with a computer program / code in it and outputs the detected programming language along with the probability.
 
-The model is based on a simple CNN architecture with fully connected flat layers. The model files are hosted along with this repository on GitHub
-The code in this repository deploys the model as a web service in a Docker container. This repository was developed
-as part of the [IBM Developer Model Asset Exchange](https://developer.ibm.com/exchanges/models/) and the public API is powered by [IBM Cloud](https://ibm.biz/Bdz2XM).
+The model is based on a simple CNN architecture with fully connected flat layers. The model files are hosted along with this repository on GitHub. More details on the model are in the reference links below. 
+The code in this repository deploys the model as a web service in a Docker container.
 
 ## Model Metadata
 | Domain | Application | Industry  | Framework | Training Data | Input Data Format |
