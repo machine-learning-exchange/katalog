@@ -126,10 +126,14 @@ related_assets:
 ```
 
 ## List of Sample Datasets
-* [Finance Proposition Bank](fpb.yaml)
-* [Groningen Meaning Bank - Modified](gmb.yaml)
-* [NOAA Weather Data - JFK Airport](jfk.yaml)
-* [PubLayNet](publaynet.yaml)
-* [PubTabNet](pubtabnet.yaml)
-* [IBM Debater® Thematic Clustering of Sentences](thematic_clustering.yaml)
-* [TensorFlow Speech Commands](tsc.yaml)
+
+* [CodeNet](codenet/codenet.yaml)
+* [CodeNet Language Classification](codenet_langclass/codenet_langclass.yaml)
+* [CodeNet MLM](codenet_mlm/codenet_mlm.yaml)
+* [Finance Proposition Bank](fpb/fpb.yaml)
+* [Groningen Meaning Bank](gmb/gmb.yaml)
+* [NOAA Weather Data - JFK Airport](jfk/jfk.yaml)
+* [PubLayNet](publaynet/publaynet.yaml)
+* [PubTabNet](pubtabnet/pubtabnet.yaml)
+* [Thematic Clustering of Sentences](thematic_clustering/thematic_clustering.yaml)
+* [TensorFlow Speech Commands](tsc/tsc.yaml)
