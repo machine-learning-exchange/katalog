@@ -19,7 +19,12 @@ The [src](src) directory is for hosting some Notebook example source files on Gi
 4. Enter a name for the notebook; Otherwise a default will be given
 
 ## List of Sample Notebooks
-* [AIF360 Bias detection example](aif-bias.yaml)
-* [ART detector model](art-detector.yaml)
-* [ART poisoning attack](art-poison.yaml)
-* [jfk-airport-analysis](JFK-airport.yaml)
+
+* [AIF360 Bias Detection](aif-bias.yaml)
+* [ART Detector Model](art-detector.yaml)
+* [ART Poisoning Attack](art-poison.yaml)
+* [CodeNet Laguage Classification](codenet-lang.yaml)
+* [CodeNet MLM](codenet-mlm.yaml)
+* [JFK Airport Weather Analysis](JFK-airport.yaml)
+* [Qiskit Quantum Machine Learning](qiskit-ml.yaml)
+* [Qiskit Neural Network Classifier and Regressor](qiskit-nncr.yaml)
