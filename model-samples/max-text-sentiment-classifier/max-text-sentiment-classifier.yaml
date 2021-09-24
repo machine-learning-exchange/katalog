@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Text Sentiment Classifier
+name: Text Sentiment Classifier
 model_identifier: max-text-sentiment-classifier
 description: IBM Model Asset eXchange(MAX) model that detects the sentiment captured in short pieces of text
 framework:

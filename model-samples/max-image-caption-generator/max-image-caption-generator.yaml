@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Image Caption Generator
+name: Image Caption Generator
 model_identifier: max-image-caption-generator
 description: "IBM Model Asset eXchange(MAX) model that generates captions from a fixed vocabulary describing the contents of images in the COCO dataset"
 framework:

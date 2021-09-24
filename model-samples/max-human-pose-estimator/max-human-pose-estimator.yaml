@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Human Pose Estimator
+name: Human Pose Estimator
 model_identifier: max-human-pose-estimator
 description: IBM Model Asset eXchange(MAX) model that detects humans in an image and estimate the pose for each person.
 framework:

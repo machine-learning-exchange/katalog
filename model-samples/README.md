@@ -10,7 +10,7 @@ The [template](template.yaml) describes the metadata spec:
 
 - **(Required)**: Fields that are Always required in all condition.
 - **(Required for xxx)**: Fields that are required when trainable/servable or certain storage type is specified.
-- **(optional)**: Fields that can be omit, but do not put empty strings since it will overwrite the default values.
+- **(optional)**: Fields that can be omitted, but do not put empty strings since it will overwrite the default values.
 
 ### Metadata template for a trainable model
 
@@ -111,13 +111,13 @@ Models can be run based on the metadata specified in the YAML file for a particu
 
 
 ## List of Sample Models
-* [MAX Human Pose Estimator](max-human-pose-estimator.yaml)
-* [MAX Image Caption Generator](max-image-caption-generator.yaml)
-* [MAX Image Resolution Enhancer](max-image-resolution-enhancer.yaml)
-* [MAX Object Detector](max-object-detector.yaml)
-* [MAX Optical Character Recognition](max-ocr.yaml)
-* [MAX Question Answering](max-question-answering.yaml)
-* [MAX Recommender System](max-recommender.yaml)
-* [MAX Text Sentiment Classifier](max-text-sentiment-classifier.yaml)
-* [MAX Toxic Comment Classifier](max-toxic-comment-classifier.yaml)
-* [MAX Weather Forecaster](max-weather-forecaster.yaml)
+* [Human Pose Estimator](max-human-pose-estimator.yaml)
+* [Image Caption Generator](max-image-caption-generator.yaml)
+* [Image Resolution Enhancer](max-image-resolution-enhancer.yaml)
+* [Object Detector](max-object-detector.yaml)
+* [Optical Character Recognition](max-ocr.yaml)
+* [Question Answering](max-question-answering.yaml)
+* [Recommender System](max-recommender.yaml)
+* [Text Sentiment Classifier](max-text-sentiment-classifier.yaml)
+* [Toxic Comment Classifier](max-toxic-comment-classifier.yaml)
+* [Weather Forecaster](max-weather-forecaster.yaml)

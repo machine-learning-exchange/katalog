@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Recommender System
+name: Recommender System
 model_identifier: max-recommender
 description: IBM Model Asset eXchange(MAX) model that generates personalized recommendations
 framework:
