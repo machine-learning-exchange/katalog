@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Question Answering
+name: Question Answering
 model_identifier: max-question-answering
 description: IBM Model Asset eXchange(MAX) model that answers questions on a given corpus of text
 framework:

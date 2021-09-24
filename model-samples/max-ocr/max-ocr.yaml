@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Optical Character Recognition
+name: Optical Character Recognition
 model_identifier: max-ocr
 description: IBM Model Asset eXchange(MAX) model that identifies text in an image.
 framework:

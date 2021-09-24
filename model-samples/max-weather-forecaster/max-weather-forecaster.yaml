@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Weather Forecaster
+name: Weather Forecaster
 model_identifier: max-weather-forecaster
 description: IBM Model Asset eXchange(MAX) model that predicts hourly weather features given historical data for a specific location
 framework:

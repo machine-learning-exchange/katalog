@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: MAX Toxic Comment Classifier
+name: Toxic Comment Classifier
 model_identifier: max-toxic-comment-classifier
 description: IBM Model Asset eXchange(MAX) model that detects 6 types of toxicity in user comments
 framework:
