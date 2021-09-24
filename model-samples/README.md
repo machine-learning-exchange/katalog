@@ -111,13 +111,16 @@ Models can be run based on the metadata specified in the YAML file for a particu
 
 
 ## List of Sample Models
-* [Human Pose Estimator](max-human-pose-estimator.yaml)
-* [Image Caption Generator](max-image-caption-generator.yaml)
-* [Image Resolution Enhancer](max-image-resolution-enhancer.yaml)
-* [Object Detector](max-object-detector.yaml)
-* [Optical Character Recognition](max-ocr.yaml)
-* [Question Answering](max-question-answering.yaml)
-* [Recommender System](max-recommender.yaml)
-* [Text Sentiment Classifier](max-text-sentiment-classifier.yaml)
-* [Toxic Comment Classifier](max-toxic-comment-classifier.yaml)
-* [Weather Forecaster](max-weather-forecaster.yaml)
+
+* [CodeNet Language Classifier](codenet-language-classification/codenet-language-classification.yaml)
+* [Human Pose Estimator](max-human-pose-estimator/max-human-pose-estimator.yaml)
+* [Image Caption Generator](max-image-caption-generator/max-image-caption-generator.yaml)
+* [Image Resolution Enhancer](max-image-resolution-enhancer/max-image-resolution-enhancer.yaml)
+* [Named Entity Tagger](max-named-entity-tagger/max-named-entity-tagger.yaml)
+* [Object Detector](max-object-detector/max-object-detector.yaml)
+* [Optical Character Recognition](max-ocr/max-ocr.yaml)
+* [Question Answering](max-question-answering/max-question-answering.yaml)
+* [Recommender System](max-recommender/max-recommender.yaml)
+* [Text Sentiment Classifier](max-text-sentiment-classifier/max-text-sentiment-classifier.yaml)
+* [Toxic Comment Classifier](max-toxic-comment-classifier/max-toxic-comment-classifier.yaml)
+* [Weather Forecaster](max-weather-forecaster/max-weather-forecaster.yaml)

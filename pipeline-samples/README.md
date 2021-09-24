@@ -39,10 +39,10 @@ For an in-depth guide to creating pipelines with Kubeflow, take a look at their
 
 
 ## List of Sample Pipelines
-* [Trusted AI Pipeline with AI Fairness 360 and Adversarial Robustness 360 components](https://github.com/kubeflow/kfp-tekton/tree/master/samples/trusted-ai)
+* [Trusted AI Pipeline with AI Fairness 360 and Adversarial Robustness 360 Components](https://github.com/kubeflow/kfp-tekton/tree/master/samples/trusted-ai)
 * [Training and Serving Models with Watson Machine Learning](https://github.com/kubeflow/kfp-tekton/tree/master/samples/watson-train-serve#training-and-serving-models-with-watson-machine-learning)
-* [Lightweight python components example](https://github.com/kubeflow/kfp-tekton/tree/master/samples/lightweight-component)
-* [The flip-coin pipeline](https://github.com/kubeflow/kfp-tekton/tree/master/samples/flip-coin)
-* [Hyperparameter tuning using Katib](https://github.com/kubeflow/kfp-tekton/tree/master/samples/katib)
-* [Nested pipeline example](https://github.com/kubeflow/kfp-tekton/tree/master/samples/nested-pipeline)
-* [Pipeline with Nested loops](https://github.com/kubeflow/kfp-tekton/tree/master/samples/nested-loops)
+* [Lightweight Python Component Example](https://github.com/kubeflow/kfp-tekton/tree/master/samples/lightweight-component)
+* [The Flip-Coin Pipeline](https://github.com/kubeflow/kfp-tekton/tree/master/samples/flip-coin)
+* [Hyperparameter Tuning using Katib](https://github.com/kubeflow/kfp-tekton/tree/master/samples/katib)
+* [Nested Pipeline Example](https://github.com/kubeflow/kfp-tekton/tree/master/samples/nested-pipeline)
+* [Pipeline with Nested Loops](https://github.com/kubeflow/kfp-tekton/tree/master/samples/nested-loops)
