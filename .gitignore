@@ -131,5 +131,5 @@ dmypy.json
 # Operating system generated files
 .DS_Store
 
-# IDE Files
+# IDE files
 .idea/
