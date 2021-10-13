@@ -125,8 +125,8 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# Pyre type checker
-.pyre/
-
 # Operating system generated files
 .DS_Store
+
+# IDE files
+.idea/
