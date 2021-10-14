@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+id: 'qiskit-neural-network-classifier-and-regressor'
 name: 'Qiskit Neural Network Classifier and Regressor'
 description: 'Use the Qiskit NeuralNetworkClassifier and NeuralNetworkRegressor with a (Quantum) NeuralNetwork leveraging a pre-configured Variational Quantum Classifier (VQC) and Variational Quantum Regressor (VQR)'
 metadata:

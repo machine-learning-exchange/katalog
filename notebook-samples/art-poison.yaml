@@ -10,7 +10,9 @@
 # distributed under the License is distributed on an "AS IS" BASIS, 
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
 # See the License for the specific language governing permissions and 
-# limitations under the License. 
+# limitations under the License.
+
+id: 'art-poisoning-attack'
 name: 'ART poisoning attack'
 description: 'Use Notebook to leverage ART for poisoning training data and learn how to defends it'
 metadata:
