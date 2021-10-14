@@ -11,7 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-name: 'jfk-airport-analysis'
+
+id: 'jfk-airport-analysis'
+name: 'JFK Airport Analysis'
 description: 'An end-to-end project to load in weather data from Data Asset eXchange, prepare the data into a wide format, build some machine learning models, and then deploy those built models.'
 metadata:
   annotations:

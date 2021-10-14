@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+id: 'qiskit-quantum-kernel-machine-learning'
 name: 'Qiskit Quantum Kernel Machine Learning'
 description: 'Use Qiskit to calculate a kernel matrix with a quantum feature map, then use this kernel matrix in scikit-learn classification and clustering algorithms.'
 metadata:

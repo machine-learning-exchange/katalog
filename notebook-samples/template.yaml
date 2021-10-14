@@ -11,11 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-name: <notebook_name> # required
+
+id: <notebook_id> # Required, must be DNS-1123 subdomain, lower case alphanumeric characters and '-'
+name: <notebook_name> # Required
 description: <notebook_description> # Optional
 metadata: # Optional metadata
   annotations:
     platform: <notebook_platform>
-implementation: # required
+implementation: # Required
   github:
     source: <notebook_github_URL>

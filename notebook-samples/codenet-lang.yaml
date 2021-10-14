@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+id: 'project-codenet-language-classification'
 name: 'Project CodeNet - Language Classification'
 description: 'Simple experiment that shows how to create and exercise a Keras model to detect the language of a piece of source code'
 metadata:

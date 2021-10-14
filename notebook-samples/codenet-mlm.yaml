@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+id: 'project-codenet-mlm'
 name: 'Project CodeNet - MLM'
 description: 'Experiment investigates whether a popular attention model to construct a masked language model (MLM) can be used for source code instead of natural language sentences'
 metadata:
