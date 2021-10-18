@@ -1,3 +1,6 @@
+# Copyright 2021 The MLX Contributors
+#
+# SPDX-License-Identifier: Apache-2.0
 id: pubtabnet
 name: PubTabNet
 description: PubTabNet is a large dataset for image-based table recognition, containing 516k+ images of tabular data annotated with the corresponding HTML representation of the tables.

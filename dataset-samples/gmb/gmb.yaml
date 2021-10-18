@@ -1,3 +1,6 @@
+# Copyright 2021 The MLX Contributors
+#
+# SPDX-License-Identifier: Apache-2.0
 id: groningen-meaning-bank-modified
 name: Groningen Meaning Bank - Modified
 description: A subset of the GMB dataset, consisting of documents verified to be in the public domain.

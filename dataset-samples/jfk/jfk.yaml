@@ -1,3 +1,6 @@
+# Copyright 2021 The MLX Contributors
+#
+# SPDX-License-Identifier: Apache-2.0
 id: noaa-weather-data-jfk-airport
 name: NOAA Weather Data - JFK Airport
 description: Local climatological data originally collected at JFK airport.
