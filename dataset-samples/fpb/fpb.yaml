@@ -1,3 +1,6 @@
+# Copyright 2021 The MLX Contributors
+#
+# SPDX-License-Identifier: Apache-2.0
 id: finance-proposition-bank
 name: Finance Proposition Bank
 description: Text from approximately 1000 English sentences obtained from IBM's public annual financial reports, annotated with a layer of 'universal' semantic role labels.

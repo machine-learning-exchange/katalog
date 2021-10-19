@@ -1,3 +1,6 @@
+# Copyright 2021 The MLX Contributors
+#
+# SPDX-License-Identifier: Apache-2.0
 id: tensorflow-speech-commands
 name: TensorFlow Speech Commands
 description: A collection of short clips of spoken English words.

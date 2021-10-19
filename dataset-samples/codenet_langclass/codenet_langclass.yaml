@@ -1,3 +1,6 @@
+# Copyright 2021 The MLX Contributors
+#
+# SPDX-License-Identifier: Apache-2.0
 id: codenet-langclass
 name: Project CodeNet - Language Classifier
 description: A small subset of the Project CodeNet dataset, intended to showcase a language classification model. It only comprises 2198 random samples across 10 languages.

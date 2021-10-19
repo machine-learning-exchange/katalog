@@ -1,3 +1,6 @@
+# Copyright 2021 The MLX Contributors
+#
+# SPDX-License-Identifier: Apache-2.0
 id: thematic-clustering-of-sentences
 name: IBM Debater® Thematic Clustering of Sentences
 description: A benchmark of sentence-clustering based on the partition of Wikipedia articles into sections.
