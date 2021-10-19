@@ -20,4 +20,4 @@ metadata:
     platform: 'OpenSource'
 implementation:
   github:
-    source: 'https://github.com/Tomcli/notebook-folder/blob/master/sklearn.ipynb'
+    source: 'https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/notebook-yaml-samples/sklearn.ipynb'
