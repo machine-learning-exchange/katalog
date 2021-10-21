@@ -1,6 +1,6 @@
 ## Overview
 
-The model is based on the [Neural Collaborative Filtering model]([https://github.com/microsoft/recommenders]). This model can be trained on a dataset containing users, items, ratings, and timestamps and make personalized item recommendations for a given user. Once trained, the input to the model is a user ID and the output is a list of recommended item IDs sorted by estimated propensity score, in descending order. For demo purposes this model has been trained on a subset of the [MovieTweetings Dataset](https://github.com/sidooms/MovieTweetings), containing 457 users with their IDs mapped from 0 to 457 for convenience.
+The model is based on the [Neural Collaborative Filtering model](https://github.com/microsoft/recommenders). This model can be trained on a dataset containing users, items, ratings, and timestamps and make personalized item recommendations for a given user. Once trained, the input to the model is a user ID and the output is a list of recommended item IDs sorted by estimated propensity score, in descending order. For demo purposes this model has been trained on a subset of the [MovieTweetings Dataset](https://github.com/sidooms/MovieTweetings), containing 457 users with their IDs mapped from 0 to 457 for convenience.
 
 ## Model Metadata
 | Domain | Application | Industry  | Framework | Training Data | Input Data Format |

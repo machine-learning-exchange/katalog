@@ -90,7 +90,7 @@ The above command will send the low resolution `food.png` file to the model, and
 
 The ideal input image is a PNG file with a resolution between 100x100 and 500x500, preferably without any post-capture processing and flashy colors. The model is able to generate details from a pixelated image (low DPI), but is not able to correct a 'blurred' image.
 
-![Example Result](images/example.png)
+![Example Result](https://github.com/IBM/MAX-Image-Resolution-Enhancer/blob/master/docs/example.png)
 _Left: input image (128×80). Right: output image (512×320)_
 
 

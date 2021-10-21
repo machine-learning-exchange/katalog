@@ -18,10 +18,10 @@ The model is based on a simple Convolutional Neural Network (CNN) architecture w
 
 | Component | License | Link  |
 | ------------- | --------  | -------- |
-| This repository | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](LICENSE) |
-| Model Weights | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](LICENSE) |
-| Model Code (3rd party) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](LICENSE) |
-| Test samples | [CDLA-Permissive 2.0](https://cdla.io) | [samples README](samples/README.md) |
+| This repository | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](https://github.com/CODAIT/MAX-CodeNet-Language-Classification/blob/master/LICENSE) |
+| Model Weights | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](https://github.com/CODAIT/MAX-CodeNet-Language-Classification/blob/master/LICENSE) |
+| Model Code (3rd party) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](https://github.com/CODAIT/MAX-CodeNet-Language-Classification/blob/master/LICENSE) |
+| Test samples | [CDLA-Permissive 2.0](https://cdla.io) | [samples README](https://github.com/CODAIT/MAX-CodeNet-Language-Classification/blob/master/samples/README.md) |
 
 ## Pre-requisites
 
@@ -111,7 +111,7 @@ The API server automatically generates an interactive Swagger documentation page
 
 Use the `model/predict` endpoint to load a test file (you can use one of the test files from the `samples` folder) and get predicted language and probabilites from the API.
 
-![INSERT SWAGGER UI SCREENSHOT HERE](docs/swagger-screenshot.png)
+![screenshot](https://github.com/CODAIT/MAX-CodeNet-Language-Classification/blob/master/docs/swagger-screenshot.png)
 
 You can also test it on the command line, for example:
 
