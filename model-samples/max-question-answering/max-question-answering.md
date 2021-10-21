@@ -79,7 +79,7 @@ curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json"
 
 ### Test the model in a notebook
 
-The [demo notebook]([https://github.com/IBM/MAX-Question-Answering/samples/demo.ipynb]) walks through how to use the
+The [demo notebook](https://github.com/IBM/MAX-Question-Answering/blob/master/samples/demo.ipynb) walks through how to use the
 model to answer questions on a given corpus of text. By default, the notebook uses the
 [hosted demo instance](http://max-question-answering.codait-prod-41208c73af8fca213512856c7a09db52-0000.us-east.containers.appdomain.cloud),
 but you can use a locally running instance.

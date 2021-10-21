@@ -2,7 +2,7 @@
 
 This model takes hourly weather data (as a Numpy array of various weather features, in text file format) as input and returns hourly weather predictions for a specific target variable or variables (such as temperature or windspeed).
 
-Three pre-trained models are provided, all trained by the [CODAIT team](codait.org) on [National Oceanic and Atmospheric Administration](https://www.ncdc.noaa.gov) local climatological data originally collected by JFK airport. All three models use an LSTM recurrent neural network architecture.
+Three pre-trained models are provided, all trained by the [CODAIT team](https://www.ibm.com/opensource/centers/codait/) on [National Oceanic and Atmospheric Administration](https://www.ncdc.noaa.gov) local climatological data originally collected by JFK airport. All three models use an LSTM recurrent neural network architecture.
 
 A description of the weather variables used to train the models is set out below.
 
