@@ -27,25 +27,26 @@ metadata:
       ["quotient", "$(results.quotient.path)"], ["remainder", "$(results.remainder.path)"]]}'
     sidecar.istio.io/inject: "false"
     pipelines.kubeflow.org/pipeline_spec: '{"description": "A toy pipeline that performs
-      arithmetic calculations.", "inputs": [{"default": "7", "name": "a", "optional":
-      true}, {"default": "8", "name": "b", "optional": true}, {"default": "17", "name":
-      "c", "optional": true}], "name": "Calculation pipeline"}'
+      arithmetic calculations.", "inputs": [{"default": "7.0", "name": "a", "optional":
+      true, "type": "Float"}, {"default": "8.0", "name": "b", "optional": true, "type":
+      "Float"}, {"default": "17.0", "name": "c", "optional": true, "type": "Float"}],
+      "name": "calculation-pipeline"}'
 spec:
   params:
   - name: a
-    value: '7'
+    value: '7.0'
   - name: b
-    value: '8'
+    value: '8.0'
   - name: c
-    value: '17'
+    value: '17.0'
   pipelineSpec:
     params:
     - name: a
-      default: '7'
+      default: '7.0'
     - name: b
-      default: '8'
+      default: '8.0'
     - name: c
-      default: '17'
+      default: '17.0'
     tasks:
     - name: add
       params:

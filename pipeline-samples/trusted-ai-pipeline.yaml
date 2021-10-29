@@ -23,90 +23,144 @@ metadata:
     sidecar.istio.io/inject: "false"
     pipelines.kubeflow.org/pipeline_spec: '{"description": "An example for trusted-ai
       integration.", "inputs": [{"default": "anonymous", "name": "namespace", "optional":
-      true}, {"default": "0.2", "name": "fgsm_attack_epsilon", "optional": true},
-      {"default": "PyTorchModel.py", "name": "model_class_file", "optional": true},
-      {"default": "ThreeLayerCNN", "name": "model_class_name", "optional": true},
-      {"default": "processed_data/X_test.npy", "name": "feature_testset_path", "optional":
-      true}, {"default": "processed_data/y_test.npy", "name": "label_testset_path",
-      "optional": true}, {"default": "processed_data/p_test.npy", "name": "protected_label_testset_path",
-      "optional": true}, {"default": "0.0", "name": "favorable_label", "optional":
-      true}, {"default": "1.0", "name": "unfavorable_label", "optional": true}, {"default":
-      "[{''race'': 0.0}]", "name": "privileged_groups", "optional": true}, {"default":
-      "[{''race'': 4.0}]", "name": "unprivileged_groups", "optional": true}, {"default":
-      "torch.nn.CrossEntropyLoss()", "name": "loss_fn", "optional": true}, {"default":
-      "torch.optim.Adam(model.parameters(), lr=0.001)", "name": "optimizer", "optional":
-      true}, {"default": "(0, 1)", "name": "clip_values", "optional": true}, {"default":
-      "2", "name": "nb_classes", "optional": true}, {"default": "(1,3,64,64)", "name":
-      "input_shape", "optional": true}], "name": "Launch trusted-ai pipeline"}'
+      true, "type": "String"}, {"default": "0.2", "name": "fgsm_attack_epsilon", "optional":
+      true, "type": "String"}, {"default": "PyTorchModel.py", "name": "model_class_file",
+      "optional": true, "type": "String"}, {"default": "ThreeLayerCNN", "name": "model_class_name",
+      "optional": true, "type": "String"}, {"default": "processed_data/X_test.npy",
+      "name": "feature_testset_path", "optional": true, "type": "String"}, {"default":
+      "processed_data/y_test.npy", "name": "label_testset_path", "optional": true,
+      "type": "String"}, {"default": "processed_data/p_test.npy", "name": "protected_label_testset_path",
+      "optional": true, "type": "String"}, {"default": "0.0", "name": "favorable_label",
+      "optional": true, "type": "String"}, {"default": "1.0", "name": "unfavorable_label",
+      "optional": true, "type": "String"}, {"default": "[{''race'': 0.0}]", "name":
+      "privileged_groups", "optional": true, "type": "String"}, {"default": "[{''race'':
+      4.0}]", "name": "unprivileged_groups", "optional": true, "type": "String"},
+      {"default": "torch.nn.CrossEntropyLoss()", "name": "loss_fn", "optional": true,
+      "type": "String"}, {"default": "torch.optim.Adam(model.parameters(), lr=0.001)",
+      "name": "optimizer", "optional": true, "type": "String"}, {"default": "(0, 1)",
+      "name": "clip_values", "optional": true, "type": "String"}, {"default": "2",
+      "name": "nb_classes", "optional": true, "type": "String"}, {"default": "(1,3,64,64)",
+      "name": "input_shape", "optional": true, "type": "String"}], "name": "Launch
+      trusted-ai pipeline"}'
 spec:
   params:
-  - {name: namespace, value: anonymous}
-  - {name: fgsm_attack_epsilon, value: '0.2'}
-  - {name: model_class_file, value: PyTorchModel.py}
-  - {name: model_class_name, value: ThreeLayerCNN}
-  - {name: feature_testset_path, value: processed_data/X_test.npy}
-  - {name: label_testset_path, value: processed_data/y_test.npy}
-  - {name: protected_label_testset_path, value: processed_data/p_test.npy}
-  - {name: favorable_label, value: '0.0'}
-  - {name: unfavorable_label, value: '1.0'}
-  - {name: privileged_groups, value: '[{''race'': 0.0}]'}
-  - {name: unprivileged_groups, value: '[{''race'': 4.0}]'}
-  - {name: loss_fn, value: torch.nn.CrossEntropyLoss()}
-  - {name: optimizer, value: 'torch.optim.Adam(model.parameters(), lr=0.001)'}
-  - {name: clip_values, value: '(0, 1)'}
-  - {name: nb_classes, value: '2'}
-  - {name: input_shape, value: '(1,3,64,64)'}
+  - name: clip_values
+    value: (0, 1)
+  - name: favorable_label
+    value: '0.0'
+  - name: feature_testset_path
+    value: processed_data/X_test.npy
+  - name: fgsm_attack_epsilon
+    value: '0.2'
+  - name: input_shape
+    value: (1,3,64,64)
+  - name: label_testset_path
+    value: processed_data/y_test.npy
+  - name: loss_fn
+    value: torch.nn.CrossEntropyLoss()
+  - name: model_class_file
+    value: PyTorchModel.py
+  - name: model_class_name
+    value: ThreeLayerCNN
+  - name: namespace
+    value: anonymous
+  - name: nb_classes
+    value: '2'
+  - name: optimizer
+    value: torch.optim.Adam(model.parameters(), lr=0.001)
+  - name: privileged_groups
+    value: '[{''race'': 0.0}]'
+  - name: protected_label_testset_path
+    value: processed_data/p_test.npy
+  - name: unfavorable_label
+    value: '1.0'
+  - name: unprivileged_groups
+    value: '[{''race'': 4.0}]'
   pipelineSpec:
     params:
-    - {name: namespace, default: anonymous}
-    - {name: fgsm_attack_epsilon, default: '0.2'}
-    - {name: model_class_file, default: PyTorchModel.py}
-    - {name: model_class_name, default: ThreeLayerCNN}
-    - {name: feature_testset_path, default: processed_data/X_test.npy}
-    - {name: label_testset_path, default: processed_data/y_test.npy}
-    - {name: protected_label_testset_path, default: processed_data/p_test.npy}
-    - {name: favorable_label, default: '0.0'}
-    - {name: unfavorable_label, default: '1.0'}
-    - {name: privileged_groups, default: '[{''race'': 0.0}]'}
-    - {name: unprivileged_groups, default: '[{''race'': 4.0}]'}
-    - {name: loss_fn, default: torch.nn.CrossEntropyLoss()}
-    - {name: optimizer, default: 'torch.optim.Adam(model.parameters(), lr=0.001)'}
-    - {name: clip_values, default: '(0, 1)'}
-    - {name: nb_classes, default: '2'}
-    - {name: input_shape, default: '(1,3,64,64)'}
+    - name: clip_values
+      default: (0, 1)
+    - name: favorable_label
+      default: '0.0'
+    - name: feature_testset_path
+      default: processed_data/X_test.npy
+    - name: fgsm_attack_epsilon
+      default: '0.2'
+    - name: input_shape
+      default: (1,3,64,64)
+    - name: label_testset_path
+      default: processed_data/y_test.npy
+    - name: loss_fn
+      default: torch.nn.CrossEntropyLoss()
+    - name: model_class_file
+      default: PyTorchModel.py
+    - name: model_class_name
+      default: ThreeLayerCNN
+    - name: namespace
+      default: anonymous
+    - name: nb_classes
+      default: '2'
+    - name: optimizer
+      default: torch.optim.Adam(model.parameters(), lr=0.001)
+    - name: privileged_groups
+      default: '[{''race'': 0.0}]'
+    - name: protected_label_testset_path
+      default: processed_data/p_test.npy
+    - name: unfavorable_label
+      default: '1.0'
+    - name: unprivileged_groups
+      default: '[{''race'': 4.0}]'
     tasks:
     - name: trust-ai-train-step
       params:
-      - {name: action, value: create}
+      - name: action
+        value: create
       - name: output
         value: |
           - name: manifest
             valueFrom: '{}'
           - name: name
             valueFrom: '{.metadata.name}'
-      - {name: success-condition, value: status.succeeded > 0}
-      - {name: failure-condition, value: status.failed > 0}
+      - name: success-condition
+        value: status.succeeded > 0
+      - name: failure-condition
+        value: status.failed > 0
       - name: set-ownerreference
         value: "false"
-      - {name: namespace, value: $(params.namespace)}
+      - name: namespace
+        value: $(params.namespace)
       taskSpec:
         params:
-        - {description: Action on the resource, name: action, type: string}
-        - {default: strategic, description: Merge strategy when using action patch,
-          name: merge-strategy, type: string}
-        - {default: '', description: An express to retrieval data from resource.,
-          name: output, type: string}
-        - {default: '', description: A label selector express to decide if the action
-            on resource is success., name: success-condition, type: string}
-        - {default: '', description: A label selector express to decide if the action
-            on resource is failure., name: failure-condition, type: string}
-        - {default: 'index.docker.io/aipipeline/kubeclient:v0.0.2', description: Kubectl
-            wrapper image, name: image, type: string}
+        - description: Action on the resource
+          name: action
+          type: string
+        - default: strategic
+          description: Merge strategy when using action patch
+          name: merge-strategy
+          type: string
+        - default: ''
+          description: An express to retrieval data from resource.
+          name: output
+          type: string
+        - default: ''
+          description: A label selector express to decide if the action on resource
+            is success.
+          name: success-condition
+          type: string
+        - default: ''
+          description: A label selector express to decide if the action on resource
+            is failure.
+          name: failure-condition
+          type: string
+        - default: aipipeline/kubectl-wrapper:1.0.1
+          description: Kubectl wrapper image
+          name: image
+          type: string
         - default: "false"
           description: Enable set owner reference for created resource.
           name: set-ownerreference
           type: string
-        - {name: namespace}
+        - name: namespace
         steps:
         - args:
           - --action=$(params.action)
@@ -115,7 +169,7 @@ spec:
             --manifest=apiVersion: batch/v1
             kind: Job
             metadata:
-              name: trusted-ai-train-job
+              name: trusted-ai-train-job-$(PIPELINERUN)
               namespace: $(inputs.params.namespace)
             spec:
               template:
@@ -146,134 +200,235 @@ spec:
           image: $(params.image)
           name: main
           resources: {}
+          env:
+          - name: PIPELINERUN
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['tekton.dev/pipelineRun']
         results:
-        - {name: manifest, description: '{}'}
-        - {name: name, description: '{.metadata.name}'}
+        - name: manifest
+          description: '{}'
+        - name: name
+          description: '{.metadata.name}'
+        metadata:
+          labels:
+            pipelines.kubeflow.org/pipelinename: ''
+            pipelines.kubeflow.org/generation: ''
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            tekton.dev/template: ''
       timeout: 0s
     - name: model-fairness-check
       params:
-      - {name: favorable_label, value: $(params.favorable_label)}
-      - {name: feature_testset_path, value: $(params.feature_testset_path)}
-      - {name: label_testset_path, value: $(params.label_testset_path)}
-      - {name: model_class_file, value: $(params.model_class_file)}
-      - {name: model_class_name, value: $(params.model_class_name)}
-      - {name: privileged_groups, value: $(params.privileged_groups)}
-      - {name: protected_label_testset_path, value: $(params.protected_label_testset_path)}
-      - {name: unfavorable_label, value: $(params.unfavorable_label)}
-      - {name: unprivileged_groups, value: $(params.unprivileged_groups)}
+      - name: favorable_label
+        value: $(params.favorable_label)
+      - name: feature_testset_path
+        value: $(params.feature_testset_path)
+      - name: label_testset_path
+        value: $(params.label_testset_path)
+      - name: model_class_file
+        value: $(params.model_class_file)
+      - name: model_class_name
+        value: $(params.model_class_name)
+      - name: privileged_groups
+        value: $(params.privileged_groups)
+      - name: protected_label_testset_path
+        value: $(params.protected_label_testset_path)
+      - name: unfavorable_label
+        value: $(params.unfavorable_label)
+      - name: unprivileged_groups
+        value: $(params.unprivileged_groups)
       taskSpec:
         steps:
         - name: main
-          args: [-u, fairness_check.py, --model_id, training-example, --model_class_file,
-            $(inputs.params.model_class_file), --model_class_name, $(inputs.params.model_class_name),
-            --feature_testset_path, $(inputs.params.feature_testset_path), --label_testset_path,
-            $(inputs.params.label_testset_path), --protected_label_testset_path, $(inputs.params.protected_label_testset_path),
-            --favorable_label, $(inputs.params.favorable_label), --unfavorable_label,
-            $(inputs.params.unfavorable_label), --privileged_groups, $(inputs.params.privileged_groups),
-            --unprivileged_groups, $(inputs.params.unprivileged_groups), --metric_path,
-            $(results.metric-path.path), --data_bucket_name, mlpipeline, --result_bucket_name,
-            mlpipeline]
-          command: [python]
+          args:
+          - -u
+          - fairness_check.py
+          - --model_id
+          - training-example
+          - --model_class_file
+          - $(inputs.params.model_class_file)
+          - --model_class_name
+          - $(inputs.params.model_class_name)
+          - --feature_testset_path
+          - $(inputs.params.feature_testset_path)
+          - --label_testset_path
+          - $(inputs.params.label_testset_path)
+          - --protected_label_testset_path
+          - $(inputs.params.protected_label_testset_path)
+          - --favorable_label
+          - $(inputs.params.favorable_label)
+          - --unfavorable_label
+          - $(inputs.params.unfavorable_label)
+          - --privileged_groups
+          - $(inputs.params.privileged_groups)
+          - --unprivileged_groups
+          - $(inputs.params.unprivileged_groups)
+          - --metric_path
+          - $(results.metric-path.path)
+          - --data_bucket_name
+          - mlpipeline
+          - --result_bucket_name
+          - mlpipeline
+          command:
+          - python
           image: aipipeline/bias-detector:pytorch
           imagePullPolicy: Always
         params:
-        - {name: favorable_label}
-        - {name: feature_testset_path}
-        - {name: label_testset_path}
-        - {name: model_class_file}
-        - {name: model_class_name}
-        - {name: privileged_groups}
-        - {name: protected_label_testset_path}
-        - {name: unfavorable_label}
-        - {name: unprivileged_groups}
+        - name: favorable_label
+        - name: feature_testset_path
+        - name: label_testset_path
+        - name: model_class_file
+        - name: model_class_name
+        - name: privileged_groups
+        - name: protected_label_testset_path
+        - name: unfavorable_label
+        - name: unprivileged_groups
         results:
-        - {name: metric-path, description: /tmp/outputs/metric_path/data}
+        - name: metric-path
+          description: /tmp/outputs/metric_path/data
         metadata:
-          annotations: {platform: OpenSource, pipelines.kubeflow.org/component_spec: '{"description":
-              "Perform a fairness check on a certain attribute using AIF360 to make
-              sure the model is fair and ethical\n", "implementation": {"container":
-              {"args": ["-u", "fairness_check.py", "--model_id", {"inputValue": "model_id"},
-              "--model_class_file", {"inputValue": "model_class_file"}, "--model_class_name",
-              {"inputValue": "model_class_name"}, "--feature_testset_path", {"inputValue":
-              "feature_testset_path"}, "--label_testset_path", {"inputValue": "label_testset_path"},
-              "--protected_label_testset_path", {"inputValue": "protected_label_testset_path"},
-              "--favorable_label", {"inputValue": "favorable_label"}, "--unfavorable_label",
-              {"inputValue": "unfavorable_label"}, "--privileged_groups", {"inputValue":
-              "privileged_groups"}, "--unprivileged_groups", {"inputValue": "unprivileged_groups"},
-              "--metric_path", {"outputPath": "metric_path"}, "--data_bucket_name",
-              {"inputValue": "data_bucket_name"}, "--result_bucket_name", {"inputValue":
-              "result_bucket_name"}], "command": ["python"], "image": "aipipeline/bias-detector:pytorch"}},
+          labels:
+            pipelines.kubeflow.org/pipelinename: ''
+            pipelines.kubeflow.org/generation: ''
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            platform: OpenSource
+            pipelines.kubeflow.org/component_spec: '{"description": "Perform a fairness
+              check on a certain attribute using AIF360 to make sure the model is
+              fair and ethical\n", "implementation": {"container": {"args": ["-u",
+              "fairness_check.py", "--model_id", {"inputValue": "model_id"}, "--model_class_file",
+              {"inputValue": "model_class_file"}, "--model_class_name", {"inputValue":
+              "model_class_name"}, "--feature_testset_path", {"inputValue": "feature_testset_path"},
+              "--label_testset_path", {"inputValue": "label_testset_path"}, "--protected_label_testset_path",
+              {"inputValue": "protected_label_testset_path"}, "--favorable_label",
+              {"inputValue": "favorable_label"}, "--unfavorable_label", {"inputValue":
+              "unfavorable_label"}, "--privileged_groups", {"inputValue": "privileged_groups"},
+              "--unprivileged_groups", {"inputValue": "unprivileged_groups"}, "--metric_path",
+              {"outputPath": "metric_path"}, "--data_bucket_name", {"inputValue":
+              "data_bucket_name"}, "--result_bucket_name", {"inputValue": "result_bucket_name"}],
+              "command": ["python"], "image": "aipipeline/bias-detector:pytorch"}},
               "inputs": [{"default": "training-dummy", "description": "Required. Training
-              model ID", "name": "model_id"}, {"default": "PyTorchModel.py", "description":
-              "Required. pytorch model class file", "name": "model_class_file"}, {"default":
-              "PyTorchModel", "description": "Required. pytorch model class name",
-              "name": "model_class_name"}, {"description": "Required. Feature test
-              dataset path in the data bucket", "name": "feature_testset_path"}, {"description":
-              "Required. Label test dataset path in the data bucket", "name": "label_testset_path"},
-              {"description": "Required. Protected label test dataset path in the
-              data bucket", "name": "protected_label_testset_path"}, {"description":
-              "Required. Favorable label for this model predictions", "name": "favorable_label"},
-              {"description": "Required. Unfavorable label for this model predictions",
-              "name": "unfavorable_label"}, {"description": "Required. Privileged
-              feature groups within this model", "name": "privileged_groups"}, {"description":
-              "Required. Unprivileged feature groups within this model", "name": "unprivileged_groups"},
-              {"default": "training-data", "description": "Optional. Bucket that has
-              the processed data", "name": "data_bucket_name"}, {"default": "training-result",
+              model ID", "name": "model_id", "type": "String"}, {"default": "PyTorchModel.py",
+              "description": "Required. pytorch model class file", "name": "model_class_file",
+              "type": "String"}, {"default": "PyTorchModel", "description": "Required.
+              pytorch model class name", "name": "model_class_name", "type": "String"},
+              {"description": "Required. Feature test dataset path in the data bucket",
+              "name": "feature_testset_path", "type": "String"}, {"description": "Required.
+              Label test dataset path in the data bucket", "name": "label_testset_path",
+              "type": "String"}, {"description": "Required. Protected label test dataset
+              path in the data bucket", "name": "protected_label_testset_path", "type":
+              "String"}, {"description": "Required. Favorable label for this model
+              predictions", "name": "favorable_label", "type": "String"}, {"description":
+              "Required. Unfavorable label for this model predictions", "name": "unfavorable_label",
+              "type": "String"}, {"description": "Required. Privileged feature groups
+              within this model", "name": "privileged_groups", "type": "String"},
+              {"description": "Required. Unprivileged feature groups within this model",
+              "name": "unprivileged_groups", "type": "String"}, {"default": "training-data",
+              "description": "Optional. Bucket that has the processed data", "name":
+              "data_bucket_name", "type": "String"}, {"default": "training-result",
               "description": "Optional. Bucket that has the training results", "name":
-              "result_bucket_name"}], "metadata": {"annotations": {"platform": "OpenSource"}},
-              "name": "Model Fairness Check", "outputs": [{"description": "Path for
-              fairness check output", "name": "metric_path"}]}'}
-      runAfter: [trust-ai-train-step]
+              "result_bucket_name", "type": "String"}], "metadata": {"annotations":
+              {"platform": "OpenSource"}}, "name": "Model Fairness Check", "outputs":
+              [{"description": "Path for fairness check output", "name": "metric_path",
+              "type": "String"}]}'
+            tekton.dev/template: ''
+      runAfter:
+      - trust-ai-train-step
       timeout: 0s
     - name: adversarial-robustness-evaluation
       params:
-      - {name: clip_values, value: $(params.clip_values)}
-      - {name: feature_testset_path, value: $(params.feature_testset_path)}
-      - {name: fgsm_attack_epsilon, value: $(params.fgsm_attack_epsilon)}
-      - {name: input_shape, value: $(params.input_shape)}
-      - {name: label_testset_path, value: $(params.label_testset_path)}
-      - {name: loss_fn, value: $(params.loss_fn)}
-      - {name: model_class_file, value: $(params.model_class_file)}
-      - {name: model_class_name, value: $(params.model_class_name)}
-      - {name: nb_classes, value: $(params.nb_classes)}
-      - {name: optimizer, value: $(params.optimizer)}
+      - name: clip_values
+        value: $(params.clip_values)
+      - name: feature_testset_path
+        value: $(params.feature_testset_path)
+      - name: fgsm_attack_epsilon
+        value: $(params.fgsm_attack_epsilon)
+      - name: input_shape
+        value: $(params.input_shape)
+      - name: label_testset_path
+        value: $(params.label_testset_path)
+      - name: loss_fn
+        value: $(params.loss_fn)
+      - name: model_class_file
+        value: $(params.model_class_file)
+      - name: model_class_name
+        value: $(params.model_class_name)
+      - name: nb_classes
+        value: $(params.nb_classes)
+      - name: optimizer
+        value: $(params.optimizer)
       taskSpec:
         steps:
         - name: main
-          args: [-u, robustness_evaluation_fgsm_pytorch.py, --model_id, training-example,
-            --model_class_file, $(inputs.params.model_class_file), --model_class_name,
-            $(inputs.params.model_class_name), --feature_testset_path, $(inputs.params.feature_testset_path),
-            --label_testset_path, $(inputs.params.label_testset_path), --epsilon,
-            $(inputs.params.fgsm_attack_epsilon), --loss_fn, $(inputs.params.loss_fn),
-            --optimizer, $(inputs.params.optimizer), --clip_values, $(inputs.params.clip_values),
-            --nb_classes, $(inputs.params.nb_classes), --input_shape, $(inputs.params.input_shape),
-            --metric_path, $(results.metric-path.path), --robust_status, $(results.robust-status.path),
-            --data_bucket_name, mlpipeline, --result_bucket_name, mlpipeline, --adversarial_accuracy_threshold,
-            '0.2']
-          command: [python]
+          args:
+          - -u
+          - robustness_evaluation_fgsm_pytorch.py
+          - --model_id
+          - training-example
+          - --model_class_file
+          - $(inputs.params.model_class_file)
+          - --model_class_name
+          - $(inputs.params.model_class_name)
+          - --feature_testset_path
+          - $(inputs.params.feature_testset_path)
+          - --label_testset_path
+          - $(inputs.params.label_testset_path)
+          - --epsilon
+          - $(inputs.params.fgsm_attack_epsilon)
+          - --loss_fn
+          - $(inputs.params.loss_fn)
+          - --optimizer
+          - $(inputs.params.optimizer)
+          - --clip_values
+          - $(inputs.params.clip_values)
+          - --nb_classes
+          - $(inputs.params.nb_classes)
+          - --input_shape
+          - $(inputs.params.input_shape)
+          - --metric_path
+          - $(results.metric-path.path)
+          - --robust_status
+          - $(results.robust-status.path)
+          - --data_bucket_name
+          - mlpipeline
+          - --result_bucket_name
+          - mlpipeline
+          - --adversarial_accuracy_threshold
+          - '0.2'
+          command:
+          - python
           image: aipipeline/robustness-evaluation:pytorch
           imagePullPolicy: Always
         params:
-        - {name: clip_values}
-        - {name: feature_testset_path}
-        - {name: fgsm_attack_epsilon}
-        - {name: input_shape}
-        - {name: label_testset_path}
-        - {name: loss_fn}
-        - {name: model_class_file}
-        - {name: model_class_name}
-        - {name: nb_classes}
-        - {name: optimizer}
+        - name: clip_values
+        - name: feature_testset_path
+        - name: fgsm_attack_epsilon
+        - name: input_shape
+        - name: label_testset_path
+        - name: loss_fn
+        - name: model_class_file
+        - name: model_class_name
+        - name: nb_classes
+        - name: optimizer
         results:
-        - {name: metric-path, description: /tmp/outputs/metric_path/data}
-        - {name: robust-status, description: /tmp/outputs/robust_status/data}
+        - name: metric-path
+          description: /tmp/outputs/metric_path/data
+        - name: robust-status
+          description: /tmp/outputs/robust_status/data
         metadata:
-          annotations: {platform: OpenSource, pipelines.kubeflow.org/component_spec: '{"description":
-              "Evaluate the adversarial robustness using the Fast Gradient Sign Method
-              of the Adversarial Robustness Toolbox (ART).\nThis is a simple demonstration
-              of how to create evaluations using adversarial methods, and generally
-              it is not recommended\nto evaluate adversarial robustness solely using
-              the Fast Gradient Sign Method. To create a thorough robustness assessment,\nplease
+          labels:
+            pipelines.kubeflow.org/pipelinename: ''
+            pipelines.kubeflow.org/generation: ''
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            platform: OpenSource
+            pipelines.kubeflow.org/component_spec: '{"description": "Evaluate the
+              adversarial robustness using the Fast Gradient Sign Method of the Adversarial
+              Robustness Toolbox (ART).\nThis is a simple demonstration of how to
+              create evaluations using adversarial methods, and generally it is not
+              recommended\nto evaluate adversarial robustness solely using the Fast
+              Gradient Sign Method. To create a thorough robustness assessment,\nplease
               refer to https://arxiv.org/abs/1902.06705 which provides widely accepted
               guidelines on different combinations of attacks.\n", "implementation":
               {"container": {"args": ["-u", "robustness_evaluation_fgsm_pytorch.py",
@@ -290,28 +445,34 @@ spec:
               {"inputValue": "adversarial_accuracy_threshold"}], "command": ["python"],
               "image": "aipipeline/robustness-evaluation:pytorch"}}, "inputs": [{"default":
               "training-dummy", "description": "Required. Training model ID", "name":
-              "model_id"}, {"default": "0.2", "description": "Required. Epsilon value
-              for the FGSM attack", "name": "epsilon"}, {"description": "Required.
-              pytorch model class file", "name": "model_class_file"}, {"default":
-              "model", "description": "Required. pytorch model class name", "name":
-              "model_class_name"}, {"description": "Required. Feature test dataset
-              path in the data bucket", "name": "feature_testset_path"}, {"description":
-              "Required. Label test dataset path in the data bucket", "name": "label_testset_path"},
-              {"description": "Required. PyTorch model loss function", "name": "loss_fn"},
-              {"description": "Required. PyTorch model optimizer", "name": "optimizer"},
-              {"description": "Required. PyTorch model clip_values allowed for features
-              (min, max)", "name": "clip_values"}, {"description": "Required. The
-              number of classes of the model", "name": "nb_classes"}, {"description":
+              "model_id", "type": "String"}, {"default": "0.2", "description": "Required.
+              Epsilon value for the FGSM attack", "name": "epsilon", "type": "String"},
+              {"description": "Required. pytorch model class file", "name": "model_class_file",
+              "type": "String"}, {"default": "model", "description": "Required. pytorch
+              model class name", "name": "model_class_name", "type": "String"}, {"description":
+              "Required. Feature test dataset path in the data bucket", "name": "feature_testset_path",
+              "type": "String"}, {"description": "Required. Label test dataset path
+              in the data bucket", "name": "label_testset_path", "type": "String"},
+              {"description": "Required. PyTorch model loss function", "name": "loss_fn",
+              "type": "String"}, {"description": "Required. PyTorch model optimizer",
+              "name": "optimizer", "type": "String"}, {"description": "Required. PyTorch
+              model clip_values allowed for features (min, max)", "name": "clip_values",
+              "type": "String"}, {"description": "Required. The number of classes
+              of the model", "name": "nb_classes", "type": "String"}, {"description":
               "Required. The shape of one input instance for the pytorch model", "name":
-              "input_shape"}, {"default": "training-data", "description": "Bucket
-              that has the processed data", "name": "data_bucket_name"}, {"default":
-              "training-result", "description": "Bucket that has the training results",
-              "name": "result_bucket_name"}, {"default": "0.2", "description": "Model
-              accuracy threshold on adversarial samples", "name": "adversarial_accuracy_threshold"}],
+              "input_shape", "type": "String"}, {"default": "training-data", "description":
+              "Bucket that has the processed data", "name": "data_bucket_name", "type":
+              "String"}, {"default": "training-result", "description": "Bucket that
+              has the training results", "name": "result_bucket_name", "type": "String"},
+              {"default": "0.2", "description": "Model accuracy threshold on adversarial
+              samples", "name": "adversarial_accuracy_threshold", "type": "String"}],
               "metadata": {"annotations": {"platform": "OpenSource"}}, "name": "Adversarial
               Robustness Evaluation", "outputs": [{"description": "Path for robustness
-              check output", "name": "metric_path"}, {"description": "Path for robustness
-              status output", "name": "robust_status"}]}'}
-      runAfter: [trust-ai-train-step]
+              check output", "name": "metric_path", "type": "String"}, {"description":
+              "Path for robustness status output", "name": "robust_status", "type":
+              "String"}]}'
+            tekton.dev/template: ''
+      runAfter:
+      - trust-ai-train-step
       timeout: 0s
   timeout: 0s

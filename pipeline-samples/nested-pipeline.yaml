@@ -6,109 +6,184 @@ kind: PipelineRun
 metadata:
   name: download-and-save-most-frequent
   annotations:
-    tekton.dev/output_artifacts: '{"download": [{"key": "artifacts/$PIPELINERUN/download/downloaded.tgz",
-      "name": "download-downloaded", "path": "/tmp/results.txt"}], "get-frequent":
-      [{"key": "artifacts/$PIPELINERUN/get-frequent/word.tgz", "name": "get-frequent-word",
-      "path": "/tmp/message.txt"}]}'
-    tekton.dev/input_artifacts: '{"get-frequent": [{"name": "download-downloaded",
-      "parent_task": "download"}], "save": [{"name": "get-frequent-word", "parent_task":
-      "get-frequent"}]}'
+    tekton.dev/output_artifacts: '{"download-message": [{"key": "artifacts/$PIPELINERUN/download-message/content.tgz",
+      "name": "download-message-content", "path": "/tmp/outputs/content/data"}], "frequent-word":
+      [{"key": "artifacts/$PIPELINERUN/frequent-word/Output.tgz", "name": "frequent-word-Output",
+      "path": "/tmp/outputs/Output/data"}]}'
+    tekton.dev/input_artifacts: '{"frequent-word": [{"name": "download-message-content",
+      "parent_task": "download-message"}], "save-message": [{"name": "frequent-word-Output",
+      "parent_task": "frequent-word"}]}'
     tekton.dev/artifact_bucket: mlpipeline
     tekton.dev/artifact_endpoint: minio-service.kubeflow:9000
     tekton.dev/artifact_endpoint_scheme: http://
-    tekton.dev/artifact_items: '{"download": [["downloaded", "$(results.downloaded.path)"]],
-      "get-frequent": [["word", "$(results.word.path)"]], "save": []}'
+    tekton.dev/artifact_items: '{"download-message": [["content", "$(results.content.path)"]],
+      "frequent-word": [["Output", "$(results.output.path)"]], "save-message": []}'
     sidecar.istio.io/inject: "false"
     pipelines.kubeflow.org/pipeline_spec: '{"description": "Download and Get Most
       Frequent Word and Save to GCS", "inputs": [{"default": "gs://ml-pipeline-playground/shakespeare1.txt",
       "name": "url", "optional": true, "type": "String"}, {"default": "res.txt", "name":
-      "outputpath", "optional": true, "type": "String"}], "name": "Download and Save
-      Most Frequent"}'
+      "outputpath", "optional": true, "type": "String"}], "name": "download-and-save-most-frequent"}'
 spec:
   params:
-  - name: url
-    value: gs://ml-pipeline-playground/shakespeare1.txt
   - name: outputpath
     value: res.txt
+  - name: url
+    value: gs://ml-pipeline-playground/shakespeare1.txt
   pipelineSpec:
     params:
-    - name: url
-      default: gs://ml-pipeline-playground/shakespeare1.txt
     - name: outputpath
       default: res.txt
+    - name: url
+      default: gs://ml-pipeline-playground/shakespeare1.txt
     tasks:
-    - name: download
+    - name: download-message
       params:
       - name: url
         value: $(params.url)
       taskSpec:
         steps:
         - name: main
-          args:
-          - gsutil cat $(inputs.params.url) | tee $(results.downloaded.path)
           command:
           - sh
           - -c
+          - |
+            set -e
+            gsutil cp "$0" "$1"
+          - $(inputs.params.url)
+          - $(results.content.path)
           image: google/cloud-sdk
         params:
         - name: url
         results:
-        - name: downloaded
-          description: /tmp/results.txt
+        - name: content
+          description: /tmp/outputs/content/data
         metadata:
           labels:
             pipelines.kubeflow.org/pipelinename: ''
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
+            pipelines.kubeflow.org/component_spec: '{"description": "downloads a message
+              and outputs it\n", "implementation": {"container": {"command": ["sh",
+              "-c", "set -e\ngsutil cp \"$0\" \"$1\"\n", {"inputValue": "url"}, {"outputPath":
+              "content"}], "image": "google/cloud-sdk"}}, "inputs": [{"description":
+              "Required. the gcs url to download the message from", "name": "url",
+              "type": "String"}], "name": "Download Message", "outputs": [{"description":
+              "file content.", "name": "content", "type": "String"}]}'
             tekton.dev/template: ''
       timeout: 0s
-    - name: get-frequent
+    - name: frequent-word
       params:
-      - name: download-downloaded
-        value: $(tasks.download.results.downloaded)
+      - name: download-message-content
+        value: $(tasks.download-message.results.content)
       taskSpec:
         steps:
         - name: main
           args:
-          - echo '$(inputs.params.download-downloaded)' | tee /tmp/results.txt ; python
-            -c "from collections import Counter; foo=open('"/tmp/results.txt"', 'r').read();words
-            = Counter(foo.split()); print(max(words, key=words.get))" | tee $(results.word.path)
+          - --message
+          - $(inputs.params.download-message-content)
+          - '----output-paths'
+          - $(results.output.path)
           command:
-          - bash
-          - -c
+          - sh
+          - -ec
+          - |
+            program_path=$(mktemp)
+            printf "%s" "$0" > "$program_path"
+            python3 -u "$program_path" "$@"
+          - |
+            def frequent_word(message):
+                """get frequent word."""
+                from collections import Counter
+                words = Counter(message.split())
+                result = max(words, key=words.get)
+                print(result)
+                return result
+
+            def _serialize_str(str_value: str) -> str:
+                if not isinstance(str_value, str):
+                    raise TypeError('Value "{}" has type "{}" instead of str.'.format(str(str_value), str(type(str_value))))
+                return str_value
+
+            import argparse
+            _parser = argparse.ArgumentParser(prog='Frequent word', description='get frequent word.')
+            _parser.add_argument("--message", dest="message", type=str, required=True, default=argparse.SUPPRESS)
+            _parser.add_argument("----output-paths", dest="_output_paths", type=str, nargs=1)
+            _parsed_args = vars(_parser.parse_args())
+            _output_files = _parsed_args.pop("_output_paths", [])
+
+            _outputs = frequent_word(**_parsed_args)
+
+            _outputs = [_outputs]
+
+            _output_serializers = [
+                _serialize_str,
+
+            ]
+
+            import os
+            for idx, output_file in enumerate(_output_files):
+                try:
+                    os.makedirs(os.path.dirname(output_file))
+                except OSError:
+                    pass
+                with open(output_file, 'w') as f:
+                    f.write(_output_serializers[idx](_outputs[idx]))
           image: python:3.5-jessie
         params:
-        - name: download-downloaded
+        - name: download-message-content
         results:
-        - name: word
-          description: /tmp/message.txt
+        - name: output
+          description: /tmp/outputs/Output/data
         metadata:
           labels:
             pipelines.kubeflow.org/pipelinename: ''
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
+            pipelines.kubeflow.org/component_spec: '{"description": "get frequent
+              word.", "implementation": {"container": {"args": ["--message", {"inputValue":
+              "message"}, "----output-paths", {"outputPath": "Output"}], "command":
+              ["sh", "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\" > \"$program_path\"\npython3
+              -u \"$program_path\" \"$@\"\n", "def frequent_word(message):\n    \"\"\"get
+              frequent word.\"\"\"\n    from collections import Counter\n    words
+              = Counter(message.split())\n    result = max(words, key=words.get)\n    print(result)\n    return
+              result\n\ndef _serialize_str(str_value: str) -> str:\n    if not isinstance(str_value,
+              str):\n        raise TypeError(''Value \"{}\" has type \"{}\" instead
+              of str.''.format(str(str_value), str(type(str_value))))\n    return
+              str_value\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Frequent
+              word'', description=''get frequent word.'')\n_parser.add_argument(\"--message\",
+              dest=\"message\", type=str, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\",
+              dest=\"_output_paths\", type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n_output_files
+              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = frequent_word(**_parsed_args)\n\n_outputs
+              = [_outputs]\n\n_output_serializers = [\n    _serialize_str,\n\n]\n\nimport
+              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
+              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
+              "image": "python:3.5-jessie"}}, "inputs": [{"name": "message", "type":
+              "String"}], "name": "Frequent word", "outputs": [{"name": "Output",
+              "type": "String"}]}'
             tekton.dev/template: ''
       timeout: 0s
-    - name: save
+    - name: save-message
       params:
-      - name: get-frequent-word
-        value: $(tasks.get-frequent.results.word)
+      - name: frequent-word-Output
+        value: $(tasks.frequent-word.results.output)
       - name: outputpath
         value: $(params.outputpath)
       taskSpec:
         steps:
         - name: main
-          args:
-          - echo '$(inputs.params.get-frequent-word)' | tee /tmp/results.txt | gsutil
-            cp /tmp/results.txt '$(inputs.params.outputpath)'
           command:
           - sh
           - -c
+          - |
+            set -e
+            echo "$0"| gsutil cp - "$1"
+          - $(inputs.params.frequent-word-Output)
+          - $(inputs.params.outputpath)
           image: google/cloud-sdk
         params:
-        - name: get-frequent-word
+        - name: frequent-word-Output
         - name: outputpath
         metadata:
           labels:
@@ -116,6 +191,13 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
+            pipelines.kubeflow.org/component_spec: '{"description": "save message
+              to a given output_path\n", "implementation": {"container": {"command":
+              ["sh", "-c", "set -e\necho \"$0\"| gsutil cp - \"$1\"\n", {"inputValue":
+              "message"}, {"inputValue": "output_path"}], "image": "google/cloud-sdk"}},
+              "inputs": [{"description": "Required. message", "name": "message", "type":
+              "String"}, {"description": "Required. output path", "name": "output_path",
+              "type": "String"}], "name": "Save Message"}'
             tekton.dev/template: ''
       timeout: 0s
   timeout: 0s
