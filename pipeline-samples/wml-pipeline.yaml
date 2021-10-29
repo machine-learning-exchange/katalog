@@ -53,12 +53,14 @@ metadata:
       WML training"}'
 spec:
   params:
-  - name: GITHUB_TOKEN
-    value: ''
   - name: CONFIG_FILE_URL
     value: https://raw.githubusercontent.com/user/repository/branch/creds.ini
-  - name: train_code
-    value: tf-model.zip
+  - name: GITHUB_TOKEN
+    value: ''
+  - name: compute_name
+    value: k80
+  - name: compute_nodes
+    value: '1'
   - name: execution_command
     value: '''python3 convolutional_network.py --trainImagesFile ${DATA_DIR}/train-images-idx3-ubyte.gz
       --trainLabelsFile ${DATA_DIR}/train-labels-idx1-ubyte.gz --testImagesFile ${DATA_DIR}/t10k-images-idx3-ubyte.gz
@@ -68,30 +70,30 @@ spec:
     value: tensorflow
   - name: framework_version
     value: '1.15'
-  - name: runtime
-    value: python
-  - name: runtime_version
-    value: '3.6'
+  - name: model_name
+    value: wml-tensorflow-mnist
   - name: run_definition
     value: wml-tensorflow-definition
   - name: run_name
     value: wml-tensorflow-run
-  - name: model_name
-    value: wml-tensorflow-mnist
+  - name: runtime
+    value: python
+  - name: runtime_version
+    value: '3.6'
   - name: scoring_payload
     value: tf-mnist-test-payload.json
-  - name: compute_name
-    value: k80
-  - name: compute_nodes
-    value: '1'
+  - name: train_code
+    value: tf-model.zip
   pipelineSpec:
     params:
-    - name: GITHUB_TOKEN
-      default: ''
     - name: CONFIG_FILE_URL
       default: https://raw.githubusercontent.com/user/repository/branch/creds.ini
-    - name: train_code
-      default: tf-model.zip
+    - name: GITHUB_TOKEN
+      default: ''
+    - name: compute_name
+      default: k80
+    - name: compute_nodes
+      default: '1'
     - name: execution_command
       default: '''python3 convolutional_network.py --trainImagesFile ${DATA_DIR}/train-images-idx3-ubyte.gz
         --trainLabelsFile ${DATA_DIR}/train-labels-idx1-ubyte.gz --testImagesFile
@@ -101,22 +103,20 @@ spec:
       default: tensorflow
     - name: framework_version
       default: '1.15'
-    - name: runtime
-      default: python
-    - name: runtime_version
-      default: '3.6'
+    - name: model_name
+      default: wml-tensorflow-mnist
     - name: run_definition
       default: wml-tensorflow-definition
     - name: run_name
       default: wml-tensorflow-run
-    - name: model_name
-      default: wml-tensorflow-mnist
+    - name: runtime
+      default: python
+    - name: runtime_version
+      default: '3.6'
     - name: scoring_payload
       default: tf-mnist-test-payload.json
-    - name: compute_name
-      default: k80
-    - name: compute_nodes
-      default: '1'
+    - name: train_code
+      default: tf-model.zip
     tasks:
     - name: create-secret-kubernetes-cluster
       params:

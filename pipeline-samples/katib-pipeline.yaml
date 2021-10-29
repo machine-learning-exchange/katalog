@@ -8,16 +8,16 @@ metadata:
   annotations:
     tekton.dev/output_artifacts: '{"katib-launch-experiment": [{"key": "artifacts/$PIPELINERUN/katib-launch-experiment/Best-Parameter-Set.tgz",
       "name": "katib-launch-experiment-Best-Parameter-Set", "path": "/tmp/outputs/Best_Parameter_Set/data"}]}'
-    tekton.dev/input_artifacts: '{"best-hp": [{"name": "katib-launch-experiment-Best-Parameter-Set",
+    tekton.dev/input_artifacts: '{"print": [{"name": "katib-launch-experiment-Best-Parameter-Set",
       "parent_task": "katib-launch-experiment"}]}'
     tekton.dev/artifact_bucket: mlpipeline
     tekton.dev/artifact_endpoint: minio-service.kubeflow:9000
     tekton.dev/artifact_endpoint_scheme: http://
-    tekton.dev/artifact_items: '{"best-hp": [], "katib-launch-experiment": [["Best-Parameter-Set",
-      "$(results.best-parameter-set.path)"]]}'
+    tekton.dev/artifact_items: '{"katib-launch-experiment": [["Best-Parameter-Set",
+      "$(results.best-parameter-set.path)"]], "print": []}'
     sidecar.istio.io/inject: "false"
     pipelines.kubeflow.org/pipeline_spec: '{"description": "An example to launch Katib
-      Experiment with early stopping", "name": "Launch Katib early stopping Experiment"}'
+      Experiment with early stopping", "name": "launch-katib-early-stopping-experiment"}'
 spec:
   pipelineSpec:
     tasks:
@@ -57,13 +57,21 @@ spec:
           - "False"
           - --output-file
           - $(results.best-parameter-set.path)
-          command: [python, src/launch_experiment.py]
+          command:
+          - python
+          - src/launch_experiment.py
           image: docker.io/kubeflowkatib/kubeflow-pipelines-launcher
         results:
-        - {name: best-parameter-set, description: /tmp/outputs/Best_Parameter_Set/data}
+        - name: best-parameter-set
+          description: /tmp/outputs/Best_Parameter_Set/data
         metadata:
-          annotations: {pipelines.kubeflow.org/component_spec: '{"description": "Katib
-              Experiment launcher", "implementation": {"container": {"args": ["--experiment-name",
+          labels:
+            pipelines.kubeflow.org/pipelinename: ''
+            pipelines.kubeflow.org/generation: ''
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            pipelines.kubeflow.org/component_spec: '{"description": "Katib Experiment
+              launcher", "implementation": {"container": {"args": ["--experiment-name",
               {"inputValue": "Experiment Name"}, "--experiment-namespace", {"inputValue":
               "Experiment Namespace"}, "--experiment-spec", {"inputValue": "Experiment
               Spec"}, "--experiment-timeout-minutes", {"inputValue": "Experiment Timeout
@@ -81,18 +89,36 @@ spec:
               finished", "name": "Delete Finished Experiment", "type": "Bool"}], "name":
               "Katib - Launch Experiment", "outputs": [{"description": "The hyperparameter
               set of the best Experiment Trial", "name": "Best Parameter Set", "type":
-              "JsonObject"}]}'}
+              "JsonObject"}]}'
+            tekton.dev/template: ''
       timeout: 0s
-    - name: best-hp
+    - name: print
       params:
-      - {name: katib-launch-experiment-Best-Parameter-Set, value: $(tasks.katib-launch-experiment.results.best-parameter-set)}
+      - name: katib-launch-experiment-Best-Parameter-Set
+        value: $(tasks.katib-launch-experiment.results.best-parameter-set)
       taskSpec:
         steps:
         - name: main
-          args: ['echo Best HyperParameters: $(inputs.params.katib-launch-experiment-Best-Parameter-Set)']
-          command: [sh, -c]
+          args:
+          - |
+            echo "Best HyperParameters: $0"
+          - $(inputs.params.katib-launch-experiment-Best-Parameter-Set)
+          command:
+          - sh
+          - -c
           image: library/bash:4.4.23
         params:
-        - {name: katib-launch-experiment-Best-Parameter-Set}
+        - name: katib-launch-experiment-Best-Parameter-Set
+        metadata:
+          labels:
+            pipelines.kubeflow.org/pipelinename: ''
+            pipelines.kubeflow.org/generation: ''
+            pipelines.kubeflow.org/cache_enabled: "true"
+          annotations:
+            pipelines.kubeflow.org/component_spec: '{"description": "print msg", "implementation":
+              {"container": {"args": ["echo \"Best HyperParameters: $0\"\n", {"inputValue":
+              "message"}], "command": ["sh", "-c"], "image": "library/bash:4.4.23"}},
+              "inputs": [{"name": "message", "type": "JsonObject"}], "name": "print"}'
+            tekton.dev/template: ''
       timeout: 0s
   timeout: 0s
