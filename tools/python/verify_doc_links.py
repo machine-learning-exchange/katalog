@@ -14,11 +14,14 @@ from os import environ as env
 from os.path import abspath, dirname, exists, relpath
 from random import randint
 from time import sleep
+from urllib3.util.url import parse_url
+from urllib3.exceptions import LocationParseError
 
 
 GITHUB_REPO = env.get("GITHUB_REPO", "https://github.com/machine-learning-exchange/katalog/")
 
 md_file_path_expressions = [
+    "/**/*.yaml",
     "/**/*.md",
 ]
 
@@ -44,31 +47,48 @@ def find_md_files() -> [str]:
     return sorted(list(itertools.chain(*md_files_list_of_lists)))
 
 
-def get_links_from_md_file(md_file_path: str) -> [(int, str, str)]: # -> [(line, link_text, URL)]
+def get_links_from_file_content(file_path: str) -> [(int, str, str)]: # -> [(line, link_text, URL)]
 
-    with open(md_file_path, "r") as f:
-        md_file_content = f.read()
+    with open(file_path, "r") as f:
+        file_content = f.read()
 
-    folder = relpath(dirname(md_file_path), project_root_dir)
+    folder = relpath(dirname(file_path), project_root_dir)
 
     # replace relative links that are siblings to the README, i.e. [link text](FEATURES.md)
-    md_file_content = re.sub(
-        r"\[([^]]+)\]\((?!http|#|/)([^)]+)\)",
-        r"[\1]({}/{}/\2)".format(github_repo_master_path, folder).replace("/./", "/"),
-        md_file_content)
+    if file_path.endswith(".md"):
+        file_content = re.sub(
+            r"\[([^]]+)\]\((?!http|#|/)([^)]+)\)",
+            r"[\1]({}/{}/\2)".format(github_repo_master_path, folder).replace("/./", "/"),
+            file_content)
 
     # replace links that are relative to the project root, i.e. [link text](/sdk/FEATURES.md)
-    md_file_content = re.sub(
-        r"\[([^]]+)\]\(/([^)]+)\)",
-        r"[\1]({}/\2)".format(github_repo_master_path),
-        md_file_content)
+    if file_path.endswith(".md"):
+        file_content = re.sub(
+            r"\[([^]]+)\]\(/([^)]+)\)",
+            r"[\1]({}/\2)".format(github_repo_master_path),
+            file_content)
 
     # return completed links
     line_text_url = []
-    for line_number, line_text in enumerate(md_file_content.splitlines()):
+    for line_number, line_text in enumerate(file_content.splitlines()):
+
+        # find markdown-styled links [text](url)
         for (link_text, url) in re.findall(r"\[([^]]+)\]\((%s[^)]+)\)" % "http", line_text):
             line_text_url.append((line_number + 1, link_text, url))
 
+        # find plain http(s)-style links
+        for url in re.findall(r"[\n\r\s\"'](https?://[^\s]+)[\n\r\s\"']", line_text):
+            if not any(s in url for s in ["localhost", "...", "lorem", "ipsum",
+                                          "/path/to/", "/user/repository/branch",
+                                          "address", "port"]):
+                try:
+                    url = str(url).rstrip(".")  # if URL is last word in a sentence ending with a dot "."
+                    parse_url(url)
+                    line_text_url.append((line_number + 1, "", url))
+                except LocationParseError:
+                    pass
+
+    # return completed links
     return line_text_url
 
 
@@ -136,7 +156,7 @@ def verify_doc_links() -> [(str, int, str, str)]:
     file_line_text_url = [
         (file, line, text, url)
         for file in md_file_paths
-        for (line, text, url) in get_links_from_md_file(file)
+        for (line, text, url) in get_links_from_file_content(file)
     ]
 
     # 3. validate the URLs
@@ -148,11 +168,14 @@ def verify_doc_links() -> [(str, int, str, str)]:
                               if s == 404]
 
     # 5. print some stats for confidence
-    print("{} {} links ({} unique URLs) in {} Markdown files.\n".format(
+    print("{} {} links ({} unique URLs) in {} files.\n".format(
         "Checked" if file_line_text_url_404 else "Verified",
         len(file_line_text_url_status),
         len(url_status_cache),
         len(md_file_paths)))
+
+    # for url in sorted(url_status_cache.keys()):
+    #     print(url)
 
     # 6. report invalid links, exit with error for CI/CD
     if file_line_text_url_404:
@@ -163,7 +186,7 @@ def verify_doc_links() -> [(str, int, str, str)]:
                 url.replace(github_repo_master_path, ""), status))
 
         # print a summary line for clear error discovery at the bottom of Travis job log
-        print("\nERROR: Found {} invalid Markdown links".format(
+        print("\nERROR: Found {} invalid links".format(
             len(file_line_text_url_404)))
 
         exit(1)

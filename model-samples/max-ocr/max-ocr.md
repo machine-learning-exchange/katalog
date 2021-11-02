@@ -68,8 +68,8 @@ $ curl -F "image=@samples/quick_start_watson_studio.jpg" -XPOST http://localhost
     ],
     [
       "Watson Studio is IBM’s hosted notebook service, and you can create",
-      "a free account at https://www.ibm.com/cloud/watson-studio. Other",
-      "hosted notebook services can be used to run the noteooks as well,",
+      "a free account at https://www.ibm.com/cloud/watson-studio/. Other",
+      "hosted notebook services can be used to run the notebooks as well,",
       "but Watson Studio offers all of the frameworks and languages that",
       "are used for this book’s examples. Once you have created an account",
       "and logged in, you can begin by creating a project and notebook."
