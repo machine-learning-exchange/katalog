@@ -1,7 +1,7 @@
 # Copyright 2021 The MLX Contributors
 #
 # SPDX-License-Identifier: Apache-2.0
-#
+
 # name: (Required) name of this model file
 # description: (Optional) description of this model file
 # author: (Required for trainable)
@@ -35,8 +35,8 @@ framework:
 # website:  (Optional) Links that explain this model in more details
 
 license: "Apache 2.0"
-domain: "Facial Recognition"
-website: "https://developer.ibm.com/exchanges/models/all/max-facial-age-estimator"
+domain: "Image Recognition"
+website: "https://developer.ibm.com/exchanges/models/all/max-image-caption-generator"
 labels:
   - url:
   - pipeline_uuids: ["abcd1234"]
