@@ -51,7 +51,6 @@ analysis Python notebooks to help you get started:
 This notebook takes you through the steps of a simple experiment that shows how to create and exercise a Keras model to detect the language of a piece of source code. 
 
 [Get the notebook](https://github.com/CODAIT/project-codenet-notebooks/blob/main/Project_CodeNet_LangClass.ipynb)
-[Run the notebook in Colab](https://colab.research.google.com/github/CODAIT/project-codenet-notebooks/blob/main/Project_CodeNet_LangClass.ipynb)
 
 ### Notebook 2: A Masked Language Model for Project CodeNet
 
