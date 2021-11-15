@@ -11,4 +11,4 @@ metadata:
 implementation:
   github:
     source: 'https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/codenet/Project_CodeNet_MLM.ipynb'
-    requirements: 'matplotlib==3.3.4,pandas==1.1.5,tensorflow==2.6.0'
+    requirements: 'matplotlib==3.3.4,pandas==1.1.5,tensorflow==2.7.0,keras==2.7.0'
