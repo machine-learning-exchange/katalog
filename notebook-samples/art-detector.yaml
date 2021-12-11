@@ -12,4 +12,4 @@ implementation:
   github:
     source: 'https://github.com/IBM/adversarial-robustness-toolbox/blob/main/notebooks/detection_adversarial_samples_cifar10.ipynb'
     # TODO: do not require '==' in elyra-ai/kfp-notebook:"bootstrapper.py", line 369, package_list_to_dict()
-    requirements: 'adversarial-robustness-toolbox==1.4.3,Keras==2.4.3'
+    requirements: 'adversarial-robustness-toolbox==1.8.1,keras==2.7.0'
