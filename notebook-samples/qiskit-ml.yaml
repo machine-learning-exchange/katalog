@@ -11,4 +11,4 @@ metadata:
 implementation:
   github:
     source: 'https://github.com/Qiskit/qiskit-machine-learning/blob/main/docs/tutorials/03_quantum_kernel.ipynb'
-    requirements: 'fastdtw==0.3.4,matplotlib==3.5.0,numpy==1.21.4,psutil==5.8.0,qiskit[visualization]==0.32.0,qiskit-machine-learning==0.2.1,scikit-learn==1.0.1,scipy==1.7.2'
+    requirements: 'fastdtw==0.3.4,matplotlib==3.5.0,numpy==1.21.4,psutil==5.8.0,qiskit[visualization]==0.33.1,qiskit-machine-learning==0.2.1,scikit-learn==1.0.1,scipy==1.7.3'

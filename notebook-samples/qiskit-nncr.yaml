@@ -11,4 +11,4 @@ metadata:
 implementation:
   github:
     source: 'https://github.com/Qiskit/qiskit-machine-learning/blob/main/docs/tutorials/02_neural_network_classifier_and_regressor.ipynb'
-    requirements: 'fastdtw==0.3.4,matplotlib==3.5.0,numpy==1.21.4,psutil==5.8.0,pylatexenc==2.10,qiskit-aer==0.9.1,qiskit-machine-learning==0.2.1,scikit-learn==1.0.1,scipy==1.7.2'
+    requirements: 'fastdtw==0.3.4,matplotlib==3.5.0,numpy==1.21.4,psutil==5.8.0,pylatexenc==2.10,qiskit-aer==0.9.1,qiskit-machine-learning==0.2.1,scikit-learn==1.0.1,scipy==1.7.3'

@@ -13,4 +13,4 @@ implementation:
     source: 'https://github.com/IBM/Trusted-ML-Pipelines/blob/master/notebooks/tutorial_credit_scoring.ipynb'
 #    requirements: 'https://github.com/IBM/Trusted-ML-Pipelines/blob/master/requirements.txt'
     # TODO: do not require '==' in elyra-ai/kfp-notebook:"bootstrapper.py", line 369, package_list_to_dict()
-    requirements: 'aif360[all]==0.4.0,ibm-cos-sdk==2.11.0,keras==2.7.0,matplotlib==3.5.0,numpy==1.20.3,pillow==8.4.0,requests==2.26.0,scikit-image==0.18.3'
+    requirements: 'aif360[all]==0.4.0,ibm-cos-sdk==2.11.0,keras==2.7.0,matplotlib==3.5.0,numpy==1.20.3,pillow==8.4.0,requests==2.26.0,scikit-image==0.19.0'
