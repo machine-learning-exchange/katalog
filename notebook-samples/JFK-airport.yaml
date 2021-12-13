@@ -12,3 +12,4 @@ implementation:
   github:
     source: 'https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/dlf-notebooks/JFK_Data.ipynb'
     requirements: 'pandas==1.3.4,scikit-learn==1.0.1,seaborn==0.11.2,statsmodels==0.13.1'
+    image: 'tensorflow/tensorflow:2.7.0'
