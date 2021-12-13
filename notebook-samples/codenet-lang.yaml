@@ -11,5 +11,5 @@ metadata:
 implementation:
   github:
     source: 'https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/codenet/Project_CodeNet_LangClass.ipynb'
-    requirements: 'keras==2.7.0,matplotlib==3.5.0,numpy==1.21.4,tensorflow==2.7.0'
+    requirements: 'keras==2.7.0,matplotlib==3.5.1,numpy==1.21.4,tensorflow==2.7.0'
     image: 'tensorflow/tensorflow:2.7.0'
