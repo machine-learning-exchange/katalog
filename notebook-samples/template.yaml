@@ -10,4 +10,6 @@ metadata: # Optional metadata
     platform: <notebook_platform>
 implementation: # Required
   github:
-    source: <notebook_github_URL>
+    source: <notebook_source_github_URL> # Required
+    requirements: <python_requirements> # Optional, but necessary unless pip installs are inside the notebook
+    image: <docker_image_to_run_notebook_in> # Recommended, defaults to tensorflow:latest

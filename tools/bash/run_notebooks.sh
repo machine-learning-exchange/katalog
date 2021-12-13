@@ -15,8 +15,11 @@ run_notebook() {
 
   echo "$1"
 
-  #IMAGE="tensorflow/tensorflow:2.7.0"  # used by Elyra
   IMAGE=$( sed -n "s/^ *image: \(.*\)$/\1/p" "$1" | sed 's/"//g' | sed "s/'//g" )
+
+  if [[ -z "${IMAGE}" ]]; then
+    IMAGE="tensorflow/tensorflow:latest"  # used by Elyra
+  fi
 
   # TODO: create and use mlexchange/elyra-tensorflow:2.7.0 image to run notebooks, here and in mlx
   #   - copy elyra-requirements to katalog repo notebook-sample/src/docker/elyra-tensorflow folder
