@@ -27,13 +27,19 @@ fi
 
 
 update_requirements() {
+
   echo "$1"
+
+  IMAGE=$( sed -n "s/^ *image: \(.*\)$/\1/p" "$1" | sed 's/"//g' | sed "s/'//g" )
+
+  if [[ "${IMAGE}" == *"tensorflow:2.3"* ]]; then
+    echo "Not upgrading requirements pinned down to old versions of tensorflow (2.3.x)."
+    exit 0
+  fi
 
   # grep the existing requirements from the notebook YAML file, i.e. "matplotlib==3.3.4,numpy==1.19.5,tensorflow==2.6.0"
   # remove the enclosing (single-/double-) quotes and remove the `==1.2.3`, i.e. matplotlib,numpy,tensorflow
-  requirements=$( \
-    grep "^ *requirements: " "$1" | sed -n "s/^ *requirements: \(.*\)$/\1/p" | \
-      sed 's/"//g' | sed "s/'//g" | sed 's/==[^,]*//g' )
+  requirements=$( sed -n "s/^ *requirements: \(.*\)$/\1/p" "$1" | sed 's/"//g' | sed "s/'//g" | sed 's/==[^,]*//g' )
 
   # create in-memory file with required packages on separate lines:  <(echo "${requirements}" | tr ',' '\n')
   # use pip-compile --upgrade to compute latest compatible PyPi packages
@@ -51,6 +57,7 @@ update_requirements() {
   # show the before/after diff in the console output
   git diff "$1" | grep -E "^(\+|-) *requirements: "
 }
+
 # export the function so it can be used by find
 export -f update_requirements
 
