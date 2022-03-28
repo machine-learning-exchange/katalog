@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 name: Create Model Config
-description:
+description: Create a ConfigMap to deploy a model on Kubernetes
 inputs:
   - {name: secret_name,         type: String, default: 'e2e-creds',   description: 'Secret name to generate for model training/deployment'}
   - {name: model_id,            type: String, default: 'sampleid',    description: 'MLX Model ID'}
