@@ -5,6 +5,13 @@
 MLX _Katalog_ is a project to hold the default content to bootstrap the _Machine Learning Exchange_.
 # List of Default Catalog Assets
 
+## Pipelines
+* [Calculation Pipeline](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/calculation-pipeline.yaml)
+* [Conditional Execution Pipeline](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/flip-coin-pipeline.yaml)
+* [Launch Katib Early Stopping Experiment](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/katib-pipeline.yaml)
+* [Download And Save Most Frequent](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/nested-pipeline.yaml)
+* [Launch Trusted Ai Pipeline](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/trusted-ai-pipeline.yaml)
+* [Kfp On Wml Training](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/wml-pipeline.yaml)
 ## Components
 * [Create Secret - Kubernetes Cluster](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/component-samples/create-secret/component.yaml)
 * [Generate Dataset Metadata](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/component-samples/dax-to-dlf/component.yaml)
@@ -12,17 +19,6 @@ MLX _Katalog_ is a project to hold the default content to bootstrap the _Machine
 * [Echo Sample](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/component-samples/echo/component.yaml)
 * [Kubernetes model deploy](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/component-samples/kube-model-deployment/component.yaml)
 * [Create Model Config](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/component-samples/model-config/component.yaml)
-## Datasets
-* [Project CodeNet](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/codenet/codenet.yaml)
-* [Project CodeNet - Language Classifier](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/codenet_langclass/codenet_langclass.yaml)
-* [Project CodeNet - MLM](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/codenet_mlm/codenet_mlm.yaml)
-* [Finance Proposition Bank](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/fpb/fpb.yaml)
-* [Groningen Meaning Bank - Modified](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/gmb/gmb.yaml)
-* [NOAA Weather Data - JFK Airport](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/jfk/jfk.yaml)
-* [PubLayNet](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/publaynet/publaynet.yaml)
-* [PubTabNet](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/pubtabnet/pubtabnet.yaml)
-* [IBM Debater® Thematic Clustering of Sentences](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/thematic_clustering/thematic_clustering.yaml)
-* [TensorFlow Speech Commands](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/tsc/tsc.yaml)
 ## Models
 * [CodeNet Language Classification](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/codenet-language-classification/codenet-language-classification.yaml)
 * [Human Pose Estimator](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-human-pose-estimator/max-human-pose-estimator.yaml)
@@ -36,6 +32,17 @@ MLX _Katalog_ is a project to hold the default content to bootstrap the _Machine
 * [Text Sentiment Classifier](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-text-sentiment-classifier/max-text-sentiment-classifier.yaml)
 * [Toxic Comment Classifier](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-toxic-comment-classifier/max-toxic-comment-classifier.yaml)
 * [Weather Forecaster](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-weather-forecaster/max-weather-forecaster.yaml)
+## Datasets
+* [Project CodeNet](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/codenet/codenet.yaml)
+* [Project CodeNet - Language Classifier](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/codenet_langclass/codenet_langclass.yaml)
+* [Project CodeNet - MLM](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/codenet_mlm/codenet_mlm.yaml)
+* [Finance Proposition Bank](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/fpb/fpb.yaml)
+* [Groningen Meaning Bank - Modified](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/gmb/gmb.yaml)
+* [NOAA Weather Data - JFK Airport](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/jfk/jfk.yaml)
+* [PubLayNet](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/publaynet/publaynet.yaml)
+* [PubTabNet](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/pubtabnet/pubtabnet.yaml)
+* [IBM Debater® Thematic Clustering of Sentences](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/thematic_clustering/thematic_clustering.yaml)
+* [TensorFlow Speech Commands](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/dataset-samples/tsc/tsc.yaml)
 ## Notebooks
 * [JFK Airport Analysis](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/notebook-samples/JFK-airport.yaml)
 * [AIF360 Bias detection example](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/notebook-samples/aif-bias.yaml)
@@ -45,10 +52,3 @@ MLX _Katalog_ is a project to hold the default content to bootstrap the _Machine
 * [Project CodeNet - MLM](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/notebook-samples/codenet-mlm.yaml)
 * [Qiskit Quantum Kernel Machine Learning](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/notebook-samples/qiskit-ml.yaml)
 * [Qiskit Neural Network Classifier and Regressor](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/notebook-samples/qiskit-nncr.yaml)
-## Pipelines
-* [Calculation Pipeline](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/calculation-pipeline.yaml)
-* [Conditional Execution Pipeline](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/flip-coin-pipeline.yaml)
-* [Launch Katib Early Stopping Experiment](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/katib-pipeline.yaml)
-* [Download And Save Most Frequent](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/nested-pipeline.yaml)
-* [Launch Trusted Ai Pipeline](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/trusted-ai-pipeline.yaml)
-* [Kfp On Wml Training](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/wml-pipeline.yaml)

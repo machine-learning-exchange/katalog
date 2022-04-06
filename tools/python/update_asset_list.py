@@ -12,11 +12,11 @@ import yaml
 
 
 asset_types = [
-    "component",
-    "dataset",
-    "model",
-    "notebook",
     "pipeline",
+    "component",
+    "model",
+    "dataset",
+    "notebook"
 ]
 
 script_path = abspath(dirname(__file__))
