@@ -86,9 +86,8 @@ def generate_katalog_md() -> None:
         for item in katalog_dict[key]:
             content = "[" + item['name'] + "](" + item['url'] + ")"
             md.append("* " + content)
-    f = open("README.md", "w")
-    f.write("\n".join(md))
-    f.close()
+    with open('README.md', 'w') as f:
+        f.write("\n".join(md))
 
 
 if __name__ == '__main__':
