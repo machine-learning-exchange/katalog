@@ -4,6 +4,13 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+"""
+    This script is used to (re)generate the katalog/README.md file with the current
+    default assets currently held by Katalog. Run it from the project root folder via
+    `make update_asset_list`.
+"""
+
+
 from __future__ import print_function
 
 from glob import glob
