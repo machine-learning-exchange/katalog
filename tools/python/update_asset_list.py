@@ -23,7 +23,6 @@ script_path = abspath(dirname(__file__))
 project_dir = dirname(script_path)
 
 katalog_dir = f"{project_dir}/../"
-KATALOG_URL = "https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/"
 
 
 def get_list_of_yaml_files_in_katalog(asset_type: str) -> list[str]:
@@ -51,7 +50,7 @@ def generate_katalog_dict() -> dict:
                 yaml_dict = yaml.load(f, Loader=yaml.FullLoader)
                 asset_name = yaml_dict.get("name") or yaml_dict.get("metadata", {})\
                     .get("name", "").replace("-", " ").title() or ""
-                asset_url = KATALOG_URL + relpath(yaml_file, katalog_dir)
+                asset_url = "./" + relpath(yaml_file, katalog_dir)
 
             katalog_asset_item = {
                 "name": asset_name,
