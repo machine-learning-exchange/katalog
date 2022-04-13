@@ -92,6 +92,6 @@ def generate_katalog_md() -> None:
 
 if __name__ == '__main__':
 
-    print("Regenerating Katalog asset list.\n")
+    print("Regenerating katalog/README.md asset list.\n")
 
     generate_katalog_md()
