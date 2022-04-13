@@ -82,7 +82,10 @@ def generate_katalog_md() -> None:
     )
 
     for key in katalog_dict.keys():
-        md.append("## " + key.capitalize())
+        if(key == 'components'):
+            md.append("## Pipeline Components")
+        else:
+            md.append("## " + key.capitalize())
         for item in katalog_dict[key]:
             content = "[" + item['name'] + "](" + item['url'] + ")"
             md.append("* " + content)

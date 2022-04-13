@@ -12,7 +12,7 @@ MLX _Katalog_ is a project to hold the default content to bootstrap the _Machine
 * [Download And Save Most Frequent](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/nested-pipeline.yaml)
 * [Launch Trusted Ai Pipeline](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/trusted-ai-pipeline.yaml)
 * [Kfp On Wml Training](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/pipeline-samples/wml-pipeline.yaml)
-## Components
+## Pipeline Components
 * [Create Secret - Kubernetes Cluster](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/component-samples/create-secret/component.yaml)
 * [Generate Dataset Metadata](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/component-samples/dax-to-dlf/component.yaml)
 * [Create Dataset Volume](https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/component-samples/dlf/component.yaml)
