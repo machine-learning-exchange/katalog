@@ -17,7 +17,7 @@ MLX _Katalog_ is a project to hold the default content to bootstrap the _Machine
 * [Generate Dataset Metadata](./component-samples/dax-to-dlf/component.yaml)
 * [Create Dataset Volume](./component-samples/dlf/component.yaml)
 * [Echo Sample](./component-samples/echo/component.yaml)
-* [Kubernetes model deploy](./component-samples/kube-model-deployment/component.yaml)
+* [Kubernetes Model Deploy](./component-samples/kube-model-deployment/component.yaml)
 * [Create Model Config](./component-samples/model-config/component.yaml)
 ## Models
 * [CodeNet Language Classification](./model-samples/codenet-language-classification/codenet-language-classification.yaml)
@@ -45,9 +45,9 @@ MLX _Katalog_ is a project to hold the default content to bootstrap the _Machine
 * [TensorFlow Speech Commands](./dataset-samples/tsc/tsc.yaml)
 ## Notebooks
 * [JFK Airport Analysis](./notebook-samples/JFK-airport.yaml)
-* [AIF360 Bias detection example](./notebook-samples/aif-bias.yaml)
-* [ART detector model](./notebook-samples/art-detector.yaml)
-* [ART poisoning attack](./notebook-samples/art-poison.yaml)
+* [AIF360 Bias Detection Example](./notebook-samples/aif-bias.yaml)
+* [ART Detector Model](./notebook-samples/art-detector.yaml)
+* [ART Poisoning Attack](./notebook-samples/art-poison.yaml)
 * [Project CodeNet - Language Classification](./notebook-samples/codenet-lang.yaml)
 * [Project CodeNet - MLM](./notebook-samples/codenet-mlm.yaml)
 * [Qiskit Quantum Kernel Machine Learning](./notebook-samples/qiskit-ml.yaml)

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 id: 'art-poisoning-attack'
-name: 'ART poisoning attack'
+name: 'ART Poisoning Attack'
 description: 'Use Notebook to leverage ART for poisoning training data and learn how to defends it'
 metadata:
   annotations:
