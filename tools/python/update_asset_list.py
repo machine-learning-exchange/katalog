@@ -103,4 +103,10 @@ if __name__ == '__main__':
 
     print("Regenerating katalog/README.md asset list.\n")
 
+    # TODO: Add functionality to compare current list containing external asset links 
+    # to make it easier for the user to prune, or move external pipelines into the 
+    # katalog repo instead.
+
     generate_katalog_md()
+
+    print("Done. Use git diff to evaluate if and which changes are desired!")
