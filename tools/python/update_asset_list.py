@@ -17,7 +17,7 @@ from glob import glob
 from os.path import abspath, dirname, relpath
 import yaml
 import textwrap
-
+import json
 
 asset_types = [
     "pipeline",
@@ -56,10 +56,15 @@ def generate_katalog_dict() -> dict:
 
             with open(yaml_file) as f:
                 yaml_dict = yaml.load(f, Loader=yaml.FullLoader)
-                asset_name = yaml_dict.get("name") or yaml_dict.get("metadata", {})\
-                    .get("name", "").replace("-", " ").title() or ""
+                if asset_type == "pipeline":
+                    template_metadata = yaml_dict.get("metadata") or dict()
+                    annotations = template_metadata.get("annotations", {})
+                    pipeline_spec = json.loads(annotations.get("pipelines.kubeflow.org/pipeline_spec", "{}"))
+                    asset_name = pipeline_spec.get("name", "").strip()
+                else:
+                    asset_name = yaml_dict.get("name") or yaml_dict.get("metadata", {})\
+                        .get("name", "").replace("-", " ").title() or ""
                 asset_url = "./" + relpath(yaml_file, katalog_dir)
-
             katalog_asset_item = {
                 "name": asset_name,
                 "url": asset_url
