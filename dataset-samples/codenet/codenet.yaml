@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 id: codenet
-name: Project CodeNet
+name: CodeNet
 description: Project CodeNet is a large-scale dataset with approximately 14 million code samples, each of which is an intended solution to one of 4000 coding problems.
 version: 1.0.0
 created: 2021-05-05

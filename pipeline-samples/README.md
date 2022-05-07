@@ -39,10 +39,12 @@ For an in-depth guide to creating pipelines with Kubeflow, take a look at their
 
 
 ## List of Sample Pipelines
-* [Trusted AI Pipeline with AI Fairness 360 and Adversarial Robustness 360 Components](https://github.com/kubeflow/kfp-tekton/tree/master/samples/trusted-ai)
-* [Training and Serving Models with Watson Machine Learning](https://github.com/kubeflow/kfp-tekton/tree/master/samples/watson-train-serve#training-and-serving-models-with-watson-machine-learning)
-* [Lightweight Python Component Example](https://github.com/kubeflow/kfp-tekton/tree/master/samples/lightweight-component)
-* [The Flip-Coin Pipeline](https://github.com/kubeflow/kfp-tekton/tree/master/samples/flip-coin)
-* [Hyperparameter Tuning using Katib](https://github.com/kubeflow/kfp-tekton/tree/master/samples/katib)
-* [Nested Pipeline Example](https://github.com/kubeflow/kfp-tekton/tree/master/samples/nested-pipeline)
-* [Pipeline with Nested Loops](https://github.com/kubeflow/kfp-tekton/tree/master/samples/nested-loops)
+
+* [Parallel Join](https://github.com/kubeflow/kfp-tekton/blob/master/sdk/python/tests/compiler/testdata/parallel_join.yaml)
+* [Sequential Pipeline](https://github.com/kubeflow/kfp-tekton/blob/master/sdk/python/tests/compiler/testdata/sequential.yaml)
+* [ResourceOp Basic](https://github.com/kubeflow/kfp-tekton/blob/master/sdk/python/tests/compiler/testdata/resourceop_basic.yaml)
+* [Calculation Pipeline](calculation-pipeline.yaml)
+* [Katib Early-Stopping Experiment](katib-pipeline.yaml)
+* [Nested Pipeline](nested-pipeline.yaml)
+* [Trusted AI Pipeline](trusted-ai-pipeline.yaml)
+* [Watson Machine Learning](wml-pipeline.yaml)

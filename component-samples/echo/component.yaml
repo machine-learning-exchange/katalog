@@ -3,18 +3,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: Echo Sample
 description: |
-  Sample component for testing
+  A simple component with input and output parameter
 inputs:
-  - {name: dummy_text,        description: 'Test empty input', default: 'hello world'}
+  - {name: input_text,  description: 'Optional text input', default: 'Hello World'}
 outputs:
-  - {name: dummy_output_path, description: 'Test unused output path'}
+  - {name: output_path, description: 'Output path, not used'}
 implementation:
   container:
     image: alpine:latest
     command: ['echo']
     args: [
       start,
-      {inputValue: dummy_text},
-      {outputPath: dummy_output_path},
+      {inputValue: input_text},
+      {outputPath: output_path},
       end
     ]

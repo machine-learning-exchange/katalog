@@ -24,7 +24,7 @@ metadata:
       [["Output", "$(results.output.path)"]], "random-num-2": [["Output", "$(results.output.path)"]]}'
     sidecar.istio.io/inject: "false"
     pipelines.kubeflow.org/pipeline_spec: '{"description": "Shows how to use dsl.Condition().",
-      "name": "conditional-execution-pipeline"}'
+      "name": "Conditional Execution Pipeline"}'
 spec:
   pipelineSpec:
     tasks:

@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: CodeNet Language Classification
+name: CodeNet Language Classifier
 model_identifier: codenet-language-classification
 description: A convolutional deep neural network to classify snippets of code
 framework:

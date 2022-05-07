@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 id: codenet-langclass
-name: Project CodeNet - Language Classifier
+name: CodeNet - Language Classification
 description: A small subset of the Project CodeNet dataset, intended to showcase a language classification model. It only comprises 2198 random samples across 10 languages.
 version: 1.0.0
 created: 2021-05-05

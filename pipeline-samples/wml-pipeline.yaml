@@ -49,8 +49,8 @@ metadata:
       true}, {"default": "wml-tensorflow-mnist", "name": "model_name", "optional":
       true}, {"default": "tf-mnist-test-payload.json", "name": "scoring_payload",
       "optional": true}, {"default": "k80", "name": "compute_name", "optional": true},
-      {"default": "1", "name": "compute_nodes", "optional": true}], "name": "KFP on
-      WML training"}'
+      {"default": "1", "name": "compute_nodes", "optional": true}], "name": "Watson
+      Machine Learning"}'
 spec:
   params:
   - name: CONFIG_FILE_URL

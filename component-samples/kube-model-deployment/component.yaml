@@ -1,7 +1,7 @@
 # Copyright 2021 The MLX Contributors
 #
 # SPDX-License-Identifier: Apache-2.0
-name: 'Kubernetes model deploy'
+name: 'Deploy Model on Kubernetes'
 description: |
   Deploy AI models using Kubernetes deployment.
 metadata:

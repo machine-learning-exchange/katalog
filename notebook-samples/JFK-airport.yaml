@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 id: 'jfk-airport-analysis'
-name: 'JFK Airport Analysis'
+name: 'JFK Airport Weather Analysis'
 description: 'An end-to-end project to load in weather data from Data Asset eXchange, prepare the data into a wide format, build some machine learning models, and then deploy those built models.'
 metadata:
   annotations:

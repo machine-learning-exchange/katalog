@@ -17,7 +17,7 @@ metadata:
       "$(results.best-parameter-set.path)"]], "print": []}'
     sidecar.istio.io/inject: "false"
     pipelines.kubeflow.org/pipeline_spec: '{"description": "An example to launch Katib
-      Experiment with early stopping", "name": "launch-katib-early-stopping-experiment"}'
+      Experiment with early stopping", "name": "Katib Early-Stopping Experiment"}'
 spec:
   pipelineSpec:
     tasks:

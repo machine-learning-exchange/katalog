@@ -2,8 +2,8 @@
 # 
 # SPDX-License-Identifier: Apache-2.0
 
-id: 'aif360-bias-detection-example'
-name: 'AIF360 Bias detection example'
+id: 'aif360-bias-detection'
+name: 'AIF360 Bias Detection'
 description: 'Detecting and mitigating age bias on credit decisions'
 metadata:
   annotations:

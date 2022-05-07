@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 id: groningen-meaning-bank-modified
-name: Groningen Meaning Bank - Modified
+name: Groningen Meaning Bank
 description: A subset of the GMB dataset, consisting of documents verified to be in the public domain.
 version: 1.0.2
 created: 2020-05-14

@@ -40,8 +40,7 @@ metadata:
       "name": "optimizer", "optional": true, "type": "String"}, {"default": "(0, 1)",
       "name": "clip_values", "optional": true, "type": "String"}, {"default": "2",
       "name": "nb_classes", "optional": true, "type": "String"}, {"default": "(1,3,64,64)",
-      "name": "input_shape", "optional": true, "type": "String"}], "name": "Launch
-      trusted-ai pipeline"}'
+      "name": "input_shape", "optional": true, "type": "String"}], "name": "Trusted AI Pipeline"}'
 spec:
   params:
   - name: clip_values

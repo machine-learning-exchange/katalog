@@ -30,7 +30,7 @@ metadata:
       arithmetic calculations.", "inputs": [{"default": "7.0", "name": "a", "optional":
       true, "type": "Float"}, {"default": "8.0", "name": "b", "optional": true, "type":
       "Float"}, {"default": "17.0", "name": "c", "optional": true, "type": "Float"}],
-      "name": "calculation-pipeline"}'
+      "name": "Calculation Pipeline"}'
 spec:
   params:
   - name: a

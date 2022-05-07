@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 id: 'qiskit-quantum-kernel-machine-learning'
-name: 'Qiskit Quantum Kernel Machine Learning'
+name: 'Qiskit Quantum Machine Learning'
 description: 'Use Qiskit to calculate a kernel matrix with a quantum feature map, then use this kernel matrix in scikit-learn classification and clustering algorithms.'
 metadata:
   annotations:

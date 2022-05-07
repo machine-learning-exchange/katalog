@@ -16,6 +16,11 @@ check_doc_links: ## Check Markdown files for valid links
 	@python3 tools/python/verify_doc_links.py
 	@echo "$@: OK"
 
+.PHONY: update_asset_list
+update_asset_list: ## Update asset list in README.md
+	@python3 tools/python/update_asset_list.py
+	@echo "$@: OK"
+
 .PHONY: check_license
 check_license: ## Make sure source files have license header
 	@git grep -L "SPDX-License-Identifier: Apache-2.0" -- *.py *.yml *.yaml *.sh *.html *.js *.css *.ts *.tsx ':!*.bundle.js' | \

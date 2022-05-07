@@ -2,15 +2,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: 'Create Secret - Kubernetes Cluster'
-description: |
-  Create secret to store pipeline credentials on Kubernetes Cluster
+name: 'Create Kubernetes Secret'
+description: 'Creates a secret to store pipeline credentials on a Kubernetes Cluster'
 inputs:
-  - {name: token,           description: 'Required. GitHub token for accessing private repository'}
-  - {name: url,             description: 'Required. GitHub raw path for accessing the credential file'}
+  - {name: token,           description: 'Required. GitHub token to access private repositories'}
+  - {name: url,             description: 'Required. GitHub raw URL to access the credentials file'}
   - {name: name,            description: 'Required. Secret Name to be stored in Kubernetes'}
 outputs:
-  - {name: secret_name,     description: 'Kubernetes secret name'}
+  - {name: secret_name,     description: 'The name of the new Kubernetes secret'}
 implementation:
   container:
     image: docker.io/aipipeline/wml-config:latest

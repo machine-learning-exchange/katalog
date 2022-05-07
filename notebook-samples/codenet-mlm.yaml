@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 id: 'project-codenet-mlm'
-name: 'Project CodeNet - MLM'
+name: 'CodeNet Masked Language Model'
 description: 'Experiment investigates whether a popular attention model to construct a masked language model (MLM) can be used for source code instead of natural language sentences'
 metadata:
   annotations:

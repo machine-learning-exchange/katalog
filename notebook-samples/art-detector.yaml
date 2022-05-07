@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 id: 'art-detector-model'
-name: 'ART detector model'
+name: 'ART Detector Model'
 description: 'Notebook to train ART detector model to detect possible adversarial attack'
 metadata:
   annotations:
