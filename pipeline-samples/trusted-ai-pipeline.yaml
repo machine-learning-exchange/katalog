@@ -21,6 +21,7 @@ metadata:
       "model-fairness-check": [["metric_path", "$(results.metric-path.path)"]], "trust-ai-train-step":
       []}'
     sidecar.istio.io/inject: "false"
+    pipelines.kubeflow.org/big_data_passing_format: $(workspaces.$TASK_NAME.path)/artifacts/$ORIG_PR_NAME/$TASKRUN_NAME/$TASK_PARAM_NAME
     pipelines.kubeflow.org/pipeline_spec: '{"description": "An example for trusted-ai
       integration.", "inputs": [{"default": "anonymous", "name": "namespace", "optional":
       true, "type": "String"}, {"default": "0.2", "name": "fgsm_attack_epsilon", "optional":
@@ -151,7 +152,7 @@ spec:
             is failure.
           name: failure-condition
           type: string
-        - default: aipipeline/kubectl-wrapper:1.0.1
+        - default: aipipeline/kubectl-wrapper:1.1.1
           description: Kubectl wrapper image
           name: image
           type: string
@@ -216,7 +217,7 @@ spec:
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
             tekton.dev/template: ''
-      timeout: 0s
+      timeout: 525600m
     - name: model-fairness-check
       params:
       - name: favorable_label
@@ -293,48 +294,14 @@ spec:
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
             platform: OpenSource
-            pipelines.kubeflow.org/component_spec: '{"description": "Perform a fairness
-              check on a certain attribute using AIF360 to make sure the model is
-              fair and ethical\n", "implementation": {"container": {"args": ["-u",
-              "fairness_check.py", "--model_id", {"inputValue": "model_id"}, "--model_class_file",
-              {"inputValue": "model_class_file"}, "--model_class_name", {"inputValue":
-              "model_class_name"}, "--feature_testset_path", {"inputValue": "feature_testset_path"},
-              "--label_testset_path", {"inputValue": "label_testset_path"}, "--protected_label_testset_path",
-              {"inputValue": "protected_label_testset_path"}, "--favorable_label",
-              {"inputValue": "favorable_label"}, "--unfavorable_label", {"inputValue":
-              "unfavorable_label"}, "--privileged_groups", {"inputValue": "privileged_groups"},
-              "--unprivileged_groups", {"inputValue": "unprivileged_groups"}, "--metric_path",
-              {"outputPath": "metric_path"}, "--data_bucket_name", {"inputValue":
-              "data_bucket_name"}, "--result_bucket_name", {"inputValue": "result_bucket_name"}],
-              "command": ["python"], "image": "aipipeline/bias-detector:pytorch"}},
-              "inputs": [{"default": "training-dummy", "description": "Required. Training
-              model ID", "name": "model_id", "type": "String"}, {"default": "PyTorchModel.py",
-              "description": "Required. pytorch model class file", "name": "model_class_file",
-              "type": "String"}, {"default": "PyTorchModel", "description": "Required.
-              pytorch model class name", "name": "model_class_name", "type": "String"},
-              {"description": "Required. Feature test dataset path in the data bucket",
-              "name": "feature_testset_path", "type": "String"}, {"description": "Required.
-              Label test dataset path in the data bucket", "name": "label_testset_path",
-              "type": "String"}, {"description": "Required. Protected label test dataset
-              path in the data bucket", "name": "protected_label_testset_path", "type":
-              "String"}, {"description": "Required. Favorable label for this model
-              predictions", "name": "favorable_label", "type": "String"}, {"description":
-              "Required. Unfavorable label for this model predictions", "name": "unfavorable_label",
-              "type": "String"}, {"description": "Required. Privileged feature groups
-              within this model", "name": "privileged_groups", "type": "String"},
-              {"description": "Required. Unprivileged feature groups within this model",
-              "name": "unprivileged_groups", "type": "String"}, {"default": "training-data",
-              "description": "Optional. Bucket that has the processed data", "name":
-              "data_bucket_name", "type": "String"}, {"default": "training-result",
-              "description": "Optional. Bucket that has the training results", "name":
-              "result_bucket_name", "type": "String"}], "metadata": {"annotations":
-              {"platform": "OpenSource"}}, "name": "Model Fairness Check", "outputs":
-              [{"description": "Path for fairness check output", "name": "metric_path",
-              "type": "String"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Model Fairness
+              Check", "outputs": [{"description": "Path for fairness check output",
+              "name": "metric_path", "type": "String"}], "version": "Model Fairness
+              Check@sha256=1706e2527a14053300b36c47885e9ee211eea65930a98ca0f80dde88b675a034"}'
             tekton.dev/template: ''
       runAfter:
       - trust-ai-train-step
-      timeout: 0s
+      timeout: 525600m
     - name: adversarial-robustness-evaluation
       params:
       - name: clip_values
@@ -422,56 +389,13 @@ spec:
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
             platform: OpenSource
-            pipelines.kubeflow.org/component_spec: '{"description": "Evaluate the
-              adversarial robustness using the Fast Gradient Sign Method of the Adversarial
-              Robustness Toolbox (ART).\nThis is a simple demonstration of how to
-              create evaluations using adversarial methods, and generally it is not
-              recommended\nto evaluate adversarial robustness solely using the Fast
-              Gradient Sign Method. To create a thorough robustness assessment,\nplease
-              refer to https://arxiv.org/abs/1902.06705 which provides widely accepted
-              guidelines on different combinations of attacks.\n", "implementation":
-              {"container": {"args": ["-u", "robustness_evaluation_fgsm_pytorch.py",
-              "--model_id", {"inputValue": "model_id"}, "--model_class_file", {"inputValue":
-              "model_class_file"}, "--model_class_name", {"inputValue": "model_class_name"},
-              "--feature_testset_path", {"inputValue": "feature_testset_path"}, "--label_testset_path",
-              {"inputValue": "label_testset_path"}, "--epsilon", {"inputValue": "epsilon"},
-              "--loss_fn", {"inputValue": "loss_fn"}, "--optimizer", {"inputValue":
-              "optimizer"}, "--clip_values", {"inputValue": "clip_values"}, "--nb_classes",
-              {"inputValue": "nb_classes"}, "--input_shape", {"inputValue": "input_shape"},
-              "--metric_path", {"outputPath": "metric_path"}, "--robust_status", {"outputPath":
-              "robust_status"}, "--data_bucket_name", {"inputValue": "data_bucket_name"},
-              "--result_bucket_name", {"inputValue": "result_bucket_name"}, "--adversarial_accuracy_threshold",
-              {"inputValue": "adversarial_accuracy_threshold"}], "command": ["python"],
-              "image": "aipipeline/robustness-evaluation:pytorch"}}, "inputs": [{"default":
-              "training-dummy", "description": "Required. Training model ID", "name":
-              "model_id", "type": "String"}, {"default": "0.2", "description": "Required.
-              Epsilon value for the FGSM attack", "name": "epsilon", "type": "String"},
-              {"description": "Required. pytorch model class file", "name": "model_class_file",
-              "type": "String"}, {"default": "model", "description": "Required. pytorch
-              model class name", "name": "model_class_name", "type": "String"}, {"description":
-              "Required. Feature test dataset path in the data bucket", "name": "feature_testset_path",
-              "type": "String"}, {"description": "Required. Label test dataset path
-              in the data bucket", "name": "label_testset_path", "type": "String"},
-              {"description": "Required. PyTorch model loss function", "name": "loss_fn",
-              "type": "String"}, {"description": "Required. PyTorch model optimizer",
-              "name": "optimizer", "type": "String"}, {"description": "Required. PyTorch
-              model clip_values allowed for features (min, max)", "name": "clip_values",
-              "type": "String"}, {"description": "Required. The number of classes
-              of the model", "name": "nb_classes", "type": "String"}, {"description":
-              "Required. The shape of one input instance for the pytorch model", "name":
-              "input_shape", "type": "String"}, {"default": "training-data", "description":
-              "Bucket that has the processed data", "name": "data_bucket_name", "type":
-              "String"}, {"default": "training-result", "description": "Bucket that
-              has the training results", "name": "result_bucket_name", "type": "String"},
-              {"default": "0.2", "description": "Model accuracy threshold on adversarial
-              samples", "name": "adversarial_accuracy_threshold", "type": "String"}],
-              "metadata": {"annotations": {"platform": "OpenSource"}}, "name": "Adversarial
-              Robustness Evaluation", "outputs": [{"description": "Path for robustness
-              check output", "name": "metric_path", "type": "String"}, {"description":
-              "Path for robustness status output", "name": "robust_status", "type":
-              "String"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Adversarial Robustness
+              Evaluation", "outputs": [{"description": "Path for robustness check
+              output", "name": "metric_path", "type": "String"}, {"description": "Path
+              for robustness status output", "name": "robust_status", "type": "String"}],
+              "version": "Adversarial Robustness Evaluation@sha256=28e3f0baf616b9f2b32085a66efbcb3b462db8ccb2d509c024b87ab0d3337fe1"}'
             tekton.dev/template: ''
       runAfter:
       - trust-ai-train-step
-      timeout: 0s
-  timeout: 0s
+      timeout: 525600m
+  timeout: 525600m

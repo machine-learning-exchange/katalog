@@ -33,6 +33,7 @@ metadata:
       "train-model-watson-machine-learning": [["run_uid", "$(results.run-uid.path)"],
       ["training_uid", "$(results.training-uid.path)"]]}'
     sidecar.istio.io/inject: "false"
+    pipelines.kubeflow.org/big_data_passing_format: $(workspaces.$TASK_NAME.path)/artifacts/$ORIG_PR_NAME/$TASKRUN_NAME/$TASK_PARAM_NAME
     pipelines.kubeflow.org/pipeline_spec: '{"description": "Kubeflow pipelines running
       on WML performing tensorflow image recognition.", "inputs": [{"default": "",
       "name": "GITHUB_TOKEN", "optional": true}, {"default": "https://raw.githubusercontent.com/user/repository/branch/creds.ini",
@@ -152,20 +153,12 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Create secret
-              to store pipeline credentials on Kubernetes Cluster\n", "implementation":
-              {"container": {"args": ["/app/config.py", "--token", {"inputValue":
-              "token"}, "--url", {"inputValue": "url"}, "--name", {"inputValue": "name"},
-              "--output-secret-name-file", {"outputPath": "secret_name"}], "command":
-              ["python3"], "image": "docker.io/aipipeline/wml-config:latest"}}, "inputs":
-              [{"description": "Required. GitHub token for accessing private repository",
-              "name": "token"}, {"description": "Required. GitHub raw path for accessing
-              the credential file", "name": "url"}, {"description": "Required. Secret
-              Name to be stored in Kubernetes", "name": "name"}], "name": "Create
-              Secret - Kubernetes Cluster", "outputs": [{"description": "Kubernetes
-              secret name", "name": "secret_name"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Create Secret
+              - Kubernetes Cluster", "outputs": [{"description": "Kubernetes secret
+              name", "name": "secret_name"}], "version": "Create Secret - Kubernetes
+              Cluster@sha256=902baeb855ce424cc0efea20e61f1b51acfad6cdcaef65ca9f3e9e503a5bbae6"}'
             tekton.dev/template: ''
-      timeout: 0s
+      timeout: 525600m
     - name: train-model-watson-machine-learning
       params:
       - name: compute_name
@@ -259,43 +252,13 @@ spec:
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
             platform: IBM Watson Machine Learning
-            pipelines.kubeflow.org/component_spec: '{"description": "Train Machine
-              Learning and Deep Learning Models in the Cloud using Watson Machine
-              Learning\n", "implementation": {"container": {"args": ["-u", "/app/wml-train.py",
-              "--config", {"inputValue": "config"}, "--train-code", {"inputValue":
-              "train_code"}, "--execution-command", {"inputValue": "execution_command"},
-              "--framework", {"inputValue": "framework"}, "--framework-version", {"inputValue":
-              "framework_version"}, "--runtime", {"inputValue": "runtime"}, "--runtime-version",
-              {"inputValue": "runtime_version"}, "--run-definition", {"inputValue":
-              "run_definition"}, "--run-name", {"inputValue": "run_name"}, "--author-name",
-              {"inputValue": "author_name"}, "--compute-name", {"inputValue": "compute_name"},
-              "--compute-nodes", {"inputValue": "compute_nodes"}, "--output-run-uid-path",
-              {"outputPath": "run_uid"}, "--output-training-uid-path", {"outputPath":
-              "training_uid"}], "command": ["python3"], "image": "docker.io/aipipeline/wml-train:latest"}},
-              "inputs": [{"description": "Required. Code for training ML/DL models",
-              "name": "train_code"}, {"description": "Required. Execution command
-              to start the model training.", "name": "execution_command"}, {"default":
-              "secret_name", "description": "Credential configfile is properly created.",
-              "name": "config"}, {"default": "tensorflow", "description": "ML/DL Model
-              Framework", "name": "framework"}, {"default": "1.15", "description":
-              "Model Framework version", "name": "framework_version"}, {"default":
-              "python", "description": "Model Code runtime language", "name": "runtime"},
-              {"default": "3.6", "description": "Model Code runtime version", "name":
-              "runtime_version"}, {"default": "python-tensorflow-definition", "description":
-              "Name for the Watson Machine Learning training definition", "name":
-              "run_definition"}, {"default": "python-tensorflow-run", "description":
-              "Name for the Watson Machine Learning training-runs", "name": "run_name"},
-              {"default": "default-author", "description": "Name of this training
-              job author", "name": "author_name"}, {"default": "k80", "description":
-              "Name of the compute tiers, in WML is the gpu count", "name": "compute_name"},
-              {"default": "1", "description": "Number of compute machine", "name":
-              "compute_nodes"}], "metadata": {"annotations": {"platform": "IBM Watson
-              Machine Learning"}}, "name": "Train Model - Watson Machine Learning",
-              "outputs": [{"description": "UID for the Watson Machine Learning training-runs",
-              "name": "run_uid"}, {"description": "Training Location UID for the Watson
-              Machine Learning training-runs", "name": "training_uid"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Train Model -
+              Watson Machine Learning", "outputs": [{"description": "UID for the Watson
+              Machine Learning training-runs", "name": "run_uid"}, {"description":
+              "Training Location UID for the Watson Machine Learning training-runs",
+              "name": "training_uid"}], "version": "Train Model - Watson Machine Learning@sha256=b4c691df9f8a58439e3b232f23da34c30695dd93d8f3d79954142f185d377c7a"}'
             tekton.dev/template: ''
-      timeout: 0s
+      timeout: 525600m
     - name: store-model-watson-machine-learning
       params:
       - name: framework
@@ -353,25 +316,12 @@ spec:
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
             platform: IBM Watson Machine Learning
-            pipelines.kubeflow.org/component_spec: '{"description": "Store and persistent
-              trained model on Watson Machine Learning.\n", "implementation": {"container":
-              {"args": ["-u", "/app/wml-store.py", "--run-uid", {"inputValue": "run_uid"},
-              "--model-name", {"inputValue": "model_name"}, "--framework", {"inputValue":
-              "framework"}, "--framework-version", {"inputValue": "framework_version"},
-              "--runtime-version", {"inputValue": "runtime_version"}, "--output-model-uid-path",
-              {"outputPath": "model_uid"}], "command": ["python3"], "image": "docker.io/aipipeline/wml-store:latest"}},
-              "inputs": [{"description": "Required. UID for the Watson Machine Learning
-              training-runs", "name": "run_uid"}, {"description": "Required. Model
-              Name to store on Watson Machine Learning", "name": "model_name"}, {"default":
-              "tensorflow", "description": "ML/DL Model Framework", "name": "framework"},
-              {"default": "1.15", "description": "Model Framework version", "name":
-              "framework_version"}, {"default": "3.6", "description": "Model Code
-              runtime version", "name": "runtime_version"}], "metadata": {"annotations":
-              {"platform": "IBM Watson Machine Learning"}}, "name": "Store model -
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Store model -
               Watson Machine Learning", "outputs": [{"description": "UID for the stored
-              model on Watson Machine Learning", "name": "model_uid"}]}'
+              model on Watson Machine Learning", "name": "model_uid"}], "version":
+              "Store model - Watson Machine Learning@sha256=feee7b0338b0e788c49b6b5f2b9c10f1f129ce1483aa99d349297236d830353c"}'
             tekton.dev/template: ''
-      timeout: 0s
+      timeout: 525600m
     - name: deploy-model-watson-machine-learning
       params:
       - name: model_name
@@ -425,25 +375,11 @@ spec:
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
             platform: IBM Watson Machine Learning
-            pipelines.kubeflow.org/component_spec: '{"description": "Deploy stored
-              model on Watson Machine Learning as a web service.\n", "implementation":
-              {"container": {"args": ["-u", "/app/wml-deploy.py", "--model-uid", {"inputValue":
-              "model_uid"}, "--model-name", {"inputValue": "model_name"}, "--scoring-payload",
-              {"inputValue": "scoring_payload"}, "--deployment-name", {"inputValue":
-              "deployment_name"}, "--output-scoring-endpoint-path", {"outputPath":
-              "scoring_endpoint"}, "--output-model-uid-path", {"outputPath": "model_uid"}],
-              "command": ["python"], "image": "docker.io/aipipeline/wml-deploy:latest"}},
-              "inputs": [{"description": "Required. UID for the stored model on Watson
-              Machine Learning", "name": "model_uid"}, {"description": "Required.
-              Model Name on Watson Machine Learning", "name": "model_name"}, {"default":
-              "", "description": "Sample Payload file name in the object storage",
-              "name": "scoring_payload"}, {"default": "", "description": "Deployment
-              Name on Watson Machine Learning", "name": "deployment_name"}], "metadata":
-              {"annotations": {"platform": "IBM Watson Machine Learning"}}, "name":
-              "Deploy Model - Watson Machine Learning", "outputs": [{"description":
-              "Link to the deployed model web service", "name": "scoring_endpoint"},
-              {"description": "UID for the stored model on Watson Machine Learning",
-              "name": "model_uid"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Deploy Model
+              - Watson Machine Learning", "outputs": [{"description": "Link to the
+              deployed model web service", "name": "scoring_endpoint"}, {"description":
+              "UID for the stored model on Watson Machine Learning", "name": "model_uid"}],
+              "version": "Deploy Model - Watson Machine Learning@sha256=11bfa9e2fe70d7acd77dfe31505d1aa230570f326c6b55ef7fa691216b8f0bcd"}'
             tekton.dev/template: ''
-      timeout: 0s
-  timeout: 0s
+      timeout: 525600m
+  timeout: 525600m
