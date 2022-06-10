@@ -23,6 +23,7 @@ metadata:
       "print-msg": [], "print-msg-2": [], "print-msg-3": [], "print-msg-4": [], "random-num":
       [["Output", "$(results.output.path)"]], "random-num-2": [["Output", "$(results.output.path)"]]}'
     sidecar.istio.io/inject: "false"
+    pipelines.kubeflow.org/big_data_passing_format: $(workspaces.$TASK_NAME.path)/artifacts/$ORIG_PR_NAME/$TASKRUN_NAME/$TASK_PARAM_NAME
     pipelines.kubeflow.org/pipeline_spec: '{"description": "Shows how to use dsl.Condition().",
       "name": "Conditional Execution Pipeline"}'
 spec:
@@ -88,27 +89,10 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Flip a coin and
-              output heads or tails randomly.", "implementation": {"container": {"args":
-              ["----output-paths", {"outputPath": "Output"}], "command": ["sh", "-ec",
-              "program_path=$(mktemp)\nprintf \"%s\" \"$0\" > \"$program_path\"\npython3
-              -u \"$program_path\" \"$@\"\n", "def flip_coin():\n    \"\"\"Flip a
-              coin and output heads or tails randomly.\"\"\"\n    import random\n    result
-              = ''heads'' if random.randint(0, 1) == 0 else ''tails''\n    print(result)\n    return
-              result\n\ndef _serialize_str(str_value: str) -> str:\n    if not isinstance(str_value,
-              str):\n        raise TypeError(''Value \"{}\" has type \"{}\" instead
-              of str.''.format(str(str_value), str(type(str_value))))\n    return
-              str_value\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Flip
-              coin'', description=''Flip a coin and output heads or tails randomly.'')\n_parser.add_argument(\"----output-paths\",
-              dest=\"_output_paths\", type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n_output_files
-              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = flip_coin(**_parsed_args)\n\n_outputs
-              = [_outputs]\n\n_output_serializers = [\n    _serialize_str,\n\n]\n\nimport
-              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
-              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
-              "image": "python:alpine3.6"}}, "name": "Flip coin", "outputs": [{"name":
-              "Output", "type": "String"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Flip coin", "outputs":
+              [{"name": "Output", "type": "String"}], "version": "Flip coin@sha256=7eec77b07107adacc26d8ec075f6f2a62ca3e7f9ecc4110ce2724c964df4501d"}'
             tekton.dev/template: ''
-      timeout: 0s
+      timeout: 525600m
     - name: random-num
       taskSpec:
         steps:
@@ -177,36 +161,16 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Generate a random
-              number between low and high.", "implementation": {"container": {"args":
-              ["--low", {"inputValue": "low"}, "--high", {"inputValue": "high"}, "----output-paths",
-              {"outputPath": "Output"}], "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf
-              \"%s\" \"$0\" > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n",
-              "def random_num(low, high):\n    \"\"\"Generate a random number between
-              low and high.\"\"\"\n    import random\n    result = random.randint(low,
-              high)\n    print(result)\n    return result\n\ndef _serialize_int(int_value:
-              int) -> str:\n    if isinstance(int_value, str):\n        return int_value\n    if
-              not isinstance(int_value, int):\n        raise TypeError(''Value \"{}\"
-              has type \"{}\" instead of int.''.format(str(int_value), str(type(int_value))))\n    return
-              str(int_value)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Random
-              num'', description=''Generate a random number between low and high.'')\n_parser.add_argument(\"--low\",
-              dest=\"low\", type=int, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"--high\",
-              dest=\"high\", type=int, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\",
-              dest=\"_output_paths\", type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n_output_files
-              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = random_num(**_parsed_args)\n\n_outputs
-              = [_outputs]\n\n_output_serializers = [\n    _serialize_int,\n\n]\n\nimport
-              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
-              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
-              "image": "python:alpine3.6"}}, "inputs": [{"name": "low", "type": "Integer"},
-              {"name": "high", "type": "Integer"}], "name": "Random num", "outputs":
-              [{"name": "Output", "type": "Integer"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Random num",
+              "outputs": [{"name": "Output", "type": "Integer"}], "version": "Random
+              num@sha256=4c991a75e7816a3c3ccae0b199ddd87a7b9ed892d85e569fd40a5ef8cacb337e"}'
             tekton.dev/template: ''
       when:
       - input: $(tasks.condition-1.results.outcome)
         operator: in
         values:
         - "true"
-      timeout: 0s
+      timeout: 525600m
     - name: print-msg
       params:
       - name: random-num-Output
@@ -244,23 +208,15 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Print a message.",
-              "implementation": {"container": {"args": ["--msg", {"inputValue": "msg"}],
-              "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\"
-              > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n", "def print_msg(msg):\n    \"\"\"Print
-              a message.\"\"\"\n    print(msg)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Print
-              msg'', description=''Print a message.'')\n_parser.add_argument(\"--msg\",
-              dest=\"msg\", type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args
-              = vars(_parser.parse_args())\n\n_outputs = print_msg(**_parsed_args)\n"],
-              "image": "python:alpine3.6"}}, "inputs": [{"name": "msg", "type": "String"}],
-              "name": "Print msg"}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Print msg", "outputs":
+              [], "version": "Print msg@sha256=a13aed2f155afe0e8a1d1e29efc69b1cb1c3b170c45129f80ffe8d0a03a07861"}'
             tekton.dev/template: ''
       when:
       - input: $(tasks.condition-2.results.outcome)
         operator: in
         values:
         - "true"
-      timeout: 0s
+      timeout: 525600m
     - name: print-msg-2
       params:
       - name: random-num-Output
@@ -298,23 +254,15 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Print a message.",
-              "implementation": {"container": {"args": ["--msg", {"inputValue": "msg"}],
-              "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\"
-              > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n", "def print_msg(msg):\n    \"\"\"Print
-              a message.\"\"\"\n    print(msg)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Print
-              msg'', description=''Print a message.'')\n_parser.add_argument(\"--msg\",
-              dest=\"msg\", type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args
-              = vars(_parser.parse_args())\n\n_outputs = print_msg(**_parsed_args)\n"],
-              "image": "python:alpine3.6"}}, "inputs": [{"name": "msg", "type": "String"}],
-              "name": "Print msg"}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Print msg", "outputs":
+              [], "version": "Print msg@sha256=a13aed2f155afe0e8a1d1e29efc69b1cb1c3b170c45129f80ffe8d0a03a07861"}'
             tekton.dev/template: ''
       when:
       - input: $(tasks.condition-3.results.outcome)
         operator: in
         values:
         - "true"
-      timeout: 0s
+      timeout: 525600m
     - name: random-num-2
       taskSpec:
         steps:
@@ -383,36 +331,16 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Generate a random
-              number between low and high.", "implementation": {"container": {"args":
-              ["--low", {"inputValue": "low"}, "--high", {"inputValue": "high"}, "----output-paths",
-              {"outputPath": "Output"}], "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf
-              \"%s\" \"$0\" > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n",
-              "def random_num(low, high):\n    \"\"\"Generate a random number between
-              low and high.\"\"\"\n    import random\n    result = random.randint(low,
-              high)\n    print(result)\n    return result\n\ndef _serialize_int(int_value:
-              int) -> str:\n    if isinstance(int_value, str):\n        return int_value\n    if
-              not isinstance(int_value, int):\n        raise TypeError(''Value \"{}\"
-              has type \"{}\" instead of int.''.format(str(int_value), str(type(int_value))))\n    return
-              str(int_value)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Random
-              num'', description=''Generate a random number between low and high.'')\n_parser.add_argument(\"--low\",
-              dest=\"low\", type=int, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"--high\",
-              dest=\"high\", type=int, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\",
-              dest=\"_output_paths\", type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n_output_files
-              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = random_num(**_parsed_args)\n\n_outputs
-              = [_outputs]\n\n_output_serializers = [\n    _serialize_int,\n\n]\n\nimport
-              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
-              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
-              "image": "python:alpine3.6"}}, "inputs": [{"name": "low", "type": "Integer"},
-              {"name": "high", "type": "Integer"}], "name": "Random num", "outputs":
-              [{"name": "Output", "type": "Integer"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Random num",
+              "outputs": [{"name": "Output", "type": "Integer"}], "version": "Random
+              num@sha256=4c991a75e7816a3c3ccae0b199ddd87a7b9ed892d85e569fd40a5ef8cacb337e"}'
             tekton.dev/template: ''
       when:
       - input: $(tasks.condition-4.results.outcome)
         operator: in
         values:
         - "true"
-      timeout: 0s
+      timeout: 525600m
     - name: print-msg-3
       params:
       - name: random-num-2-Output
@@ -450,23 +378,15 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Print a message.",
-              "implementation": {"container": {"args": ["--msg", {"inputValue": "msg"}],
-              "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\"
-              > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n", "def print_msg(msg):\n    \"\"\"Print
-              a message.\"\"\"\n    print(msg)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Print
-              msg'', description=''Print a message.'')\n_parser.add_argument(\"--msg\",
-              dest=\"msg\", type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args
-              = vars(_parser.parse_args())\n\n_outputs = print_msg(**_parsed_args)\n"],
-              "image": "python:alpine3.6"}}, "inputs": [{"name": "msg", "type": "String"}],
-              "name": "Print msg"}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Print msg", "outputs":
+              [], "version": "Print msg@sha256=a13aed2f155afe0e8a1d1e29efc69b1cb1c3b170c45129f80ffe8d0a03a07861"}'
             tekton.dev/template: ''
       when:
       - input: $(tasks.condition-5.results.outcome)
         operator: in
         values:
         - "true"
-      timeout: 0s
+      timeout: 525600m
     - name: print-msg-4
       params:
       - name: random-num-2-Output
@@ -504,23 +424,15 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Print a message.",
-              "implementation": {"container": {"args": ["--msg", {"inputValue": "msg"}],
-              "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\"
-              > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n", "def print_msg(msg):\n    \"\"\"Print
-              a message.\"\"\"\n    print(msg)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Print
-              msg'', description=''Print a message.'')\n_parser.add_argument(\"--msg\",
-              dest=\"msg\", type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args
-              = vars(_parser.parse_args())\n\n_outputs = print_msg(**_parsed_args)\n"],
-              "image": "python:alpine3.6"}}, "inputs": [{"name": "msg", "type": "String"}],
-              "name": "Print msg"}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Print msg", "outputs":
+              [], "version": "Print msg@sha256=a13aed2f155afe0e8a1d1e29efc69b1cb1c3b170c45129f80ffe8d0a03a07861"}'
             tekton.dev/template: ''
       when:
       - input: $(tasks.condition-6.results.outcome)
         operator: in
         values:
         - "true"
-      timeout: 0s
+      timeout: 525600m
     - name: condition-1
       params:
       - name: operand1
@@ -727,4 +639,4 @@ spec:
         operator: in
         values:
         - "true"
-  timeout: 0s
+  timeout: 525600m

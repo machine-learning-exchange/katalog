@@ -19,6 +19,7 @@ metadata:
     tekton.dev/artifact_items: '{"download-message": [["content", "$(results.content.path)"]],
       "frequent-word": [["Output", "$(results.output.path)"]], "save-message": []}'
     sidecar.istio.io/inject: "false"
+    pipelines.kubeflow.org/big_data_passing_format: $(workspaces.$TASK_NAME.path)/artifacts/$ORIG_PR_NAME/$TASKRUN_NAME/$TASK_PARAM_NAME
     pipelines.kubeflow.org/pipeline_spec: '{"description": "Download and Get Most
       Frequent Word and Save to GCS", "inputs": [{"default": "gs://ml-pipeline-playground/shakespeare1.txt",
       "name": "url", "optional": true, "type": "String"}, {"default": "res.txt", "name":
@@ -63,15 +64,11 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "downloads a message
-              and outputs it\n", "implementation": {"container": {"command": ["sh",
-              "-c", "set -e\ngsutil cp \"$0\" \"$1\"\n", {"inputValue": "url"}, {"outputPath":
-              "content"}], "image": "google/cloud-sdk"}}, "inputs": [{"description":
-              "Required. the gcs url to download the message from", "name": "url",
-              "type": "String"}], "name": "Download Message", "outputs": [{"description":
-              "file content.", "name": "content", "type": "String"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Download Message",
+              "outputs": [{"description": "file content.", "name": "content", "type":
+              "String"}], "version": "Download Message@sha256=0da65249fbc9c2600dced3912b301411ee099ea62631ba8fa4ebb3753643eb55"}'
             tekton.dev/template: ''
-      timeout: 0s
+      timeout: 525600m
     - name: frequent-word
       params:
       - name: download-message-content
@@ -141,29 +138,11 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "get frequent
-              word.", "implementation": {"container": {"args": ["--message", {"inputValue":
-              "message"}, "----output-paths", {"outputPath": "Output"}], "command":
-              ["sh", "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\" > \"$program_path\"\npython3
-              -u \"$program_path\" \"$@\"\n", "def frequent_word(message):\n    \"\"\"get
-              frequent word.\"\"\"\n    from collections import Counter\n    words
-              = Counter(message.split())\n    result = max(words, key=words.get)\n    print(result)\n    return
-              result\n\ndef _serialize_str(str_value: str) -> str:\n    if not isinstance(str_value,
-              str):\n        raise TypeError(''Value \"{}\" has type \"{}\" instead
-              of str.''.format(str(str_value), str(type(str_value))))\n    return
-              str_value\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Frequent
-              word'', description=''get frequent word.'')\n_parser.add_argument(\"--message\",
-              dest=\"message\", type=str, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\",
-              dest=\"_output_paths\", type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n_output_files
-              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = frequent_word(**_parsed_args)\n\n_outputs
-              = [_outputs]\n\n_output_serializers = [\n    _serialize_str,\n\n]\n\nimport
-              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
-              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
-              "image": "python:3.5-jessie"}}, "inputs": [{"name": "message", "type":
-              "String"}], "name": "Frequent word", "outputs": [{"name": "Output",
-              "type": "String"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Frequent word",
+              "outputs": [{"name": "Output", "type": "String"}], "version": "Frequent
+              word@sha256=e1af016a623c0f31454872f321df7ff90c198bf0986f79a02923eb57ef122ed3"}'
             tekton.dev/template: ''
-      timeout: 0s
+      timeout: 525600m
     - name: save-message
       params:
       - name: frequent-word-Output
@@ -191,13 +170,8 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "save message
-              to a given output_path\n", "implementation": {"container": {"command":
-              ["sh", "-c", "set -e\necho \"$0\"| gsutil cp - \"$1\"\n", {"inputValue":
-              "message"}, {"inputValue": "output_path"}], "image": "google/cloud-sdk"}},
-              "inputs": [{"description": "Required. message", "name": "message", "type":
-              "String"}, {"description": "Required. output path", "name": "output_path",
-              "type": "String"}], "name": "Save Message"}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Save Message",
+              "outputs": [], "version": "Save Message@sha256=0c6f77a07b938c7978848376ddd4e7275a483e8e7e1d7587cd1670af9b01b6b7"}'
             tekton.dev/template: ''
-      timeout: 0s
-  timeout: 0s
+      timeout: 525600m
+  timeout: 525600m

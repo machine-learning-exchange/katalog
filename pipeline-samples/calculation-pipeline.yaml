@@ -26,6 +26,7 @@ metadata:
       "/tmp/outputs/mlpipeline_ui_metadata/data"], ["mlpipeline-metrics", "/tmp/outputs/mlpipeline_metrics/data"],
       ["quotient", "$(results.quotient.path)"], ["remainder", "$(results.remainder.path)"]]}'
     sidecar.istio.io/inject: "false"
+    pipelines.kubeflow.org/big_data_passing_format: $(workspaces.$TASK_NAME.path)/artifacts/$ORIG_PR_NAME/$TASKRUN_NAME/$TASK_PARAM_NAME
     pipelines.kubeflow.org/pipeline_spec: '{"description": "A toy pipeline that performs
       arithmetic calculations.", "inputs": [{"default": "7.0", "name": "a", "optional":
       true, "type": "Float"}, {"default": "8.0", "name": "b", "optional": true, "type":
@@ -118,30 +119,10 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Calculates sum
-              of two arguments", "implementation": {"container": {"args": ["--a",
-              {"inputValue": "a"}, "--b", {"inputValue": "b"}, "----output-paths",
-              {"outputPath": "Output"}], "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf
-              \"%s\" \"$0\" > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n",
-              "def add(a, b):\n   \"\"\"Calculates sum of two arguments\"\"\"\n   return
-              a + b\n\ndef _serialize_float(float_value: float) -> str:\n    if isinstance(float_value,
-              str):\n        return float_value\n    if not isinstance(float_value,
-              (float, int)):\n        raise TypeError(''Value \"{}\" has type \"{}\"
-              instead of float.''.format(str(float_value), str(type(float_value))))\n    return
-              str(float_value)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Add'',
-              description=''Calculates sum of two arguments'')\n_parser.add_argument(\"--a\",
-              dest=\"a\", type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"--b\",
-              dest=\"b\", type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\",
-              dest=\"_output_paths\", type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n_output_files
-              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = add(**_parsed_args)\n\n_outputs
-              = [_outputs]\n\n_output_serializers = [\n    _serialize_float,\n\n]\n\nimport
-              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
-              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
-              "image": "python:3.7"}}, "inputs": [{"name": "a", "type": "Float"},
-              {"name": "b", "type": "Float"}], "name": "Add", "outputs": [{"name":
-              "Output", "type": "Float"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Add", "outputs":
+              [{"name": "Output", "type": "Float"}], "version": "Add@sha256=6747051c897943c73ef931bf243a7a5ea738f7981a2208ab6daf11bcdf6744c4"}'
             tekton.dev/template: ''
-      timeout: 0s
+      timeout: 525600m
     - name: my-divmod
       params:
       - name: add-Output
@@ -270,53 +251,12 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Divides two numbers
-              and calculate  the quotient and remainder", "implementation": {"container":
-              {"args": ["--dividend", {"inputValue": "dividend"}, "--divisor", {"inputValue":
-              "divisor"}, "----output-paths", {"outputPath": "quotient"}, {"outputPath":
-              "remainder"}, {"outputPath": "mlpipeline_ui_metadata"}, {"outputPath":
-              "mlpipeline_metrics"}], "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf
-              \"%s\" \"$0\" > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n",
-              "def my_divmod(dividend, divisor):\n    \"\"\"Divides two numbers and
-              calculate  the quotient and remainder\"\"\"\n    #Pip installs inside
-              a component function.\n    #NOTE: installs should be placed right at
-              the beginning to avoid upgrading a package\n    # after it has already
-              been imported and cached by python\n    import sys, subprocess;\n    subprocess.run([sys.executable,
-              ''-m'', ''pip'', ''install'', ''tensorflow==1.8.0''])\n\n    #Imports
-              inside a component function:\n    import numpy as np\n\n    #This function
-              demonstrates how to use nested functions inside a component function:\n    def
-              divmod_helper(dividend, divisor):\n        return np.divmod(dividend,
-              divisor)\n\n    (quotient, remainder) = divmod_helper(dividend, divisor)\n\n    from
-              tensorflow.python.lib.io import file_io\n    import json\n\n    # Exports
-              a sample tensorboard:\n    metadata = {\n      ''outputs'' : [{\n        ''type'':
-              ''tensorboard'',\n        ''source'': ''gs://ml-pipeline-dataset/tensorboard-train'',\n      }]\n    }\n\n    #
-              Exports two sample metrics:\n    metrics = {\n      ''metrics'': [{\n          ''name'':
-              ''quotient'',\n          ''numberValue'':  float(quotient),\n        },{\n          ''name'':
-              ''remainder'',\n          ''numberValue'':  float(remainder),\n        }]}\n\n    from
-              collections import namedtuple\n    divmod_output = namedtuple(''MyDivmodOutput'',
-              [''quotient'', ''remainder'', ''mlpipeline_ui_metadata'', ''mlpipeline_metrics''])\n    return
-              divmod_output(quotient, remainder, json.dumps(metadata), json.dumps(metrics))\n\ndef
-              _serialize_float(float_value: float) -> str:\n    if isinstance(float_value,
-              str):\n        return float_value\n    if not isinstance(float_value,
-              (float, int)):\n        raise TypeError(''Value \"{}\" has type \"{}\"
-              instead of float.''.format(str(float_value), str(type(float_value))))\n    return
-              str(float_value)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''My
-              divmod'', description=''Divides two numbers and calculate  the quotient
-              and remainder'')\n_parser.add_argument(\"--dividend\", dest=\"dividend\",
-              type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"--divisor\",
-              dest=\"divisor\", type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\",
-              dest=\"_output_paths\", type=str, nargs=4)\n_parsed_args = vars(_parser.parse_args())\n_output_files
-              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = my_divmod(**_parsed_args)\n\n_output_serializers
-              = [\n    _serialize_float,\n    _serialize_float,\n    str,\n    str,\n\n]\n\nimport
-              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
-              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
-              "image": "tensorflow/tensorflow:1.11.0-py3"}}, "inputs": [{"name": "dividend",
-              "type": "Float"}, {"name": "divisor", "type": "Float"}], "name": "My
-              divmod", "outputs": [{"name": "quotient", "type": "Float"}, {"name":
-              "remainder", "type": "Float"}, {"name": "mlpipeline_ui_metadata", "type":
-              "UI_metadata"}, {"name": "mlpipeline_metrics", "type": "Metrics"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "My divmod", "outputs":
+              [{"name": "quotient", "type": "Float"}, {"name": "remainder", "type":
+              "Float"}, {"name": "mlpipeline_ui_metadata", "type": "UI_metadata"},
+              {"name": "mlpipeline_metrics", "type": "Metrics"}], "version": "My divmod@sha256=4c899614d703dce761021d181331942f218ad9dceb0c389dff06e39841d9b067"}'
             tekton.dev/template: ''
-      timeout: 0s
+      timeout: 525600m
     - name: add-2
       params:
       - name: c
@@ -390,28 +330,8 @@ spec:
             pipelines.kubeflow.org/generation: ''
             pipelines.kubeflow.org/cache_enabled: "true"
           annotations:
-            pipelines.kubeflow.org/component_spec: '{"description": "Calculates sum
-              of two arguments", "implementation": {"container": {"args": ["--a",
-              {"inputValue": "a"}, "--b", {"inputValue": "b"}, "----output-paths",
-              {"outputPath": "Output"}], "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf
-              \"%s\" \"$0\" > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n",
-              "def add(a, b):\n   \"\"\"Calculates sum of two arguments\"\"\"\n   return
-              a + b\n\ndef _serialize_float(float_value: float) -> str:\n    if isinstance(float_value,
-              str):\n        return float_value\n    if not isinstance(float_value,
-              (float, int)):\n        raise TypeError(''Value \"{}\" has type \"{}\"
-              instead of float.''.format(str(float_value), str(type(float_value))))\n    return
-              str(float_value)\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Add'',
-              description=''Calculates sum of two arguments'')\n_parser.add_argument(\"--a\",
-              dest=\"a\", type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"--b\",
-              dest=\"b\", type=float, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\",
-              dest=\"_output_paths\", type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n_output_files
-              = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = add(**_parsed_args)\n\n_outputs
-              = [_outputs]\n\n_output_serializers = [\n    _serialize_float,\n\n]\n\nimport
-              os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
-              OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
-              "image": "python:3.7"}}, "inputs": [{"name": "a", "type": "Float"},
-              {"name": "b", "type": "Float"}], "name": "Add", "outputs": [{"name":
-              "Output", "type": "Float"}]}'
+            pipelines.kubeflow.org/component_spec_digest: '{"name": "Add", "outputs":
+              [{"name": "Output", "type": "Float"}], "version": "Add@sha256=6747051c897943c73ef931bf243a7a5ea738f7981a2208ab6daf11bcdf6744c4"}'
             tekton.dev/template: ''
-      timeout: 0s
-  timeout: 0s
+      timeout: 525600m
+  timeout: 525600m
