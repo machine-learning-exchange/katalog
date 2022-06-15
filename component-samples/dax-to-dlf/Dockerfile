@@ -1,4 +1,4 @@
-FROM python:3.7-slim
+FROM registry.access.redhat.com/ubi8/python-38
 
 RUN pip3 install PyYaml exchange-metadata-converter==0.0.9
 
