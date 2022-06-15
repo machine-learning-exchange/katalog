@@ -1,8 +1,4 @@
-FROM python:3.6-slim
-
-RUN apt-get update
-RUN apt-get install -y curl gnupg
-RUN apt-get install -y apt-transport-https
+FROM registry.access.redhat.com/ubi8/python-38
 
 RUN pip install kubernetes Flask flask-cors requests ruamel.yaml
 

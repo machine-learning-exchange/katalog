@@ -1,4 +1,4 @@
-FROM python:3.6-slim
+FROM registry.access.redhat.com/ubi8/python-38
 
 RUN pip3 install kubernetes==10.0.1 requests==2.22.0
 
