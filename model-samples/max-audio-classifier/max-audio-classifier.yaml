@@ -1,0 +1,26 @@
+# Copyright 2021 The MLX Contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: Audio Classifier
+model_identifier: max-audio-classifier
+description: IBM Model Asset eXchange (MAX) model that identifies sounds in short audio clips
+framework:
+  name: tensorflow
+  version: "1.5.0"
+
+license: "Apache 2.0"
+domain: "Audio Classification"
+website: "https://developer.ibm.com/exchanges/models/all/max-audio-classifier"
+
+serve:
+  servable: true
+  tested_platforms:
+    - kubernetes
+    - kfserving
+  serving_container_image:
+    container_image_url: "quay.io/codait/max-audio-classifier:latest"
+
+# TODO: update in PR
+#readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-audio-classifier/max-audio-classifier.md
+readme_url: https://raw.githubusercontent.com/ckadner/katalog/max_audio_classifier/model-samples/max-audio-classifier/max-audio-classifier.md
