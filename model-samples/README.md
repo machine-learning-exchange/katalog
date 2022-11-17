@@ -31,6 +31,7 @@ framework:
 license: "Apache 2.0"
 domain: "Domain Area"
 website: <model_website> # Can be GitHub link
+readme_url: <readme_url> # Optional, GitHub "Raw"-URL, Github-flavored markdown to be displayed as Description in MLX UI
 
 train:
   trainable: true
@@ -82,6 +83,7 @@ framework:
 license: "Apache 2.0"
 domain: "Domain Area"
 website: <model_website> # Can be GitHub link
+readme_url: <readme_url> # Optional, GitHub "Raw"-URL, Github-flavored markdown to be displayed as Description in MLX UI
 
 serve:
   servable: true
@@ -90,6 +92,7 @@ serve:
     - knative
   serving_container_image:
     container_image_url: <model_docker_image>
+    container_port: 5000
 ```
 
 ## Register Model

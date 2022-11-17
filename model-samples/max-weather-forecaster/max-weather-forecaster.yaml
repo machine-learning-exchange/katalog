@@ -19,5 +19,6 @@ serve:
     - kfserving
   serving_container_image:
     container_image_url: "quay.io/codait/max-weather-forecaster:latest"
+    container_port: "5000"
 
 readme_url: https://raw.githubusercontent.com/machine-learning-exchange/katalog/main/model-samples/max-weather-forecaster/max-weather-forecaster.md
