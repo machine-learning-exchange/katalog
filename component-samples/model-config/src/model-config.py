@@ -122,7 +122,7 @@ def generateKnativeDeployParams(model_dict, param_path):
         'deployment_name': model_dict['model_identifier'],
         'model_class_name': '',
         'model_class_file': '',
-        'container_port': '5000',
+        'container_port': model_dict['serve']['serving_container_image'].get('container_port', '5000'),
         'traffic_route_name': 'knative-demo',
         'primary_model_revision': model_dict['model_identifier'] + '-00001',
         'traffic_percentage': '5'
@@ -146,10 +146,13 @@ def generateKFServingDeployParams(model_dict, param_path):
     kfserving_params = {
         'model_serving_image': model_dict['serve']['serving_container_image']['container_image_url'],
         'deployment_name': model_dict['model_identifier'],
-        'container_port': '5000',
-        'default_custom_model_spec': json.dumps({"name": model_dict['model_identifier'],
-                                      "image": model_dict['serve']['serving_container_image']['container_image_url'],
-                                      "port": "5000"})
+        'container_port': model_dict['serve']['serving_container_image'].get('container_port', '5000'),
+        'default_custom_model_spec':
+            json.dumps({
+                "name": model_dict['model_identifier'],
+                "image": model_dict['serve']['serving_container_image']['container_image_url'],
+                "port": model_dict['serve']['serving_container_image'].get('container_port', '5000')
+            })
     }
 
     for key, value in kfserving_params.items():
@@ -161,7 +164,7 @@ def generateKubeDeployParams(model_dict, param_path):
         'deployment_name': model_dict['model_identifier'],
         'model_class_name': '',
         'model_class_file': '',
-        'container_port': '5000',
+        'container_port': model_dict['serve']['serving_container_image'].get('container_port', '5000'),
         'traffic_route_name': 'knative-demo',
     }
 
@@ -233,9 +236,11 @@ if __name__ == "__main__":
         for item in model_dict['serve']['tested_platforms']:
             if item.lower() == 'knative':
                 generateKnativeDeployParams(model_dict, param_path)
-            if item.lower() == 'kubernetes':
+            elif item.lower() == 'kubernetes':
                 generateKubeDeployParams(model_dict, param_path)
-            if item.lower() == 'kfserving' or True:
+            elif item.lower() == 'kfserving':
+                generateKFServingDeployParams(model_dict, param_path)
+            else:
                 generateKFServingDeployParams(model_dict, param_path)
 
     # Generate secret for the pipeline
