@@ -2,14 +2,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Image Caption Generator
+name: "Image Caption Generator"
 model_identifier: max-image-caption-generator
-description: "IBM Model Asset eXchange(MAX) model that generates captions from a fixed vocabulary describing the contents of images in the COCO dataset"
+description: "Generate captions from a fixed vocabulary describing the contents of images in the COCO dataset"
 framework:
     name: tensorflow
 license: "Apache 2.0"
 domain: "Image-To-Text Translation"
-website: "https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/"
+website: https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/
 
 filter_categories:
   domain: "image-to-text"

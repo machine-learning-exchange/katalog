@@ -2,7 +2,7 @@
 
 This model takes hourly weather data (as a Numpy array of various weather features, in text file format) as input and returns hourly weather predictions for a specific target variable or variables (such as temperature or windspeed).
 
-Three pre-trained models are provided, all trained by the [CODAIT team](https://www.ibm.com/opensource/centers/codait/) on [National Oceanic and Atmospheric Administration](https://www.ncdc.noaa.gov) local climatological data originally collected by JFK airport. All three models use an LSTM recurrent neural network architecture.
+Three pre-trained models are provided, all trained by the [CODAIT team](https://developer.ibm.com/open/centers/codait/) on [National Oceanic and Atmospheric Administration](https://www.ncdc.noaa.gov) local climatological data originally collected by JFK airport. All three models use an LSTM recurrent neural network architecture.
 
 A description of the weather variables used to train the models is set out below.
 
@@ -43,7 +43,7 @@ Each model returns a different format for its predictions:
 
 Literature and Documentation
 * [LSTMs in Keras](https://keras.io/layers/recurrent/#lstm)
-* [Time Series Prediction with RNNs](https://mourafiq.com/2016/05/15/predicting-sequences-using-rnn-in-tensorflow.html)
+* [Time Series Prediction with RNNs](https://www.tensorflow.org/tutorials/structured_data/time_series)
 * _S. Hochreiter, J. Schmidhuber_ ["Long Short Term Memory"](http://www.bioinf.jku.at/publications/older/2604.pdf), Neural Computation 1997
 
 Related Repositories

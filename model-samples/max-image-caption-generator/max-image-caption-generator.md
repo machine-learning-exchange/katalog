@@ -102,7 +102,7 @@ You can utilize this model in a serverless application by following the instruct
 
 ## Links
 
-* [Image Caption Generator Web App](https://developer.ibm.com/patterns/create-a-web-app-to-interact-with-machine-learning-generated-image-captions/): A reference application created by the IBM CODAIT team that uses the Image Caption Generator
+* [Image Caption Generator Web App](https://github.com/IBM/MAX-Image-Caption-Generator-Web-App): A reference application created by the IBM CODAIT team that uses the Image Caption Generator
 
 ## Resources and Contributions
 

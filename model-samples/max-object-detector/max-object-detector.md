@@ -112,7 +112,7 @@ You can utilize this model in a serverless application by following the instruct
 
 ## Links
 
-* [MAX Object Detector Web App](https://developer.ibm.com/patterns/create-a-web-app-to-interact-with-objects-detected-using-machine-learning/): a demo application providing interactive visualization of the bounding boxes and their related labels returned by the model.
+* [MAX Object Detector Web App](https://github.com/IBM/MAX-Object-Detector-Web-App): a demo application providing interactive visualization of the bounding boxes and their related labels returned by the model.
 
 ## Options available for training this model
 

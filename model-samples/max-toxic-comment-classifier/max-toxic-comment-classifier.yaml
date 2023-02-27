@@ -2,16 +2,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Toxic Comment Classifier
+name: "Toxic Comment Classifier"
 model_identifier: max-toxic-comment-classifier
-description: IBM Model Asset eXchange(MAX) model that detects 6 types of toxicity in user comments
+description: "Detect 6 types of toxicity in user comments"
 framework:
   name: pytorch
   version: "1.0.1"
-
 license: "Apache 2.0"
 domain: "Text Classification"
-website: "https://developer.ibm.com/exchanges/models/all/max-toxic-comment-classifier/"
+website: https://developer.ibm.com/exchanges/models/all/max-toxic-comment-classifier/
 
 serve:
   servable: true

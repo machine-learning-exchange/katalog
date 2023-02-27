@@ -2,12 +2,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Weather Forecaster
+name: "Weather Forecaster"
 model_identifier: max-weather-forecaster
-description: IBM Model Asset eXchange(MAX) model that predicts hourly weather features given historical data for a specific location
+description: "Predict hourly weather features given historical data for a specific location"
 framework:
   name: keras
-
 license: "Apache 2.0"
 domain: "Time Series Prediction"
 website: "https://developer.ibm.com/exchanges/models/all/max-weather-forecaster"

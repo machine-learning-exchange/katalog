@@ -2,16 +2,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Question Answering
+name: "Question Answering"
 model_identifier: max-question-answering
-description: IBM Model Asset eXchange(MAX) model that answers questions on a given corpus of text
+description: "Answers questions on a given corpus of text"
 framework:
   name: "tensorflow"
   version: "1.15.4"
-
 license: "Apache 2.0"
 domain: "Question and Answer"
-website: "https://developer.ibm.com/exchanges/models/all/max-question-answering/"
+website: https://developer.ibm.com/exchanges/models/all/max-question-answering/
 
 serve:
   servable: true
