@@ -4,13 +4,13 @@
 
 name: "Image Resolution Enhancer"
 model_identifier: max-image-resolution-enhancer
-description: "Upscale an image by a factor of 4 while generating photo-realistic details"
+description: "Upscales an image by a factor of 4 while generating photo-realistic details"
 framework:
   name: "tensorflow"
   version: "1.15.4"
 license: "Apache 2.0"
 domain: "Super-Resolution"
-website: https://developer.ibm.com/exchanges/models/all/max-image-resolution-enhancer/
+website: https://github.com/IBM/MAX-Image-Resolution-Enhancer/
 
 serve:
   servable: true

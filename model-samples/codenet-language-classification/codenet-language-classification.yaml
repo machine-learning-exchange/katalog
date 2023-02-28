@@ -2,16 +2,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: CodeNet Language Classifier
+name: "CodeNet Language Classifier"
 model_identifier: codenet-language-classification
-description: A convolutional deep neural network to classify snippets of code
+description: "Classifies snippets of code using a convolutional deep neural network"
 framework:
-  name: "TensorFlow"
+  name: tensorflow
   version: "2.5"
-
 license: "Apache 2.0"
 domain: "Code Classification"
-website: "https://github.com/CODAIT/MAX-CodeNet-Language-Classification"
+website: https://github.com/CODAIT/MAX-CodeNet-Language-Classification/
 
 serve:
   servable: true

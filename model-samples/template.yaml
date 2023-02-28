@@ -37,7 +37,7 @@ framework:
 
 license: "Apache 2.0"
 domain: "Image Recognition"
-website: "https://developer.ibm.com/exchanges/models/all/max-image-caption-generator"
+website: "https://raw.githubusercontent.com/IBM/MAX-Image-Caption-Generator"
 labels:
   - url:
   - pipeline_uuids: ["abcd1234"]

@@ -10,7 +10,7 @@ framework:
   version: "1.15.4"
 license: "Apache 2.0"
 domain: "Question and Answer"
-website: https://developer.ibm.com/exchanges/models/all/max-question-answering/
+website: https://github.com/IBM/MAX-Question-Answering/
 
 serve:
   servable: true

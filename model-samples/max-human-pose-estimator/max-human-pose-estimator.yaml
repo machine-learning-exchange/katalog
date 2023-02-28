@@ -4,13 +4,13 @@
 
 name: "Human Pose Estimator"
 model_identifier: max-human-pose-estimator
-description: "Detect humans in an image and estimate the pose for each person"
+description: "Detects humans in an image and estimate the pose for each person"
 framework:
   name: tensorflow
   version: "1.15.4"
 license: "Apache 2.0"
 domain: "Human Pose Estimation"
-website: https://developer.ibm.com/exchanges/models/all/max-human-pose-estimator/
+website: https://github.com/IBM/MAX-Human-Pose-Estimator/
 
 filter_categories:
   domain: image-recognition

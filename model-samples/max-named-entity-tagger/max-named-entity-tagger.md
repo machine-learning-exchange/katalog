@@ -48,7 +48,7 @@ This model can be deployed using the following mechanisms:
 * Deploy on Kubernetes:
 
   ```
-  kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Named-Entity-Tagger/master/max-named-entity-tagger.yaml
+  kubectl apply -f https://raw.githubusercontent.com/IBM/MAX-Named-Entity-Tagger/master/max-named-entity-tagger.yml
   ```
 
   A more elaborate tutorial on how to deploy this MAX model to production on [IBM Cloud](https://ibm.biz/Bdz2XM) can be found [here](http://ibm.biz/max-to-ibm-cloud-tutorial).

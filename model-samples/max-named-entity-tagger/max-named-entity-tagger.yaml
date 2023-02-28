@@ -4,13 +4,13 @@
 
 name: "Named Entity Tagger"
 model_identifier: max-named-entity-tagger
-description: "Locate and tag named entities in a text"
+description: "Locates and tags named entities in a text"
 framework:
   name: tensorflow
   version: "1.15.4"
 license: "Apache 2.0"
 domain: "Natural Language Processing"
-website: https://developer.ibm.com/exchanges/models/all/max-named-entity-tagger/
+website: https://github.com/IBM/MAX-Named-Entity-Tagger/
 
 serve:
   servable: true

@@ -4,13 +4,13 @@
 
 name: "Object Detector"
 model_identifier: max-object-detector
-description: "Localize and identify multiple objects in a single image"
+description: "Localizes and identifies multiple objects in a single image"
 framework:
   name: tensorflow
   version: "1.5.0"
 license: "Apache 2.0"
 domain: "Object detection in images"
-website: https://developer.ibm.com/exchanges/models/all/max-object-detector
+website: https://github.com/IBM/MAX-Object-Detector/
 
 serve:
   servable: true

@@ -4,12 +4,12 @@
 
 name: "Image Caption Generator"
 model_identifier: max-image-caption-generator
-description: "Generate captions from a fixed vocabulary describing the contents of images in the COCO dataset"
+description: "Generates captions from a fixed vocabulary describing the contents of images in the COCO dataset"
 framework:
     name: tensorflow
 license: "Apache 2.0"
 domain: "Image-To-Text Translation"
-website: https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/
+website: https://github.com/IBM/MAX-Image-Caption-Generator/
 
 filter_categories:
   domain: "image-to-text"

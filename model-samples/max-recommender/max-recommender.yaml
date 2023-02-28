@@ -4,13 +4,13 @@
 
 name: "Recommender System"
 model_identifier: max-recommender
-description: "Generate personalized recommendations"
+description: "Generates personalized recommendations"
 framework:
   name: tensorflow
   version: "1.15.4"
 license: "Apache 2.0"
 domain: "Recommendations"
-website: https://developer.ibm.com/exchanges/models/all/max-recommender/
+website: https://github.com/IBM/MAX-Recommender/
 
 serve:
   servable: true

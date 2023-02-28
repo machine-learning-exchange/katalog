@@ -78,7 +78,7 @@ related_assets:
   - name: MLX notebook
     description: Machine Learning Exchange example notebook with data mount
     mime_type: application/x-ipynb+json
-    url: https://github.com/machine-learning-exchange/mlx/blob/main/notebooks/dlf-notebooks/JFK_Data.ipynb
+    url: https://github.com/machine-learning-exchange/katalog/blob/main/notebook-samples/src/dlf-notebooks/JFK_Data.ipynb
     application:
       name: MLX
       asset_id: notebooks/jfk-airport-analysis

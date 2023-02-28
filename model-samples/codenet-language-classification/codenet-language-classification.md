@@ -58,7 +58,7 @@ You can also deploy the model on Kubernetes using the latest docker image.
 On your Kubernetes cluster, run the following commands:
 
 ```
-$ kubectl apply -f https://github.com/CODAIT/MAX-CodeNet-Language-Classification/raw/main/codenet-language-classifier.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/CODAIT/MAX-CodeNet-Language-Classification/master/codenet-language-classifier.yaml
 ```
 
 The model will be available internally at port `5000`, but can also be accessed externally through the `NodePort`.

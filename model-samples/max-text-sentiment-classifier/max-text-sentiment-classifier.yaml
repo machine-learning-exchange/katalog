@@ -4,13 +4,13 @@
 
 name: "Text Sentiment Classifier"
 model_identifier: max-text-sentiment-classifier
-description: "Detect the sentiment captured in short snippets of text"
+description: "Detects the sentiment captured in short snippets of text"
 framework:
   name: tensorflow
   version: "1.15.4"
 license: "Apache 2.0"
 domain: "Sentiment Analysis"
-website: https://developer.ibm.com/technologies/artificial-intelligence/models/max-text-sentiment-classifier/
+website: https://github.com/IBM/MAX-Text-Sentiment-Classifier/
 
 serve:
   servable: true
