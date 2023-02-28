@@ -122,8 +122,8 @@ You can utilize this model in a serverless application by following the instruct
 
 ## Links
 
-* [Use your arms to make music](https://developer.ibm.com/patterns/making-music-with-the-max-human-pose-estimator-and-tensorflowjs/) This interactive example application was built using a TensorFlow.js version of this model.
-* [Build a web app that recognizes yoga poses using a model from the Model Asset Exchange](https://developer.ibm.com/patterns/build-a-web-application-that-recognizes-yoga-poses-using-a-model-from-the-model-asset-exchange/)
+* [Use your arms to make music](https://github.com/IBM/max-human-pose-estimator-tfjs): An interactive example application built using a TensorFlow.js version of this model.
+* [Build a web app that recognizes yoga poses using a model from the Model Asset Exchange](https://github.com/IBM/yogait)
 
 ## Resources and Contributions
 

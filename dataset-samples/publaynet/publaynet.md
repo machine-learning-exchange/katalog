@@ -68,4 +68,4 @@ year={2019}
 
 - [Model Asset eXchange (MAX)](https://developer.ibm.com/exchanges/models) - A place for developers to find and use free and open source deep learning models.
 
-- [Center for Open-Source Data & AI Technologies (CODAIT)](http://codait.org) - Improving the  Enterprise AI Lifecycle in Open Source."
+- [Center for Open-Source Data & AI Technologies (CODAIT)](https://medium.com/codait) - Improving the  Enterprise AI Lifecycle in Open Source."

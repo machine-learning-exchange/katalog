@@ -77,7 +77,7 @@ def get_links_from_file_content(file_path: str) -> [(int, str, str)]: # -> [(lin
             line_text_url.append((line_number + 1, link_text, url))
 
         # find plain http(s)-style links
-        for url in re.findall(r"[\n\r\s\"'](https?://[^\s]+)[\n\r\s\"']", line_text):
+        for url in re.findall(r"https?://[a-zA-Z0-9./?=_&%${}<>:-]+", line_text):
             if not any(s in url for s in ["localhost", "...", "lorem", "ipsum",
                                           "/path/to/", "/user/repository/branch",
                                           "address", "port"]):
@@ -192,5 +192,26 @@ def verify_doc_links() -> [(str, int, str, str)]:
         exit(1)
 
 
+def apply_monkey_patch_to_force_ipv4_connections():
+    # Monkey-patch socket.getaddrinfo to force IPv4 conections, since some older
+    # routers and some internet providers don't support IPv6, in which case Python
+    # will first try an IPv6 connection which will hang until timeout and only
+    # then attempt a successful IPv4 connection
+    import socket
+
+    # get a reference to the original getaddrinfo function
+    getaddrinfo_original = socket.getaddrinfo
+
+    # create a patched getaddrinfo function which uses the original function
+    # but filters out IPv6 (socket.AF_INET6) entries of host and port address infos
+    def getaddrinfo_patched(*args, **kwargs):
+        res = getaddrinfo_original(*args, **kwargs)
+        return [r for r in res if r[0] == socket.AF_INET]
+
+    # replace the original socket.getaddrinfo function with our patched version
+    socket.getaddrinfo = getaddrinfo_patched
+
+
 if __name__ == '__main__':
+    apply_monkey_patch_to_force_ipv4_connections()
     verify_doc_links()

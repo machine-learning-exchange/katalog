@@ -2,16 +2,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Optical Character Recognition
+name: "Optical Character Recognition"
 model_identifier: max-ocr
-description: IBM Model Asset eXchange(MAX) model that identifies text in an image.
+description: "Identifies text in an image"
 framework:
   name: "N/A"
   version: "N/A"
-
 license: "Apache 2.0"
 domain: "Optical Character Recognition"
-website: "https://developer.ibm.com/exchanges/models/all/max-ocr/"
+website: https://github.com/IBM/MAX-OCR/
 
 serve:
   servable: true
