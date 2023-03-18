@@ -1,4 +1,4 @@
-FROM python:3.6-slim
+FROM registry.access.redhat.com/ubi8/python-38
 
 RUN pip install kubernetes Flask flask-cors requests
 
