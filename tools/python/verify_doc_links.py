@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright 2021 The MLX Contributors
+# Copyright 2021, 2023 The MLX Contributors
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -108,6 +108,23 @@ def get_links_from_file_content(file_path: str) -> [(int, str, str)]: # -> [(lin
 
 
 def test_ibm_developer_url(url):
+
+    # Resource missing on developer.ibm.com do not return a 404 error, so we need
+    # to do some custom checking.
+    #
+    # assert 200 == test_ibm_developer_url("https://developer.ibm.com/exchanges/data/")
+    # # test_url("file", 0, "should", "https://developer.ibm.com/middleware/v1/contents/static/exchanges/data")
+    # # test_url("file", 0, "should", "https://developer.ibm.com/middleware/v1/contents/data/doclaynet")
+    #
+    # # returns 301 redirect to location https://developer.ibm.com
+    # assert 404 == test_ibm_developer_url("https://developer.ibm.com/exchanges/models")
+    #
+    # # returns 200: We are unable to find the page you have requested
+    # assert 404 == test_ibm_developer_url("https://developer.ibm.com/technologies/artificial-intelligence/data/pubtabnet/")
+    #
+    # # returns 200: found
+    # assert 200 == test_ibm_developer_url("https://developer.ibm.com/exchanges/data/all/doclaynet/")
+
     content_apis = ["https://developer.ibm.com/middleware/v1/contents/static",
                     "https://developer.ibm.com/middleware/v1/contents"]
 
@@ -258,19 +275,4 @@ def apply_monkey_patch_to_force_ipv4_connections():
 
 if __name__ == '__main__':
     apply_monkey_patch_to_force_ipv4_connections()
-
-    # # works
-    # assert 200 == test_ibm_developer_url("https://developer.ibm.com/exchanges/data/")
-    # # test_url("file", 0, "should", "https://developer.ibm.com/middleware/v1/contents/static/exchanges/data")
-    # # test_url("file", 0, "should", "https://developer.ibm.com/middleware/v1/contents/data/doclaynet")
-    #
-    # # 301 redirect to location https://developer.ibm.com
-    # assert 404 == test_ibm_developer_url("https://developer.ibm.com/exchanges/models")
-    #
-    # # 200: We are unable to find the page you have requested
-    # assert 404 == test_ibm_developer_url("https://developer.ibm.com/technologies/artificial-intelligence/data/pubtabnet/")
-    #
-    # # 200: found
-    # assert 200 == test_ibm_developer_url("https://developer.ibm.com/exchanges/data/all/doclaynet/")
-
     verify_doc_links()
