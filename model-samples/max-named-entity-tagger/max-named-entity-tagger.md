@@ -35,7 +35,7 @@ The model is based on Guillaume Genthial's [Named Entity Recognition with Tensor
 
 This model can be deployed using the following mechanisms:
 
-* Deploy from Dockerhub:
+* Run with Docker:
 
   ```
   docker run -it -p 5000:5000 codait/max-named-entity-tagger
@@ -43,7 +43,9 @@ This model can be deployed using the following mechanisms:
 
 * Deploy on Red Hat OpenShift:
 
-  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/) and specify `codait/max-named-entity-tagger` as the image name.
+  Follow the instructions for the OpenShift web console or the OpenShift Container
+  Platform CLI in [this tutorial](https://github.ibm.com/IBMCode/Code-Tutorials/blob/e29a33f/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/index.md)
+  and specify `codait/max-named-entity-tagger` as the image name.
 
 * Deploy on Kubernetes:
 
@@ -104,7 +106,7 @@ You should see a JSON response like that below:
 
 ### Test the model in a serverless app
 
-You can utilize this model in a serverless application by following the instructions in the [Leverage deep learning in IBM Cloud Functions](https://developer.ibm.com/tutorials/leverage-deep-learning-in-apache-openwhisk-ibm-cloud-functions/) tutorial.
+You can utilize this model in a serverless application by following the instructions in the [Leverage deep learning in IBM Cloud Functions](https://github.com/IBM/use-deep-learning-in-ibm-cloud-functions/) tutorial.
 
 
 ## Options available for training this model

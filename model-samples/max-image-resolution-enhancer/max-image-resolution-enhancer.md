@@ -53,7 +53,7 @@ _NOTE: The SRGAN in the paper was trained on 350k ImageNet samples, whereas this
 
 This model can be deployed using the following mechanisms:
 
-* Deploy from Dockerhub:
+* Run with Docker:
 
   ```
   docker run -it -p 5000:5000 codait/max-image-resolution-enhancer
@@ -61,7 +61,7 @@ This model can be deployed using the following mechanisms:
 
 * Deploy on Red Hat OpenShift:
 
-  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/) and specify `codait/max-image-resolution-enhancer` as the image name.
+  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://github.ibm.com/IBMCode/Code-Tutorials/blob/e29a33f/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/index.md) and specify `codait/max-image-resolution-enhancer` as the image name.
 
 * Deploy on Kubernetes:
 

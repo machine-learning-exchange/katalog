@@ -47,4 +47,4 @@ For an in-depth guide to creating pipelines with Kubeflow, take a look at their
 * [Katib Early-Stopping Experiment](katib-pipeline.yaml)([source](https://github.com/kubeflow/kfp-tekton/tree/master/samples/katib))
 * [Nested Pipeline](nested-pipeline.yaml)([source](https://github.com/kubeflow/kfp-tekton/tree/master/samples/nested-pipeline))
 * [Trusted AI Pipeline](trusted-ai-pipeline.yaml)([source](https://github.com/kubeflow/kfp-tekton/tree/master/samples/trusted-ai))
-* [Watson Machine Learning](wml-pipeline.yaml)([source](https://github.com/kubeflow/kfp-tekton/tree/master/samples/watson-train-serve))
+* [Watson Machine Learning](wml-pipeline.yaml)([source](https://github.com/kubeflow/kfp-tekton/tree/v1.6.4/samples/watson-train-serve))

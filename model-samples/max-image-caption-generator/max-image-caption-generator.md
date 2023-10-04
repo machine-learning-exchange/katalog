@@ -29,7 +29,7 @@ The model is based on the [Show and Tell Image Caption Generator Model](https://
 
 This model can be deployed using the following mechanisms:
 
-* Deploy from Dockerhub:
+* Run with Docker:
 
   ```
   docker run -it -p 5000:5000 codait/max-image-caption-generator
@@ -37,7 +37,9 @@ This model can be deployed using the following mechanisms:
 
 * Deploy on Red Hat OpenShift:
 
-  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/) and specify `codait/max-image-caption-generator` as the image name.
+  Follow the instructions for the OpenShift web console or the OpenShift Container
+  Platform CLI in [this tutorial](https://github.ibm.com/IBMCode/Code-Tutorials/blob/e29a33f/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/index.md)
+  and specify `codait/max-image-caption-generator` as the image name.
 
 * Deploy on Kubernetes:
 
@@ -98,7 +100,7 @@ Learn how to send an image to the model and how to render the results in [CodePe
 
 ### Test the model in a serverless app
 
-You can utilize this model in a serverless application by following the instructions in the [Leverage deep learning in IBM Cloud Functions](https://developer.ibm.com/tutorials/leverage-deep-learning-in-apache-openwhisk-ibm-cloud-functions/) tutorial.
+You can utilize this model in a serverless application by following the instructions in the [Leverage deep learning in IBM Cloud Functions](https://github.com/IBM/use-deep-learning-in-ibm-cloud-functions/) tutorial.
 
 ## Links
 

@@ -62,5 +62,5 @@ data = pardata.load_dataset('gmb')
 ## Related Links
 
 - [Groningen Meaning Bank](https://www.researchgate.net/publication/317902904_The_Groningen_Meaning_Bank)
-- [Model Asset Exchange - Named Entity Tagger](https://developer.ibm.com/exchanges/models/all/max-named-entity-tagger/)
+- [Model Asset Exchange - Named Entity Tagger](https://github.com/IBM/MAX-Named-Entity-Tagger/)
 - [Part-of-speech Tags](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)

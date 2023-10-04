@@ -24,7 +24,7 @@ The model is based on the [Neural Collaborative Filtering model](https://github.
 
 This model can be deployed using the following mechanisms:
 
-* Deploy from Dockerhub:
+* Run with Docker:
 
   ```
   docker run -it -p 5000:5000 codait/max-recommender
@@ -32,7 +32,7 @@ This model can be deployed using the following mechanisms:
 
 * Deploy on Red Hat OpenShift:
 
-  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/) and specify `codait/max-recommender` as the image name.
+  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://github.ibm.com/IBMCode/Code-Tutorials/blob/e29a33f/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/index.md) and specify `codait/max-recommender` as the image name.
 
 * Deploy on Kubernetes:
   ```
@@ -96,4 +96,4 @@ $ curl -X POST "http://localhost:5000/model/predict?user_id=1&num_results=5" -H 
 
 ### Test the model in a serverless app
 
-You can utilize this model in a serverless application by following the instructions in the [Leverage deep learning in IBM Cloud Functions](https://developer.ibm.com/tutorials/leverage-deep-learning-in-apache-openwhisk-ibm-cloud-functions/) tutorial.
+You can utilize this model in a serverless application by following the instructions in the [Leverage deep learning in IBM Cloud Functions](https://github.com/IBM/use-deep-learning-in-ibm-cloud-functions/) tutorial.

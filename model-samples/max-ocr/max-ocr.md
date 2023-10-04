@@ -30,7 +30,7 @@ for more detailed information about how this model was trained.
 
 ## Options available for deploying this model
 
-* Deploy from Dockerhub:
+* Run with Docker:
 
   ```
   docker run -it -p 5000:5000 codait/max-ocr
@@ -38,7 +38,7 @@ for more detailed information about how this model was trained.
 
 * Deploy on Red Hat OpenShift:
 
-  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/) and specify `codait/max-ocr` as the image name.
+  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://github.ibm.com/IBMCode/Code-Tutorials/blob/e29a33f/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/index.md) and specify `codait/max-ocr` as the image name.
 
 * Deploy on Kuberneters:
 

@@ -29,7 +29,7 @@ The model is based on the [BERT model](https://github.com/google-research/bert).
 
 This model can be deployed using the following mechanisms:
 
-* Deploy from Dockerhub:
+* Run with Docker:
 
 ```
 docker run -it -p 5000:5000 codait/max-question-answering

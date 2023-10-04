@@ -24,7 +24,7 @@ This model detects humans and their poses in a given image. The model first dete
 
 This model can be deployed using the following mechanisms:
 
-* Deploy from Dockerhub:
+* Run with Docker:
 
   ```
   docker run -it -p 5000:5000 codait/max-human-pose-estimator
@@ -32,7 +32,7 @@ This model can be deployed using the following mechanisms:
 
 * Deploy on Red Hat OpenShift:
 
-  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/) and specify `codait/max-human-pose-estimator` as the image name.
+  Follow the instructions for the OpenShift web console or the OpenShift Container Platform CLI in [this tutorial](https://developer.ibm.com/tutorials/deploy-python-app-to-openshift-cluster-source-to-image/) and specify `codait/max-human-pose-estimator` as the image name.
 
 * Deploy on Kubernetes:
 
@@ -118,7 +118,7 @@ Learn how to send an image to the model and how to render the results in [CodePe
 
 ### Test the model in a serverless app
 
-You can utilize this model in a serverless application by following the instructions in the [Leverage deep learning in IBM Cloud Functions](https://developer.ibm.com/tutorials/leverage-deep-learning-in-apache-openwhisk-ibm-cloud-functions/) tutorial.
+You can utilize this model in a serverless application by following the instructions in the [Leverage deep learning in IBM Cloud Functions](https://github.com/IBM/use-deep-learning-in-ibm-cloud-functions/) tutorial.
 
 ## Links
 
