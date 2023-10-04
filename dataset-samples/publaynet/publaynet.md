@@ -64,8 +64,6 @@ year={2019}
 
 ## Related Links
 
-- [PubTabNet](https://developer.ibm.com/technologies/artificial-intelligence/data/pubtabnet/) - a large dataset for image-based table recognition, containing 568k+ images of tabular data annotated with the corresponding HTML representation of the tables.
-
-- [Model Asset eXchange (MAX)](https://developer.ibm.com/exchanges/models) - A place for developers to find and use free and open source deep learning models.
+- [PubTabNet](https://developer.ibm.com/exchanges/data/all/pubtabnet/) - a large dataset for image-based table recognition, containing 568k+ images of tabular data annotated with the corresponding HTML representation of the tables.
 
 - [Center for Open-Source Data & AI Technologies (CODAIT)](https://medium.com/codait) - Improving the  Enterprise AI Lifecycle in Open Source."

@@ -49,7 +49,10 @@ If you'd rather checkout and build the model locally you can follow the [run loc
 
 ## Deploy on Red Hat OpenShift
 
-You can deploy the model-serving microservice on Red Hat OpenShift by following the instructions for the OpenShift web console or the OpenShift Container Platform CLI [in this tutorial](https://developer.ibm.com/tutorials/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/), specifying `codait/codenet-language-classifier` as the image name.
+You can deploy the model-serving microservice on Red Hat OpenShift by following
+the instructions for the OpenShift web console or the OpenShift Container Platform
+CLI [in this tutorial](https://github.ibm.com/IBMCode/Code-Tutorials/blob/e29a33f/deploy-a-model-asset-exchange-microservice-on-red-hat-openshift/index.md),
+specifying `codait/codenet-language-classifier` as the image name.
 
 ## Deploy on Kubernetes
 

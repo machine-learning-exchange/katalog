@@ -55,7 +55,7 @@ data = pardata.load_dataset('noaa_jfk')
 
 ## Related Links
 
-* __[MAX Weather Forecaster](https://developer.ibm.com/exchanges/models/all/max-weather-forecaster/)__ link to our MAX weather forecasting model trained using the cleaned data provided in this archive
+* __[MAX Weather Forecaster](https://github.com/IBM/MAX-Weather-Forecaster/)__ link to our MAX weather forecasting model trained using the cleaned data provided in this archive
 * __[NOAA LCD Data Download Platform](https://www.ncdc.noaa.gov/cdo-web/datatools/lcd)__ website where you can choose new geographic locations for which to download local weather data from
 * __[NOAA LCD JFK Weather Station](https://www.ncdc.noaa.gov/cdo-web/datasets/LCD/stations/WBAN:94789/detail)__ website with JFK Local Climatological Data station details
 * __[NOAA LCD Data Documentation](https://www1.ncdc.noaa.gov/pub/data/cdo/documentation/LCD_documentation.pdf)__ document that provides NOAA LCD data dictionary

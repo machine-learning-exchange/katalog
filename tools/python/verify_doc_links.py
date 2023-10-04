@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright 2021 The MLX Contributors
+# Copyright 2021, 2023 The MLX Contributors
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -25,6 +25,14 @@ md_file_path_expressions = [
     "/**/*.md",
 ]
 
+excluded_paths = [
+    "tools",
+    "temp",
+]
+
+url_excludes = ["localhost", "...", "lorem", "ipsum", "/path/to/",
+                "/user/repository/branch", "address", "port"]
+
 script_folder = abspath(dirname(__file__))
 project_root_dir = abspath(dirname(dirname(script_folder)))
 github_repo_master_path = "{}/blob/master".format(GITHUB_REPO.rstrip("/"))
@@ -41,10 +49,15 @@ def find_md_files() -> [str]:
         print("  " + path_expr.lstrip("/"))
     print("")
 
-    md_files_list_of_lists = [glob(project_root_dir + path_expr, recursive=True)
-                              for path_expr in md_file_path_expressions]
+    list_of_lists = [glob(project_root_dir + path_expr, recursive=True)
+                     for path_expr in md_file_path_expressions]
 
-    return sorted(list(itertools.chain(*md_files_list_of_lists)))
+    flattened_list = list(itertools.chain(*list_of_lists))
+
+    filtered_list = [path for path in flattened_list
+                     if not any(s in path for s in excluded_paths)]
+
+    return sorted(filtered_list)
 
 
 def get_links_from_file_content(file_path: str) -> [(int, str, str)]: # -> [(line, link_text, URL)]
@@ -72,15 +85,17 @@ def get_links_from_file_content(file_path: str) -> [(int, str, str)]: # -> [(lin
     line_text_url = []
     for line_number, line_text in enumerate(file_content.splitlines()):
 
+        all_urls_in_this_line = set()
+
         # find markdown-styled links [text](url)
         for (link_text, url) in re.findall(r"\[([^]]+)\]\((%s[^)]+)\)" % "http", line_text):
             line_text_url.append((line_number + 1, link_text, url))
+            all_urls_in_this_line.add(url)
 
         # find plain http(s)-style links
         for url in re.findall(r"https?://[a-zA-Z0-9./?=_&%${}<>:-]+", line_text):
-            if not any(s in url for s in ["localhost", "...", "lorem", "ipsum",
-                                          "/path/to/", "/user/repository/branch",
-                                          "address", "port"]):
+            if url not in all_urls_in_this_line \
+                    and not any(s in url for s in url_excludes):
                 try:
                     url = str(url).rstrip(".")  # if URL is last word in a sentence ending with a dot "."
                     parse_url(url)
@@ -90,6 +105,50 @@ def get_links_from_file_content(file_path: str) -> [(int, str, str)]: # -> [(lin
 
     # return completed links
     return line_text_url
+
+
+def test_ibm_developer_url(url):
+
+    # Resource missing on developer.ibm.com do not return a 404 error, so we need
+    # to do some custom checking.
+    #
+    # assert 200 == test_ibm_developer_url("https://developer.ibm.com/exchanges/data/")
+    # # test_url("file", 0, "should", "https://developer.ibm.com/middleware/v1/contents/static/exchanges/data")
+    # # test_url("file", 0, "should", "https://developer.ibm.com/middleware/v1/contents/data/doclaynet")
+    #
+    # # returns 301 redirect to location https://developer.ibm.com
+    # assert 404 == test_ibm_developer_url("https://developer.ibm.com/exchanges/models")
+    #
+    # # returns 200: We are unable to find the page you have requested
+    # assert 404 == test_ibm_developer_url("https://developer.ibm.com/technologies/artificial-intelligence/data/pubtabnet/")
+    #
+    # # returns 200: found
+    # assert 200 == test_ibm_developer_url("https://developer.ibm.com/exchanges/data/all/doclaynet/")
+
+    content_apis = ["https://developer.ibm.com/middleware/v1/contents/static",
+                    "https://developer.ibm.com/middleware/v1/contents"]
+
+    url = url.replace("exchanges/data/all", "data")
+    path = parse_url(url).path
+    status = 404
+
+    if path:
+        for api_base_url in content_apis:
+            api_url = api_base_url + path
+            try:
+                resp = requests.get(api_url.rstrip("/"), timeout=5)
+                status = resp.json()["code"]
+                if status == 200:
+                    break
+                else:
+                    status = 404
+            except requests.exceptions.RequestException as e:
+                print(f"Error test_ibm_developer_url({url}): {e}")
+                status = 500
+    else:
+        status = requests.head(url, timeout=5).status_code
+
+    return status
 
 
 def test_url(file: str, line: int, text: str, url: str) -> (str, int, str, str, int):  # (file, line, text, url, status)
@@ -105,6 +164,8 @@ def test_url(file: str, line: int, text: str, url: str) -> (str, int, str, str, 
                 status = 200
             else:
                 status = 404
+        elif "developer.ibm.com" in short_url:
+            status = test_ibm_developer_url(short_url)
         else:
             try:
                 status = requests.head(short_url, allow_redirects=True, timeout=5).status_code
@@ -113,9 +174,9 @@ def test_url(file: str, line: int, text: str, url: str) -> (str, int, str, str, 
                 if status == 429:  # GitHub rate limiting, try again after 1 minute
                     sleep(randint(60, 90))
                     status = requests.head(short_url, allow_redirects=True, timeout=5).status_code
-            except requests.exceptions.Timeout as e:
+            except requests.exceptions.Timeout:
                 status = 408
-            except requests.exceptions.RequestException as e:
+            except requests.exceptions.RequestException:
                 status = 500
 
         url_status_cache[short_url] = status

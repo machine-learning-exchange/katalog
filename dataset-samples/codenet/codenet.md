@@ -55,15 +55,16 @@ This notebook takes you through the steps of a simple experiment that shows how 
 This experiment investigates whether a popular attention model to construct a masked language model (MLM) can be used for source code instead of natural language sentences. 
 
 [Get the notebook](https://github.com/CODAIT/project-codenet-notebooks/blob/main/Project_CodeNet_MLM.ipynb)
+
 [Run the notebook in Colab](https://colab.research.google.com/github/CODAIT/project-codenet-notebooks/blob/main/Project_CodeNet_MLM.ipynb)
 
 
 ## Citation
 
 ```text
-  @inproceedings{puri2021codenet,
-  author = {Ruchir Puri and David Kung and Geert Janssen and Wei Zhang and Giacomo Domeniconi and Vladmir Zolotov and Julian Dolby and Jie Chen and Mihir Choudhury and Lindsey Decker and Veronika Thost and Luca Buratti and Saurabh Pujar and Ulrich Finkler},
-  title = {Project CodeNet: A Large-Scale AI for Code Dataset for Learning a Diversity of Coding Tasks},
-  year = {2021},
- }
+ @inproceedings{puri2021codenet,
+  author = {Ruchir Puri and David Kung and Geert Janssen and Wei Zhang and Giacomo Domeniconi and Vladmir Zolotov and Julian Dolby and Jie Chen and Mihir Choudhury and Lindsey Decker and Veronika Thost and Luca Buratti and Saurabh Pujar and Ulrich Finkler},
+  title = {Project CodeNet: A Large-Scale AI for Code Dataset for Learning a Diversity of Coding Tasks},
+  year = {2021},
+ }
 ```
